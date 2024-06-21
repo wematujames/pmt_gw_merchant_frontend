@@ -38,21 +38,15 @@ const UserAvatar = () => {
       />
     );
 
-  if (userQuery.isSuccess) {
-    console.log("user", userQuery.data);
-  }
-
   const menuStyle = {
     boxShadow: "none",
-    margin: 0,
+    marginLeft: 0,
     padding: 0,
   };
 
-  const contentStyle = {
-    backgroundColor: token.colorBgElevated,
-    borderRadius: token.borderRadiusLG,
-    boxShadow: token.boxShadowSecondary,
-  };
+  if (userQuery.isError) {
+    logout();
+  }
 
   return (
     <Dropdown
