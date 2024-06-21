@@ -29,3 +29,14 @@ export const forgotPassword = async (email: string,) =>  {
     );
 };
 
+export const resetPassword = async (resetToken: string, newPassword: string) =>  {
+   return await axios(
+      "http://127.0.0.1:8249/api/v1/platform/auth/resetpassword",
+      {
+        method: "POST",
+        headers: {  Accept: "application/json","Content-Type": "application/json", },
+        data: { resetToken, newPassword },
+      }
+    );
+};
+

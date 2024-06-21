@@ -9,7 +9,7 @@ import { Typography } from "antd";
 import styles from "./styles.module.css";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "@/app/actions/auth";
-import { loginCredentials } from "@/types/types";
+import { LoginCredentials } from "@/types/types";
 import { AxiosError } from "axios";
 import { message } from "antd";
 import { useEffect } from "react";
@@ -21,7 +21,7 @@ export default function LoginPage() {
 
   const onFinish = useMutation({
     mutationKey: ["login-user"],
-    mutationFn: (credentials: loginCredentials) =>
+    mutationFn: (credentials: LoginCredentials) =>
       login(credentials.email, credentials.password),
     onSuccess: (res) => {
       router.push("/dashboard");

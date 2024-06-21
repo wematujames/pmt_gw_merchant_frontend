@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { message } from "antd";
 import { AxiosError, AxiosResponse } from "axios";
 import { forgotPassword } from "@/app/actions/auth";
-import { forgotPasswordData } from "@/types/types";
+import { ForgotPasswordData } from "@/types/types";
 
 const { Title } = Typography;
 
@@ -21,7 +21,7 @@ export default function LoginPage() {
 
   const onFinish = useMutation({
     mutationKey: ["user-forgot-password"],
-    mutationFn: (values: forgotPasswordData) => forgotPassword(values.email),
+    mutationFn: (values: ForgotPasswordData) => forgotPassword(values.email),
     onSuccess: (res: AxiosResponse<{ message: string }>) => {
       api.success(res.data.message);
     },
