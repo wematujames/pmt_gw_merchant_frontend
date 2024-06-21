@@ -12,12 +12,14 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Layout, Menu, theme } from "antd";
+import { Divider, Flex, Layout, theme } from "antd";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserAvatar from "./user/components/Avatar";
+import Link from "next/link";
+import Image from "next/image";
+import AppSideMenu from "./AppSideMenu";
 const { Header, Content, Footer, Sider } = Layout;
 const queryClient = new QueryClient();
-
 const items: MenuProps["items"] = [
   UserOutlined,
   VideoCameraOutlined,
@@ -55,13 +57,18 @@ export default function ProtectLayout({
             bottom: 0,
           }}
         >
-          <div className="demo-logo-vertical" />
-          <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={["4"]}
-            items={items}
-          />
+          <Flex style={{ width: "100%" }} justify="center" align="center">
+            <Link href="/">
+              <Image
+                src="/nerasollogo.png"
+                alt="nerasol-logo"
+                width={180}
+                height={80}
+              />
+            </Link>
+          </Flex>
+          <Divider style={{ background: "#e1e1ef", margin: 0 }} />
+          <AppSideMenu />
         </Sider>
         <Layout style={{ marginLeft: 200 }}>
           <Header
