@@ -13,8 +13,7 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <h1>Welcome to the dashboard!</h1>
-      <button onClick={logout}>Logout</button>
+      <h1>Welcome {"user"}</h1>
     </div>
   );
 }

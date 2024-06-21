@@ -14,6 +14,7 @@ import {
 import type { MenuProps } from "antd";
 import { Layout, Menu, theme } from "antd";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import UserAvatar from "./user/components/Avatar";
 const { Header, Content, Footer, Sider } = Layout;
 const queryClient = new QueryClient();
 
@@ -38,7 +39,7 @@ export default function ProtectLayout({
   children: React.ReactNode;
 }>) {
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { colorBgContainer, borderRadiusLG, paddingMD },
   } = theme.useToken();
 
   return (
@@ -63,7 +64,16 @@ export default function ProtectLayout({
           />
         </Sider>
         <Layout style={{ marginLeft: 200 }}>
-          <Header style={{ padding: 0, background: colorBgContainer }} />
+          <Header
+            style={{
+              padding: 0,
+              background: colorBgContainer,
+              paddingRight: paddingMD,
+              textAlign: "right",
+            }}
+          >
+            <UserAvatar />
+          </Header>
           <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
             {children}
             <div
@@ -75,7 +85,7 @@ export default function ProtectLayout({
               }}
             >
               <p>long content</p>
-              {Array.from({ length: 43 }, (_, index) => (
+              {Array.from({ length: 45 }, (_, index) => (
                 <React.Fragment key={index}>
                   {index % 20 === 0 && index ? "more" : "..."}
                   <br />

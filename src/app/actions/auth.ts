@@ -1,4 +1,5 @@
 import axios from "axios";
+import setAuthTokenHeader from "./helpers/setAuthToken";
 
 export const login = async (email: string, password: string) =>  {
     const res = await axios(
@@ -14,6 +15,23 @@ export const login = async (email: string, password: string) =>  {
     );
 
     if (res.status === 200) localStorage.setItem("token", res.data.data.token);
+
+    return res.data.data;
+};
+
+export const loadUser = async () =>  {
+    setAuthTokenHeader();
+    
+    const res = await axios(
+      "http://127.0.0.1:8249/api/v1/platform/auth/user",
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        }
+      }
+    );
 
     return res.data.data;
 };
