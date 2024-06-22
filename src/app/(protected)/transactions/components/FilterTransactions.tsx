@@ -111,6 +111,17 @@ export default function FilterTransaction({
               </Form.Item>
             </Col>
             <Col span={12}>
+              <Form.Item name="network" label="Network">
+                <Select defaultActiveFirstOption defaultValue="">
+                  <Option value="">All</Option>
+                  <Option value="MTN">MTN</Option>
+                  <Option value="Telecel">Telecel</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
               <Form.Item
                 name="dateTime"
                 label="DateTime"
@@ -123,7 +134,6 @@ export default function FilterTransaction({
               </Form.Item>
             </Col>
           </Row>
-
           <Row gutter={16}>
             <Form.Item>
               <Space>
