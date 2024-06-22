@@ -96,9 +96,6 @@ function TransactionReport() {
     queryFn: () => getTransactions(filter),
   });
 
-  console.log("txn filterr", filter);
-  console.log(txnsQuery.data?.length);
-
   return (
     <Table
       title={() => (

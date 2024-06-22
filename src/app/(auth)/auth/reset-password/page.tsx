@@ -35,7 +35,6 @@ export default function LoginPage() {
   const onFinish = useMutation({
     mutationKey: ["reset-user-password"],
     mutationFn: (data: ResetPasswordData) => {
-      console.log(data.newPassword);
       return resetPassword(
         searchParams.get("token") as string,
         data.newPassword
@@ -47,7 +46,6 @@ export default function LoginPage() {
       });
     },
     onError: (err: AxiosError<Error>) => {
-      console.log(err.response);
       api.error(err.response?.data.message as string);
     },
   });

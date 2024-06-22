@@ -1,36 +1,9 @@
 import React from "react";
-import { Button, Modal } from "antd";
+import { Button, Col, Input, Modal, Row } from "antd";
 import { BsEye } from "react-icons/bs";
 import { RxReload } from "react-icons/rx";
 
-// {
-//     "_id": "6648574ee18c5235e783f834",
-//     "phone": "233200072904",
-//     "amount": 1,
-//     "desc": "Payment for some shoes",
-//     "type": "collection",
-//     "ref": "8c8c80f5d9f347f7a293",
-//     "network": "Telecel",
-//     "processor": "T-Cash",
-//     "status": "pending",
-//     "statusReason": "pending",
-//     "reversed": false,
-//     "merchantRef": "test collection",
-//     "merchantCallbackURL": "https://webhook.site/4ebb8f50-55af-40fd-9eea-5e5aa1011275",
-//     "merchant": "664856c8e18c5235e783f82b",
-//     "originalAmount": 1,
-//     "createdAt": "2024-05-18T07:22:54.542Z",
-//     "updatedAt": "2024-05-18T07:22:57.694Z",
-//     "__v": 0,
-//     "processorInitialRef": "158799b82cc04314a5f657db624d6ff7",
-//     "id": "6648574ee18c5235e783f834"
-// }
-
-export default function TransactionDetail({
-  transaction,
-}: {
-  transaction: any;
-}) {
+export default function TxnDetails({ transaction }: { transaction: any }) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
 
@@ -40,8 +13,29 @@ export default function TransactionDetail({
 
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1000);
   };
+
+  const transformTxn: any = (txn: any) => ({
+    Status: txn.status,
+    Reason: txn.statusReason,
+    Processor: txn.processor,
+    "Amount ₵": parseFloat(txn.amount).toFixed(2),
+    Reversed: txn.reversed,
+    "Original Amount ₵": parseFloat(txn.originalAmount).toFixed(2),
+    "Reversal Amount ₵": parseFloat(txn.originalAmount).toFixed(2),
+    Account: txn.phone,
+    Narration: txn.desc,
+    Type: txn.type,
+    Network: txn.network,
+    Merchant: txn.merchant,
+    MerchantRef: txn.merchantRef,
+    CallbackURl: txn.merchantCallbackURL,
+    ExternalRef: txn.processorTerminalRef,
+    CreatedAt: txn.createdAt,
+  });
+
+  const txnTransformed = transformTxn(transaction);
 
   return (
     <>
@@ -53,6 +47,10 @@ export default function TransactionDetail({
       />
 
       <Modal
+        open={open}
+        width={1000}
+        loading={loading}
+        onCancel={() => setOpen(false)}
         title={"Transaction: " + transaction._id}
         footer={
           <Button block type="default" onClick={showLoading}>
@@ -60,14 +58,18 @@ export default function TransactionDetail({
             Check Status
           </Button>
         }
-        loading={loading}
-        open={open}
-        onCancel={() => setOpen(false)}
       >
-        <p>₵ {parseFloat(transaction.amount).toFixed(2)}</p>
-        <p>{transaction.phone}</p>
-        <p>{transaction.status}</p>
-        <p>{transaction.statusReason}</p>
+        <Row gutter={[10, 5]}>
+          {Object.keys(txnTransformed).map((key) => (
+            <Col key={key} lg={12} style={{ width: "100%" }}>
+              <Input
+                readOnly
+                addonBefore={<p>{key}</p>}
+                value={txnTransformed[key]}
+              />
+            </Col>
+          ))}
+        </Row>
       </Modal>
     </>
   );

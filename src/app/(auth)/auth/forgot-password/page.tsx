@@ -26,7 +26,6 @@ export default function LoginPage() {
       api.success(res.data.message);
     },
     onError: (err: AxiosError<{ message: string }>) => {
-      console.log(err.response);
       api.error(err.response?.data.message);
     },
   });

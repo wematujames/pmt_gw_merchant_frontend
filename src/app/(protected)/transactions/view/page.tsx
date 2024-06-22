@@ -9,8 +9,13 @@ import { GrOverview } from "react-icons/gr";
 import OverView from "../components/OverView";
 import TransactionReport from "../components/TransactionReport";
 import { TbReport } from "react-icons/tb";
+import { useAuth } from "../../../../hooks/useAuth";
+import { useLogout } from "../../../../hooks/useLogout";
 
 const App: React.FC = () => {
+  const authenticated = useAuth();
+  const logout = useLogout();
+
   const { token } = theme.useToken();
   const searchParams = useSearchParams();
   const [activeTabKey, setActiveTabKey] = useState<string>(
@@ -33,6 +38,8 @@ const App: React.FC = () => {
   ];
 
   const onTabChange = (key: string) => setActiveTabKey(key);
+
+  if (!authenticated) return <div>Loading...</div>;
 
   return (
     <Card

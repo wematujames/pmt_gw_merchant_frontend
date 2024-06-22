@@ -3,8 +3,13 @@ import CollectionsGrapgh from "./components/CollectionsGrapgh";
 import DisbursementsGrapgh from "./components/DisbursementsGrapgh";
 import StatisticsCards from "./components/Statistics";
 import Jumbotron from "./components/Jumbotron";
+import { useAuth } from "../../../../hooks/useAuth";
+import { useLogout } from "../../../../hooks/useLogout";
 
 const Dashboard = () => {
+  const authenticated = useAuth();
+  const logout = useLogout();
+
   const overallStats = [
     {
       title: "Collections Today",
@@ -40,6 +45,8 @@ const Dashboard = () => {
       prefix: "₵",
     },
   ];
+
+  if (!authenticated) return <div>Loading...</div>;
 
   return (
     <>

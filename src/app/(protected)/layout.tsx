@@ -1,17 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import type { MenuProps } from "antd";
 import { Divider, Flex, Layout, theme } from "antd";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserAvatar from "./user/components/Avatar";
@@ -20,20 +9,6 @@ import Image from "next/image";
 import AppSideMenu from "./AppSideMenu";
 const { Header, Content, Footer, Sider } = Layout;
 const queryClient = new QueryClient();
-const items: MenuProps["items"] = [
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  AppstoreOutlined,
-  TeamOutlined,
-  ShopOutlined,
-].map((icon, index) => ({
-  key: String(index + 1),
-  icon: React.createElement(icon),
-  label: `nav ${index + 1}`,
-}));
 
 export default function ProtectLayout({
   children,
@@ -50,12 +25,8 @@ export default function ProtectLayout({
         <Sider
           breakpoint="lg"
           collapsedWidth="0"
-          onBreakpoint={(broken) => {
-            console.log(broken);
-          }}
-          onCollapse={(collapsed, type) => {
-            console.log(collapsed, type);
-          }}
+          onBreakpoint={(broken) => {}}
+          onCollapse={(collapsed, type) => {}}
           style={
             collapsed
               ? {
