@@ -5,7 +5,7 @@ import FilterTransaction from "./FilterDDebitMandates";
 import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
-import { getDirectDebitMandates } from "@/app/actions/directdebitmandate";
+import { getDirectDebitMandates } from "@/actions/directdebitmandate";
 import moment from "moment";
 
 const columns: TableColumnsType = [

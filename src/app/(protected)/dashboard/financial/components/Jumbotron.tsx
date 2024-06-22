@@ -1,5 +1,5 @@
 "use client";
-import { loadUser } from "@/app/actions/auth";
+import { loadUser } from "@/actions/auth";
 import { useQuery } from "@tanstack/react-query";
 import { Card, theme } from "antd";
 

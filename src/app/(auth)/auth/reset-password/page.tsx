@@ -7,7 +7,7 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import { useMutation } from "@tanstack/react-query";
 import { ResetPasswordData } from "@/types/types";
-import { resetPassword } from "@/app/actions/auth";
+import { resetPassword } from "@/actions/auth";
 import { AxiosError } from "axios";
 import {
   Form,
@@ -41,7 +41,7 @@ export default function LoginPage() {
       );
     },
     onSuccess: (res) => {
-      api.success(res.data.message, 5, () => {
+      api.success(res.data.message, 3000, () => {
         router.push("/auth/login");
       });
     },

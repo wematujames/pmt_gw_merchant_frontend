@@ -4,7 +4,7 @@ import TransactionDetail from "./TransactionDetails";
 import FilterTransaction from "./FilterTransactions";
 import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
-import { getTransactions } from "@/app/actions/transactions";
+import { getTransactions } from "@/actions/transactions";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 

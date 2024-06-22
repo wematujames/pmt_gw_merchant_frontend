@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 import { useMutation } from "@tanstack/react-query";
 import { message } from "antd";
 import { AxiosError, AxiosResponse } from "axios";
-import { forgotPassword } from "@/app/actions/auth";
+import { forgotPassword } from "@/actions/auth";
 import { ForgotPasswordData } from "@/types/types";
 
 const { Title } = Typography;

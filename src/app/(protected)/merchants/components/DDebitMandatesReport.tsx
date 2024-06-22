@@ -6,7 +6,7 @@ import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
-import { getPlatformMerchants } from "@/app/actions/merchants";
+import { getPlatformMerchants } from "@/actions/merchants";
 
 const columns: TableColumnsType = [
   {

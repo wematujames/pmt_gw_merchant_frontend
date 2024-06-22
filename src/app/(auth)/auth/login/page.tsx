@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Typography } from "antd";
 import styles from "./styles.module.css";
 import { useMutation } from "@tanstack/react-query";
-import { login } from "@/app/actions/auth";
+import { login } from "@/actions/auth";
 import { LoginCredentials } from "@/types/types";
 import { AxiosError } from "axios";
 import { message } from "antd";

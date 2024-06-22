@@ -1,9 +1,9 @@
-import axios from "axios";
-import setAuthTokenHeader from "./helpers/setAuthToken";
+import setAuthTokenHeader from "./utils/setAuthToken";
+import nersikaAxiosConfig from "./utils/nersikaAxiosConfig";
 
 export const login = async (email: string, password: string) =>  {
-    const res = await axios(
-      "http://127.0.0.1:8249/api/v1/platform/auth/login",
+    const res = await nersikaAxiosConfig(
+      "/platform/auth/login",
       {
         method: "POST",
         headers: {
@@ -14,7 +14,9 @@ export const login = async (email: string, password: string) =>  {
       }
     );
 
-    if (res.status === 200) localStorage.setItem("token", res.data.data.token);
+    if (res.status === 200) {
+      localStorage.setItem("token", res.data.data.token);
+    };
 
     return res.data.data;
 };
@@ -22,8 +24,8 @@ export const login = async (email: string, password: string) =>  {
 export const loadUser = async () =>  {
     setAuthTokenHeader();
     
-    const res = await axios(
-      "http://127.0.0.1:8249/api/v1/platform/auth/user",
+    const res = await nersikaAxiosConfig(
+      "/platform/auth/user",
       {
         method: "GET",
         headers: {
@@ -37,8 +39,8 @@ export const loadUser = async () =>  {
 };
 
 export const forgotPassword = async (email: string,) =>  {
-   return await axios(
-      "http://127.0.0.1:8249/api/v1/platform/auth/forgotpassword",
+   return nersikaAxiosConfig(
+      "/platform/auth/forgotpassword",
       {
         method: "POST",
         headers: {  Accept: "application/json","Content-Type": "application/json", },
@@ -48,8 +50,8 @@ export const forgotPassword = async (email: string,) =>  {
 };
 
 export const resetPassword = async (resetToken: string, newPassword: string) =>  {
-   return await axios(
-      "http://127.0.0.1:8249/api/v1/platform/auth/resetpassword",
+   return nersikaAxiosConfig(
+      "/platform/auth/resetpassword",
       {
         method: "POST",
         headers: {  Accept: "application/json","Content-Type": "application/json", },
