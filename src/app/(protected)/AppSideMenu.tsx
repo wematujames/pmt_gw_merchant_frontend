@@ -8,6 +8,7 @@ import type { MenuProps } from "antd";
 import { GrTransaction } from "react-icons/gr";
 import { BsShop } from "react-icons/bs";
 import { HiUserGroup } from "react-icons/hi";
+import { TbTransactionBitcoin } from "react-icons/tb";
 
 const { SubMenu } = Menu;
 
@@ -16,10 +17,7 @@ const items = [
     key: "dashboard",
     label: "Dashboard",
     icon: <ImMeter />,
-    items: [
-      // { key: "1", label: "Operational", link: "/dashboard/operational" },
-      { key: "2", label: "Financial", link: "/dashboard/financial" },
-    ],
+    items: [{ key: "2", label: "Financial", link: "/dashboard/financial" }],
   },
   {
     key: "transactions",
@@ -28,7 +26,15 @@ const items = [
     items: [
       { key: "6", label: `Overview`, link: "/transactions/view?tab=overview" },
       { key: "5", label: `Report`, link: "/transactions/view?tab=report" },
-      // { key: "9", label: `USSD Reports`, link: "/ussd/reports" },
+    ],
+  },
+  {
+    key: "direcctdebits",
+    label: "Direct Debits",
+    icon: <TbTransactionBitcoin />,
+    items: [
+      { key: "7", label: `Overview`, link: "/directdebits/view?tab=overview" },
+      { key: "8", label: `Report`, link: "/directdebits/view?tab=report" },
     ],
   },
   {
@@ -36,9 +42,8 @@ const items = [
     label: "Merchants",
     icon: <BsShop />,
     items: [
-      { key: "10", label: `Manage Merchant`, link: "/merchants/view" },
-      // { key: "11", label: `USSD API Docs`, link: "/docs/sms/v1" },
-      // { key: "12", label: `OTP API Docs`, link: "/docs/otp/v1" },
+      { key: "9", label: `Overview`, link: "/merchants/view?tab=overview" },
+      { key: "10", label: `Report`, link: "/merchants/view?tab=report" },
     ],
   },
   {
@@ -46,7 +51,7 @@ const items = [
     label: "Platform Users",
     icon: <HiUserGroup />,
     items: [
-      { key: "13", label: `Manage Users`, link: "/users/view" },
+      { key: "11", label: `Manage Users`, link: "/users/view" },
       // { key: "14", label: `USSD API Docs`, link: "/docs/sms/v1" },
       // { key: "15", label: `OTP API Docs`, link: "/docs/otp/v1" },
     ],

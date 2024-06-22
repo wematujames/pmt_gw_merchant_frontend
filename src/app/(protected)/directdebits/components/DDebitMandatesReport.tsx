@@ -1,11 +1,11 @@
 "use client";
 import { Flex, Space, Table, TableColumnsType, theme } from "antd";
-import TransactionDetail from "./TransactionDetails";
-import FilterTransaction from "./FilterTransactions";
+import TransactionDetail from "./DDebitMandatesDetails";
+import FilterTransaction from "./FilterDDebitMandates";
 import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
-import { getTransactions } from "@/app/actions/transactions";
 import { useQuery } from "@tanstack/react-query";
+import { getDirectDebitMandates } from "@/app/actions/directdebitmandate";
 import moment from "moment";
 
 const columns: TableColumnsType = [
@@ -29,7 +29,6 @@ const columns: TableColumnsType = [
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
         <p>₵ {parseFloat(record.amount).toFixed(2)}</p>
-        <small>{record.type}</small>
       </Space>
     ),
   },
@@ -41,6 +40,18 @@ const columns: TableColumnsType = [
       <Space size={0} direction="vertical">
         <p>{record.phone}</p>
         <small>{record.desc}</small>
+      </Space>
+    ),
+  },
+  {
+    title: "Frequency",
+    dataIndex: "frequency",
+    key: "frequency",
+    render: (_: any, record: any) => (
+      <Space size={0} direction="vertical">
+        <p>{record.frequency}</p>
+        <small>N: {moment(record.nextPaymentDate).format("YYYY-MM-DD")}</small>
+        <small>E: {moment(record.expiryDate).format("YYYY-MM-DD")}</small>
       </Space>
     ),
   },
@@ -61,7 +72,7 @@ const columns: TableColumnsType = [
     key: "network",
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
-        <p>{record.status}</p>
+        <p>{record.active ? "Active" : "Inactive"}</p>
         <small>{record.statusReason}</small>
       </Space>
     ),
@@ -93,8 +104,8 @@ function TransactionReport() {
   const [filter, setFilter] = useState({});
 
   const txnsQuery = useQuery({
-    queryKey: ["transactions", filter],
-    queryFn: () => getTransactions(filter),
+    queryKey: ["ddebit-mandates", filter],
+    queryFn: () => getDirectDebitMandates(filter),
   });
 
   return (
@@ -118,11 +129,11 @@ function TransactionReport() {
       )}
       loading={txnsQuery.isLoading}
       sticky
+      size="small"
       rowHoverable
       scroll={{ x: true }}
       dataSource={txnsQuery.data}
       columns={columns}
-      size="small"
     />
   );
 }

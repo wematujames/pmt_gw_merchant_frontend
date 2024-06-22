@@ -24,7 +24,6 @@ export default function FilterTransaction({
   setFilter: any;
 }) {
   const [open, setOpen] = useState(false);
-  // const [filter, setFilter] = useState({});
 
   const showDrawer = () => {
     setOpen(true);
@@ -68,36 +67,13 @@ export default function FilterTransaction({
         <Form layout="vertical" requiredMark onFinish={onFinish}>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="_id" label="Transaction ID">
+              <Form.Item name="_id" label="Mandate ID">
                 <Input placeholder="6648574ee18c5235e783f834" />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item name="phone" label="Account">
                 <Input placeholder="233554268378" />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="type" label="Type">
-                <Select defaultActiveFirstOption defaultValue="">
-                  <Option value="">All</Option>
-                  <Option value="collection-c2b">Collection</Option>
-                  <Option value="collection-dd">DD Collection</Option>
-                  <Option value="disbursement-b2c">Disbursement</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="status" label="Status">
-                <Select defaultActiveFirstOption defaultValue="">
-                  <Option value="">All</Option>
-                  <Option value="successful">Successful</Option>
-                  <Option value="pending">Pending</Option>
-                  <Option value="failed">Failed</Option>
-                </Select>
               </Form.Item>
             </Col>
           </Row>
@@ -111,6 +87,18 @@ export default function FilterTransaction({
               </Form.Item>
             </Col>
             <Col span={12}>
+              <Form.Item name="active" label="Status">
+                <Select defaultActiveFirstOption defaultValue="">
+                  <Option value="">All</Option>
+                  <Option value="true">Active</Option>
+                  <Option value="false">Inactive</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={24}>
               <Form.Item
                 name="dateTime"
                 label="DateTime"
