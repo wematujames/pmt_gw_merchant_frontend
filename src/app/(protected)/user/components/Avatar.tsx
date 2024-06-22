@@ -38,7 +38,7 @@ const UserAvatar = () => {
   ];
 
   const userQuery = useQuery({
-    queryKey: ["load-user"],
+    queryKey: ["current-user"],
     queryFn: () => loadUser(),
   });
 
@@ -75,7 +75,6 @@ const UserAvatar = () => {
     >
       <Space>
         {userQuery.data.person.fName}
-        {userQuery.data.person.lName}
         <Avatar size={{ xs: 24, sm: 32, md: 40 }} icon={<UserOutlined />} />
       </Space>
     </Dropdown>

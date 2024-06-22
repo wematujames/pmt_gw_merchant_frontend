@@ -31,19 +31,6 @@ const Dashboard = () => {
     },
   ];
 
-  const netWorkStats = [
-    {
-      title: "MTN",
-      value: 1128.87,
-      prefix: "₵",
-    },
-    {
-      title: "Vodafone",
-      value: 93842,
-      prefix: "₵",
-    },
-  ];
-
   if (!authenticated) return <div>Loading...</div>;
 
   return (

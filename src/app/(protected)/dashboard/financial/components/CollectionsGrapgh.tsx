@@ -21,13 +21,13 @@ function CollectionsGrapgh() {
       logo: "/tcashlogo.jpg",
     },
     {
-      network: "MTN MoMo",
+      network: "MTN MoMo2",
       today: 234.23,
       allTime: 3242342.23,
       logo: "/mtnghlogo.jpg",
     },
     {
-      network: "T-Cash",
+      network: "T-Cash2",
       today: 24.23,
       allTime: 3242.23,
       logo: "/tcashlogo.jpg",

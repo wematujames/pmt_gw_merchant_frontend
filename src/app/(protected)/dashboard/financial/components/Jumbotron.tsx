@@ -1,8 +1,16 @@
 "use client";
+import { loadUser } from "@/app/actions/auth";
+import { useQuery } from "@tanstack/react-query";
 import { Card, theme } from "antd";
 
 const Jumbotron = () => {
   const { token } = theme.useToken();
+
+  const userQuery = useQuery({
+    queryKey: ["current-user"],
+    queryFn: () => loadUser(),
+    enabled: false,
+  });
 
   function getGreeting() {
     const now = new Date();
@@ -19,7 +27,9 @@ const Jumbotron = () => {
       style={{ marginTop: token.marginXXS, marginBottom: token.marginSM }}
     >
       <p style={{ fontSize: token.fontSizeHeading2 }}>
-        {getGreeting()} {"Current User!"}
+        {`${getGreeting()} ${userQuery.data?.person?.fName} ${
+          userQuery.data?.person?.lName
+        }`}
       </p>
       <p style={{ fontSize: token.fontSize, color: token.colorBgMask }}>
         {"Here's"} your financial overview

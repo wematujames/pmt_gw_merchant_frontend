@@ -14,7 +14,7 @@ function NetworkStats({ stats }: { stats: NetworkCollectionStat[] }) {
 
   return (
     <Row justify="space-between">
-      {stats.map((netrk: NetworkCollectionStat) => (
+      {stats.map((netrk: NetworkCollectionStat, idx) => (
         <Col key={netrk.network as string} xs={24} sm={12} md={8} lg={6}>
           <Card
             key={netrk.network}
