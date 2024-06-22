@@ -10,11 +10,9 @@ import OverView from "../components/OverView";
 import TransactionReport from "../components/TransactionReport";
 import { TbReport } from "react-icons/tb";
 import { useAuth } from "../../../../hooks/useAuth";
-import { useLogout } from "../../../../hooks/useLogout";
 
 const App: React.FC = () => {
   const authenticated = useAuth();
-  const logout = useLogout();
 
   const { token } = theme.useToken();
   const searchParams = useSearchParams();
@@ -43,7 +41,6 @@ const App: React.FC = () => {
 
   return (
     <Card
-      style={{ width: "100", minHeight: "80vh" }}
       tabProps={{ size: "large", centered: true }}
       activeTabKey={activeTabKey}
       onTabChange={onTabChange}

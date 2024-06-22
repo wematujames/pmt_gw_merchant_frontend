@@ -10,7 +10,7 @@ import AppSideMenu from "./AppSideMenu";
 const { Header, Content, Footer, Sider } = Layout;
 const queryClient = new QueryClient();
 
-export default function ProtectLayout({
+export default function ProtectedLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -27,18 +27,7 @@ export default function ProtectLayout({
           collapsedWidth="0"
           onBreakpoint={(broken) => {}}
           onCollapse={(collapsed, type) => {}}
-          style={
-            collapsed
-              ? {
-                  overflow: "auto",
-                  height: "100vh",
-                  position: "fixed",
-                  left: 0,
-                  top: 0,
-                  bottom: 0,
-                }
-              : {}
-          }
+          style={{ minHeight: "100vh" }}
         >
           <Flex style={{ width: "100%" }} justify="center" align="center">
             <Link href="/">
@@ -53,7 +42,7 @@ export default function ProtectLayout({
           <Divider style={{ background: "#e1e1ef", margin: 0 }} />
           <AppSideMenu />
         </Sider>
-        <Layout style={collapsed ? { marginLeft: 200 } : {}}>
+        <Layout>
           <Header
             style={{
               padding: 0,
