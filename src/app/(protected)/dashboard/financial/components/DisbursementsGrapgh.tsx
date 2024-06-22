@@ -2,8 +2,36 @@ import { Line } from "@ant-design/plots";
 import { Card, Space, theme } from "antd";
 import Meta from "antd/es/card/Meta";
 import { BiMoneyWithdraw } from "react-icons/bi";
+import NetworkStats from "./NetworkTnxStats";
 function DisbursementsGrapgh() {
   const { token } = theme.useToken();
+
+  const disNetworkData = [
+    {
+      network: "MTN MoMo",
+      today: 234.23,
+      allTime: 3242342.23,
+      logo: "/mtnghlogo.jpg",
+    },
+    {
+      network: "T-Cash",
+      today: 24.23,
+      allTime: 3242.23,
+      logo: "/tcashlogo.jpg",
+    },
+    {
+      network: "MTN MoMo",
+      today: 234.23,
+      allTime: 3242342.23,
+      logo: "/mtnghlogo.jpg",
+    },
+    {
+      network: "T-Cash",
+      today: 24.23,
+      allTime: 3242.23,
+      logo: "/tcashlogo.jpg",
+    },
+  ];
 
   const data = [
     { day: "1991", total: 3 },
@@ -58,6 +86,7 @@ function DisbursementsGrapgh() {
       }
       style={{ marginTop: token.marginMD }}
     >
+      <NetworkStats stats={disNetworkData} />
       <Line {...config} />
     </Card>
   );

@@ -17,7 +17,7 @@ const items = [
     label: "Dashboard",
     icon: <ImMeter />,
     items: [
-      { key: "1", label: "Operational", link: "/dashboard/operational" },
+      // { key: "1", label: "Operational", link: "/dashboard/operational" },
       { key: "2", label: "Financial", link: "/dashboard/financial" },
     ],
   },

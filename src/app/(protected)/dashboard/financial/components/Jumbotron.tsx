@@ -22,7 +22,7 @@ const Jumbotron = () => {
         {getGreeting()} {"Current User!"}
       </p>
       <p style={{ fontSize: token.fontSize, color: token.colorBgMask }}>
-        {"Here's"} an overview for you
+        {"Here's"} your financial overview
       </p>
     </Card>
   );

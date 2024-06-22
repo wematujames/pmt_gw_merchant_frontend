@@ -10,3 +10,16 @@ export interface ResetPasswordData {
     newPassword: string,
     resetToken: string,
 }
+
+export interface StatCardItem{
+    title: string,
+    value: number,
+    prefix: string,
+}
+
+export interface NetworkCollectionStat{
+    network: string,
+    logo: string,
+    today: number,
+    allTime: number,
+}

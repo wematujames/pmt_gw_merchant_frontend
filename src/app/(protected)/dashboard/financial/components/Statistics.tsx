@@ -1,43 +1,21 @@
 "use client";
-import { Card, Row, Col, Statistic, theme } from "antd";
+import { Card, Statistic, theme, Row, Col } from "antd";
 import CountUp from "react-countup";
 import type { StatisticProps } from "antd";
+import { StatCardItem } from "@/types/types";
 
 const formatter: StatisticProps["formatter"] = (value) => (
   <CountUp end={value as number} separator="," />
 );
 
-const StatisticsCards = () => {
+const StatisticsCards = ({ stats }: { stats: StatCardItem[] }) => {
   const { token } = theme.useToken();
 
-  const stats = [
-    {
-      title: "Total Collections",
-      value: 1128,
-      prefix: "",
-    },
-    {
-      title: "Total Revenue",
-      value: 93842,
-      prefix: "$",
-    },
-    {
-      title: "Total Disbursements",
-      value: 48393,
-      prefix: "$",
-    },
-    {
-      title: "Active Merchants",
-      value: 238,
-      prefix: "",
-    },
-  ];
-
   return (
-    <Row gutter={16}>
-      {stats.map((stat: StatisticProps) => (
-        <Col key={stat.title as string} span={6}>
-          <Card>
+    <Row gutter={[16, 16]}>
+      {stats.map((stat: StatCardItem) => (
+        <Col key={stat.title as string} xs={24} sm={12} md={8} lg={6}>
+          <Card key={stat.title as string}>
             <Statistic
               formatter={formatter}
               title={stat.title}

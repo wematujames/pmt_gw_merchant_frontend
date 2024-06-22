@@ -1,6 +1,6 @@
 "use client";
-
-import React from "react";
+import "./layout.module.css";
+import React, { useState } from "react";
 import {
   AppstoreOutlined,
   BarChartOutlined,
@@ -40,22 +40,36 @@ export default function ProtectLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
- const {
+  const [collapsed, setCollaped] = useState(false);
+
+  const {
     token: { colorBgContainer, borderRadiusLG, paddingMD },
   } = theme.useToken();
- 
+
   return (
     <QueryClientProvider client={queryClient}>
       <Layout hasSider>
         <Sider
-          style={{
-            overflow: "auto",
-            height: "100vh",
-            position: "fixed",
-            left: 0,
-            top: 0,
-            bottom: 0,
+          breakpoint="lg"
+          collapsedWidth="0"
+          onBreakpoint={(broken) => {
+            console.log(broken);
           }}
+          onCollapse={(collapsed, type) => {
+            console.log(collapsed, type);
+          }}
+          style={
+            collapsed
+              ? {
+                  overflow: "auto",
+                  height: "100vh",
+                  position: "fixed",
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                }
+              : {}
+          }
         >
           <Flex style={{ width: "100%" }} justify="center" align="center">
             <Link href="/">
@@ -70,7 +84,7 @@ export default function ProtectLayout({
           <Divider style={{ background: "#e1e1ef", margin: 0 }} />
           <AppSideMenu />
         </Sider>
-        <Layout style={{ marginLeft: 200 }}>
+        <Layout style={collapsed ? { marginLeft: 200 } : {}}>
           <Header
             style={{
               padding: 0,
