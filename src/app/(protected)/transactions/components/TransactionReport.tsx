@@ -93,10 +93,11 @@ function TransactionReport() {
 
   const txnsQuery = useQuery({
     queryKey: ["transactions", filter],
-    queryFn: ({ queryKey }) => getTransactions(queryKey[1]),
+    queryFn: () => getTransactions(filter),
   });
 
   console.log("txn filterr", filter);
+  console.log(txnsQuery.data?.length);
 
   return (
     <Table
@@ -110,7 +111,11 @@ function TransactionReport() {
             <MdNumbers size={token.fontSizeIcon} />
             Count:{txnsQuery?.data?.length}
           </Space>
-          <FilterTransaction txnsQuery={txnsQuery} />
+          <FilterTransaction
+            filter={filter}
+            setFilter={setFilter}
+            txnsQuery={txnsQuery}
+          />
         </Flex>
       )}
       loading={txnsQuery.isLoading}

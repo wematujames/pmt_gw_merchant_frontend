@@ -14,9 +14,17 @@ import { FiFilter } from "react-icons/fi";
 
 const { Option } = Select;
 
-export default function FilterTransaction({ txnsQuery }: { txnsQuery: any }) {
+export default function FilterTransaction({
+  txnsQuery,
+  filter,
+  setFilter,
+}: {
+  txnsQuery: any;
+  filter: any;
+  setFilter: any;
+}) {
   const [open, setOpen] = useState(false);
-  const [filter, setFilter] = useState(false);
+  // const [filter, setFilter] = useState({});
 
   const showDrawer = () => {
     setOpen(true);
@@ -33,7 +41,7 @@ export default function FilterTransaction({ txnsQuery }: { txnsQuery: any }) {
 
     if (vals.dateTime?.length) {
       setFilter((prev: any) => ({ ...prev, startDate: vals.dateTime[0].$d }));
-      setFilter((prev: any) => ({ ...prev, endDate: vals.dateTime[0].$d }));
+      setFilter((prev: any) => ({ ...prev, endDate: vals.dateTime[1].$d }));
     }
 
     setFilter((prev: any) => ({ ...prev, dateTime: undefined }));
@@ -74,7 +82,8 @@ export default function FilterTransaction({ txnsQuery }: { txnsQuery: any }) {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item name="type" label="Type">
-                <Select defaultActiveFirstOption defaultValue="collection-b2c">
+                <Select defaultActiveFirstOption defaultValue="">
+                  <Option value="">All</Option>
                   <Option value="collection-c2b">Collection</Option>
                   <Option value="collection-dd">DD Collection</Option>
                   <Option value="disbursement-b2c">Disbursement</Option>
@@ -96,7 +105,9 @@ export default function FilterTransaction({ txnsQuery }: { txnsQuery: any }) {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item name="merchant" label="Merchant">
-                <Input placeholder="NlpOUENwUUVFRE5j" />
+                <Select defaultActiveFirstOption defaultValue="">
+                  <Option value="">All</Option>
+                </Select>
               </Form.Item>
             </Col>
             <Col span={12}>
