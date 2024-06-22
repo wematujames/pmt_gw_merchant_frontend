@@ -24,7 +24,7 @@ export default function LoginPage() {
     mutationFn: (credentials: LoginCredentials) =>
       login(credentials.email, credentials.password),
     onSuccess: (res) => {
-      router.push("/dashboard");
+      router.push("/dashboard/financial");
     },
     onError: (err: AxiosError<Error>) => {
       api.error(err.response?.data.message as string);
@@ -32,7 +32,7 @@ export default function LoginPage() {
   });
 
   useEffect(() => {
-    if (localStorage.getItem("token")) router.push("/dashboard");
+    if (localStorage.getItem("token")) router.push("/dashboard/financial");
   });
 
   return (

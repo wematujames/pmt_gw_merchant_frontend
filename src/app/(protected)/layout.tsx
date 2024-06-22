@@ -40,10 +40,10 @@ export default function ProtectLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const {
+ const {
     token: { colorBgContainer, borderRadiusLG, paddingMD },
   } = theme.useToken();
-
+ 
   return (
     <QueryClientProvider client={queryClient}>
       <Layout hasSider>
@@ -83,22 +83,6 @@ export default function ProtectLayout({
           </Header>
           <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
             {children}
-            <div
-              style={{
-                padding: 24,
-                textAlign: "center",
-                background: colorBgContainer,
-                borderRadius: borderRadiusLG,
-              }}
-            >
-              <p>long content</p>
-              {Array.from({ length: 45 }, (_, index) => (
-                <React.Fragment key={index}>
-                  {index % 20 === 0 && index ? "more" : "..."}
-                  <br />
-                </React.Fragment>
-              ))}
-            </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
             Nerasika ©{new Date().getFullYear()} Created by NeraSol Ghana

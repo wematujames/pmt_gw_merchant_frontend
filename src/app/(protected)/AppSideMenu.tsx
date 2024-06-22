@@ -26,8 +26,8 @@ const items = [
     label: "Transactions",
     icon: <GrTransaction />,
     items: [
-      { key: "5", label: `Manage Transactions`, link: "/transactions/view" },
-      // { key: "6", label: `Manage USSD apps`, link: "/ussd/apps" },
+      { key: "6", label: `Overview`, link: "/transactions/overview" },
+      { key: "5", label: `Report`, link: "/transactions/report" },
       // { key: "9", label: `USSD Reports`, link: "/ussd/reports" },
     ],
   },

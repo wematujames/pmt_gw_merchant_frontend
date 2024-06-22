@@ -1,20 +1,18 @@
 "use client";
+import CollectionsGrapgh from "./components/CollectionsGrapgh";
+import DisbursementsGrapgh from "./components/DisbursementsGrapgh";
+import StatisticsCards from "./components/Statistics";
+import Jumbotron from "./components/Jumbotron";
 
-import { useAuth } from "../../../../hooks/useAuth";
-import { useLogout } from "../../../../hooks/useLogout";
-
-export default function DashboardPage() {
-  const authenticated = useAuth();
-  const logout = useLogout();
-
-  if (!authenticated) {
-    return <div>Loading...</div>;
-  }
-
+const Dashboard = () => {
   return (
-    <div>
-      <h1>Welcome User</h1>
-      <p>This is your financial dashboard</p>
-    </div>
+    <>
+      <Jumbotron />
+      <StatisticsCards />
+      <CollectionsGrapgh />
+      <DisbursementsGrapgh />
+    </>
   );
-}
+};
+
+export default Dashboard;
