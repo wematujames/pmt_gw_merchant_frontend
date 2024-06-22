@@ -1,5 +1,5 @@
 "use client";
-import "./layout.module.css";
+
 import React, { useState } from "react";
 import {
   AppstoreOutlined,
@@ -42,9 +42,7 @@ export default function ProtectLayout({
 }>) {
   const [collapsed, setCollaped] = useState(false);
 
-  const {
-    token: { colorBgContainer, borderRadiusLG, paddingMD },
-  } = theme.useToken();
+  const { token } = theme.useToken();
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -88,8 +86,8 @@ export default function ProtectLayout({
           <Header
             style={{
               padding: 0,
-              background: colorBgContainer,
-              paddingRight: paddingMD,
+              background: token.colorBgContainer,
+              paddingRight: token.paddingMD,
               textAlign: "right",
             }}
           >

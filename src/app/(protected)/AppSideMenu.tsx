@@ -26,8 +26,8 @@ const items = [
     label: "Transactions",
     icon: <GrTransaction />,
     items: [
-      { key: "6", label: `Overview`, link: "/transactions/overview" },
-      { key: "5", label: `Report`, link: "/transactions/report" },
+      { key: "6", label: `Overview`, link: "/transactions/view?tab=overview" },
+      { key: "5", label: `Report`, link: "/transactions/view?tab=report" },
       // { key: "9", label: `USSD Reports`, link: "/ussd/reports" },
     ],
   },
