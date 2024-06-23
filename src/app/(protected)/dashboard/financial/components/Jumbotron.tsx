@@ -27,9 +27,7 @@ const Jumbotron = () => {
       style={{ marginTop: token.marginXXS, marginBottom: token.marginSM }}
     >
       <p style={{ fontSize: token.fontSizeHeading2 }}>
-        {`${getGreeting()} ${userQuery.data?.person?.fName} ${
-          userQuery.data?.person?.lName
-        }`}
+        {getGreeting()} {userQuery.data?.person?.fName}
       </p>
       <p style={{ fontSize: token.fontSize, color: token.colorBgMask }}>
         {"Here's"} your financial overview
