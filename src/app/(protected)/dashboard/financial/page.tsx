@@ -4,6 +4,7 @@ import DisbursementsGrapgh from "./components/DisbursementsGrapgh";
 import StatisticsCards from "./components/Statistics";
 import Jumbotron from "./components/Jumbotron";
 import { useAuth } from "../../../../hooks/useAuth";
+import PageLoader from "../../PageLoader";
 
 const Dashboard = () => {
   const authenticated = useAuth();
@@ -31,7 +32,7 @@ const Dashboard = () => {
     },
   ];
 
-  if (!authenticated) return <div>Loading...</div>;
+  if (!authenticated) return <PageLoader />;
 
   return (
     <>

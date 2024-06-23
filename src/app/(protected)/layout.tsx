@@ -8,7 +8,6 @@ import Link from "next/link";
 import Image from "next/image";
 import AppSideMenu from "./AppSideMenu";
 const { Header, Content, Footer, Sider } = Layout;
-const queryClient = new QueryClient();
 
 export default function ProtectedLayout({
   children,
@@ -16,6 +15,13 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }>) {
   const [collapsed, setCollaped] = useState(false);
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   const { token } = theme.useToken();
 

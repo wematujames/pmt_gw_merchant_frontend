@@ -10,6 +10,7 @@ import TransactionReport from "../components/DDebitMandatesReport";
 import { TbReport } from "react-icons/tb";
 import { useAuth } from "../../../../hooks/useAuth";
 import { CiMoneyCheck1 } from "react-icons/ci";
+import PageLoader from "../../PageLoader";
 
 const App: React.FC = () => {
   const authenticated = useAuth();
@@ -37,7 +38,7 @@ const App: React.FC = () => {
 
   const onTabChange = (key: string) => setActiveTabKey(key);
 
-  if (!authenticated) return <div>Loading...</div>;
+  if (!authenticated) return <PageLoader />;;
 
   return (
     <Card

@@ -1,3 +1,4 @@
+"use client";
 import { Card, Space, theme } from "antd";
 import { Line } from "@ant-design/plots";
 import Meta from "antd/es/card/Meta";

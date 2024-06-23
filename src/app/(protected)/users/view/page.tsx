@@ -2,13 +2,14 @@
 
 import { useAuth } from "../../../../hooks/useAuth";
 import { useLogout } from "../../../../hooks/useLogout";
+import PageLoader from "../../PageLoader";
 
 export default function DashboardPage() {
   const authenticated = useAuth();
   const logout = useLogout();
 
   if (!authenticated) {
-    return <div>Loading...</div>;
+    return <PageLoader />;;
   }
 
   return (

@@ -1,16 +1,13 @@
-import setAuthTokenHeader from "./utils/setAuthToken";
-import nersikaAxiosConfig from "./utils/nersikaAxiosConfig";
+import axios from "axios";
 
 export const getPlatformMerchants = async (_filter: any = {}) =>  {
-  setAuthTokenHeader();
-
   const filter = {} as any;
 
   Object.keys(_filter).forEach((key: any) => {
     if (_filter[key]) filter[key] = _filter[key]
   });
 
-  const res = await nersikaAxiosConfig(
+  const res = await axios(
     "/platform/merchants",
     {
       method: "GET",

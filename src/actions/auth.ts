@@ -1,9 +1,9 @@
-import setAuthTokenHeader from "./utils/setAuthToken";
-import nersikaAxiosConfig from "./utils/nersikaAxiosConfig";
+"use client"
 
+import axios from "axios";
 export const login = async (email: string, password: string) =>  {
-    const res = await nersikaAxiosConfig(
-      "/platform/auth/login",
+    const res = await axios(
+      process.env.NEXT_PUBLIC_API_BASE_URL + "/platform/auth/login",
       {
         method: "POST",
         headers: {
@@ -14,17 +14,13 @@ export const login = async (email: string, password: string) =>  {
       }
     );
 
-    if (res.status === 200) {
-      localStorage.setItem("token", res.data.data.token);
-    };
+    localStorage.setItem("token", res.data.data.token);
 
     return res.data.data;
 };
 
 export const loadUser = async () =>  {
-    setAuthTokenHeader();
-    
-    const res = await nersikaAxiosConfig(
+    const res = await axios(
       "/platform/auth/user",
       {
         method: "GET",
@@ -39,7 +35,7 @@ export const loadUser = async () =>  {
 };
 
 export const forgotPassword = async (email: string,) =>  {
-   return nersikaAxiosConfig(
+   return axios(
       "/platform/auth/forgotpassword",
       {
         method: "POST",
@@ -50,7 +46,7 @@ export const forgotPassword = async (email: string,) =>  {
 };
 
 export const resetPassword = async (resetToken: string, newPassword: string) =>  {
-   return nersikaAxiosConfig(
+   return axios(
       "/platform/auth/resetpassword",
       {
         method: "POST",

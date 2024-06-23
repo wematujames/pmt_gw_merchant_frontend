@@ -1,14 +1,14 @@
+"use client";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "NeraSol NeraSika",
-  description: "NeraSol Ghana limited ",
-  robots: { index: false, follow: false },
-};
+// export const metadata: Metadata = {
+//   title: "NeraSol NeraSika",
+//   description: "NeraSol Ghana limited ",
+//   robots: { index: false, follow: false },
+// };
 
 export default function RootLayout({
   children,
