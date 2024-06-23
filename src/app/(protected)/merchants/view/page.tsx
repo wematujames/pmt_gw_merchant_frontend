@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Tabs } from "antd";
 import { GrOverview } from "react-icons/gr";
 import OverView from "../components/OverView";
-import TransactionReport from "../components/DDebitMandatesReport";
+import TransactionReport from "../components/MerchantsReport";
 import { TbReport } from "react-icons/tb";
 import { useAuth } from "../../../../hooks/useAuth";
 import { FaStore } from "react-icons/fa6";

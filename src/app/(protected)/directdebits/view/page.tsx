@@ -38,7 +38,7 @@ const App: React.FC = () => {
 
   const onTabChange = (key: string) => setActiveTabKey(key);
 
-  if (!authenticated) return <PageLoader />;;
+  if (!authenticated) return <PageLoader />;
 
   return (
     <Card

@@ -1,6 +1,6 @@
 "use client";
 import { Flex, Space, Table, TableColumnsType, theme } from "antd";
-import TransactionDetail from "./DDebitMandatesDetails";
+import TransactionDetail from "./DDebitMandateDetails";
 import FilterTransaction from "./FilterDDebitMandates";
 import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
@@ -39,7 +39,11 @@ const columns: TableColumnsType = [
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
         <p>{record.phone}</p>
-        <small>{record.desc}</small>
+        <small>
+          {record.desc.length > 10
+            ? record.desc?.slice(0, 10) + "..."
+            : record.desc}
+        </small>
       </Space>
     ),
   },
@@ -50,8 +54,8 @@ const columns: TableColumnsType = [
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
         <p>{record.frequency}</p>
-        <small>N: {moment(record.nextPaymentDate).format("YYYY-MM-DD")}</small>
-        <small>E: {moment(record.expiryDate).format("YYYY-MM-DD")}</small>
+        <small>NP: {moment(record.nextPaymentDate).format("YYYY-MM-DD")}</small>
+        <small>EX: {moment(record.expiryDate).format("YYYY-MM-DD")}</small>
       </Space>
     ),
   },
@@ -69,11 +73,15 @@ const columns: TableColumnsType = [
   {
     title: "Status",
     dataIndex: "status",
-    key: "network",
+    key: "status",
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
         <p>{record.active ? "Active" : "Inactive"}</p>
-        <small>{record.statusReason}</small>
+        <small>
+          {record.statusReason.length > 10
+            ? record.statusReason?.slice(0, 10) + "..."
+            : record.statusReason}
+        </small>
       </Space>
     ),
   },

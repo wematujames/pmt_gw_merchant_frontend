@@ -1,78 +1,59 @@
 "use client";
 import { Flex, Space, Table, TableColumnsType, theme } from "antd";
-import TransactionDetail from "./TransactionDetails";
-import FilterTransaction from "./FilterTransactions";
+import TransactionDetail from "./MerchantDetails";
+import FilterTransaction from "./FilterMerchants";
 import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
-import { getTransactions } from "@/actions/transactions";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
+import { getPlatformMerchants } from "@/actions/merchants";
 
 const columns: TableColumnsType = [
   {
-    title: "ID",
+    title: "Merchant ID",
     dataIndex: "_id",
     key: "_id",
     ellipsis: { showTitle: true },
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
-        <p>{record._id}</p>
-        <small>{record.merchantRef}</small>
-        <small>{record.merchant}</small>
+        <p>{record.merchantId}</p>
+        <small>{record._id}</small>
       </Space>
     ),
   },
   {
-    title: "Amount ",
-    dataIndex: "amount",
-    key: "amount",
+    title: "Account Name",
+    dataIndex: "name",
+    key: "name",
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
-        <p>₵ {parseFloat(record.amount).toFixed(2)}</p>
-        <small>{record.type}</small>
+        <p>{record.name}</p>
+        <small>{record.active ? "Active" : "Inactive"}</small>
       </Space>
     ),
   },
   {
-    title: "Account",
+    title: "Contact",
     dataIndex: "phone",
     key: "phone",
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
         <p>{record.phone}</p>
-        <small>{record.desc}</small>
+        <small>{record.email}</small>
+        <small>
+          PV: {record.phoneVerified ? "Yes   " : "No   "}
+          EV: {record.emailVerified ? "Yes" : "No"}
+        </small>
       </Space>
     ),
   },
   {
-    title: "Network",
-    dataIndex: "network",
-    key: "network",
+    title: "Created By",
+    dataIndex: "createdBy",
+    key: "createdBy",
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
-        <p>{record.network}</p>
-        <small>{record.processor}</small>
-      </Space>
-    ),
-  },
-  {
-    title: "Status",
-    dataIndex: "status",
-    key: "network",
-    render: (_: any, record: any) => (
-      <Space size={0} direction="vertical">
-        <p>{record.status}</p>
-        <small>{record.statusReason}</small>
-      </Space>
-    ),
-  },
-  {
-    title: "ExternId",
-    dataIndex: "processorTerminalRef",
-    key: "processorTerminalRef",
-    render: (_: any, record: any) => (
-      <Space size={0} direction="vertical">
-        <p>{record.processorTerminalRef || "N/A"}</p>
+        <p>{record.createdBy}</p>
         <small>{moment(record.createdAt).format("YYYY-MM-DD HH:mm:ss")}</small>
       </Space>
     ),
@@ -93,8 +74,8 @@ function TransactionReport() {
   const [filter, setFilter] = useState({});
 
   const txnsQuery = useQuery({
-    queryKey: ["transactions", filter],
-    queryFn: () => getTransactions(filter),
+    queryKey: ["platform-merchants", filter],
+    queryFn: () => getPlatformMerchants(filter),
   });
 
   return (
@@ -118,11 +99,11 @@ function TransactionReport() {
       )}
       loading={txnsQuery.isLoading}
       sticky
+      size="small"
       rowHoverable
       scroll={{ x: true }}
       dataSource={txnsQuery.data}
       columns={columns}
-      size="small"
     />
   );
 }
