@@ -29,3 +29,18 @@ export const getCollectionStatics = async (_filter: any = {}) =>  {
   console.log(res.data.data)
   return res.data.data
 };
+
+export const getDibursementStatics = async (_filter: any = {}) =>  {
+   const res = await axios(
+    "/platform/summary/disbursementtransactionstats",
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log(res.data.data)
+  return res.data.data
+};

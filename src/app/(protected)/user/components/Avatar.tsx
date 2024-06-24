@@ -1,5 +1,5 @@
-import { UserOutlined, LockOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Avatar, Card, Divider, Dropdown, Space, theme } from "antd";
+import { LockOutlined, LogoutOutlined } from "@ant-design/icons";
+import { Avatar, Card, Divider, Dropdown, Space, Spin, theme } from "antd";
 import { useLogout } from "../../../../hooks/useLogout";
 import { useQuery } from "@tanstack/react-query";
 import { loadUser } from "@/actions/auth";
@@ -42,8 +42,7 @@ const UserAvatar = () => {
     queryFn: () => loadUser(),
   });
 
-  if (userQuery.isPending)
-    return <Avatar size={{ xs: 24, sm: 32, md: 40 }} icon={<UserOutlined />} />;
+  if (userQuery.isPending) return <Spin size="small" />;
 
   const menuStyle = {
     boxShadow: "none",
@@ -64,7 +63,16 @@ const UserAvatar = () => {
           loading={userQuery.isLoading}
         >
           <Meta
-            avatar={<Avatar size={50} icon={<UserOutlined />} />}
+            avatar={
+              <Avatar
+                shape="square"
+                style={{ backgroundColor: "#001550" }}
+                size={50}
+              >
+                {userQuery.data.person.lName.slice(0, 1)}
+                {userQuery.data.person.fName.slice(0, 1)}
+              </Avatar>
+            }
             title={`${userQuery.data.person.fName} ${userQuery.data.person.lName}`}
             description={userQuery.data.email}
           />
@@ -74,8 +82,14 @@ const UserAvatar = () => {
       )}
     >
       <Space>
-        {userQuery.data.person.fName}
-        <Avatar size={{ xs: 24, sm: 32, md: 40 }} icon={<UserOutlined />} />
+        <Avatar
+          shape="square"
+          style={{ backgroundColor: "#001550" }}
+          size={{ lg: 45, xl: 50 }}
+        >
+          {userQuery.data.person.lName.slice(0, 1)}
+          {userQuery.data.person.fName.slice(0, 1)}
+        </Avatar>
       </Space>
     </Dropdown>
   );

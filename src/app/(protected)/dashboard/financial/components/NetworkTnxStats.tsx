@@ -35,7 +35,7 @@ function NetworkStats({
                   </small>
                   <br />
                   <small>
-                    Balance: ₵ {parseFloat("" + netrk.allTime).toFixed(2)}
+                    Total: ₵ {parseFloat("" + netrk.allTime).toFixed(2)}
                   </small>
                 </>
               }

@@ -1,9 +1,16 @@
 "use client";
 import { Space, theme } from "antd";
 import Meta from "antd/es/card/Meta";
-import { FaMoneyBillTrendUp } from "react-icons/fa6";
 
-function SectionHeader() {
+function SectionHeader({
+  leadText,
+  subText,
+  icon,
+}: {
+  leadText: string;
+  subText: string;
+  icon: JSX.Element;
+}) {
   const { token } = theme.useToken();
 
   return (
@@ -16,8 +23,8 @@ function SectionHeader() {
           }}
         >
           <Space>
-            <FaMoneyBillTrendUp />
-            <p>Collections Overview</p>
+            {icon}
+            <p>{leadText}</p>
           </Space>
         </p>
       }
@@ -29,10 +36,9 @@ function SectionHeader() {
             marginTop: -token.marginXS,
           }}
         >
-          Based on data from the past 7 days
+          {subText}
         </p>
       }
-      style={{ marginTop: token.marginSM }}
     />
   );
 }
