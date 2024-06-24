@@ -7,7 +7,7 @@ import { getCollectionStatics } from "@/actions/summary";
 import SectionHeader from "./SectionHeader";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 
-function CollectionsGrapgh() {
+export default function CollectionsGrapgh() {
   const { token } = theme.useToken();
 
   const collectionStats = useQuery({
@@ -26,6 +26,7 @@ function CollectionsGrapgh() {
         stats={collectionStats.data?.networks}
         loading={collectionStats.isLoading}
       />
+
       <Line
         data={collectionStats.data?.graph}
         height={250}
@@ -38,5 +39,3 @@ function CollectionsGrapgh() {
     </Card>
   );
 }
-
-export default CollectionsGrapgh;

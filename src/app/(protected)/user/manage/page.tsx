@@ -8,7 +8,7 @@ import { BiUserCircle } from "react-icons/bi";
 import UpdateProfile from "./components/UpdateProfile";
 import TwoFactorAuth from "./components/TwoFactorAuth";
 import UpdatePassword from "./components/UpdatePassword";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 const tabs = [
   {
@@ -51,5 +51,10 @@ const User: React.FC = () => {
     </Card>
   );
 };
-
-export default User;
+export default function UserSuspended() {
+  return (
+    <Suspense>
+      <User />
+    </Suspense>
+  );
+}

@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:dev": "ENVIRONMENT=./env/.env.development yarn build",
+    "build:prod": "ENVIRONMENT=./env/.env.production yarn build"
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.0",

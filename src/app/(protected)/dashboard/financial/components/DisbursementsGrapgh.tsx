@@ -6,7 +6,8 @@ import NetworkStats from "./NetworkTnxStats";
 import SectionHeader from "./SectionHeader";
 import { getDibursementStatics } from "@/actions/summary";
 import { useQuery } from "@tanstack/react-query";
-function DisbursementsGrapgh() {
+
+export default function DisbursementsGrapgh() {
   const { token } = theme.useToken();
 
   const disbursementStats = useQuery({
@@ -39,5 +40,3 @@ function DisbursementsGrapgh() {
     </Card>
   );
 }
-
-export default DisbursementsGrapgh;

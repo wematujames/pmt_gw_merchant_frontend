@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { LockOutlined } from "@ant-design/icons";
 import Image from "next/image";
@@ -22,7 +22,7 @@ import {
 
 const { Title } = Typography;
 
-export default function LoginPage() {
+function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -141,5 +141,13 @@ export default function LoginPage() {
         </Flex>
       </Flex>
     </>
+  );
+}
+
+export default function LoginPageSuspended() {
+  return (
+    <Suspense>
+      <LoginPage />
+    </Suspense>
   );
 }

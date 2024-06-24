@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { Card, Space, theme } from "antd";
 import Meta from "antd/es/card/Meta";
 import { useSearchParams } from "next/navigation";
@@ -12,7 +12,7 @@ import { useAuth } from "../../../../hooks/useAuth";
 import { FaStore } from "react-icons/fa6";
 import PageLoader from "../../PageLoader";
 
-const App: React.FC = () => {
+const Merchants: React.FC = () => {
   const authenticated = useAuth();
 
   const { token } = theme.useToken();
@@ -38,7 +38,7 @@ const App: React.FC = () => {
 
   const onTabChange = (key: string) => setActiveTabKey(key);
 
-  if (!authenticated) return <PageLoader />;;
+  if (!authenticated) return <PageLoader />;
 
   return (
     <Card
@@ -83,4 +83,10 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default function MerchantsSuspended() {
+  return (
+    <Suspense>
+      <Merchants />
+    </Suspense>
+  );
+}

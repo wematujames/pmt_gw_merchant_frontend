@@ -24,6 +24,7 @@ export default function FilterTransaction({
   setFilter: any;
 }) {
   const [open, setOpen] = useState(false);
+  // const [filter, setFilter] = useState({});
 
   const showDrawer = () => {
     setOpen(true);
@@ -58,16 +59,16 @@ export default function FilterTransaction({
       >
         Filter
       </Button>
-      <Drawer title="Filter Mandates" width={720} onClose={onClose} open={open}>
+      <Drawer title="Filter Users" width={720} onClose={onClose} open={open}>
         <Form layout="vertical" requiredMark onFinish={onFinish}>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="_id" label="Mandate ID">
-                <Input placeholder="6648574ee18c5235e783f834" />
+              <Form.Item name="_id" label="Email">
+                <Input placeholder="jwematu@nerasolgh.com" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="phone" label="Account">
+              <Form.Item name="phone" label="Phone">
                 <Input placeholder="233554268378" />
               </Form.Item>
             </Col>
@@ -75,14 +76,14 @@ export default function FilterTransaction({
 
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="merchant" label="Merchant">
+              <Form.Item name="type" label="Role">
                 <Select defaultActiveFirstOption defaultValue="">
                   <Option value="">All</Option>
                 </Select>
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="active" label="Status">
+              <Form.Item name="status" label="Status">
                 <Select defaultActiveFirstOption defaultValue="">
                   <Option value="">All</Option>
                   <Option value="true">Active</Option>
@@ -91,31 +92,16 @@ export default function FilterTransaction({
               </Form.Item>
             </Col>
           </Row>
-
           <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="dateTime"
-                label="DateTime"
-                rules={[{ required: true, message: "Select date range" }]}
-              >
+            <Col span={24}>
+              <Form.Item name="dateTime" label="Created Between">
                 <DatePicker.RangePicker
                   style={{ width: "100%" }}
                   getPopupContainer={(trigger) => trigger.parentElement!}
                 />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item name="network" label="Network">
-                <Select defaultActiveFirstOption defaultValue="">
-                  <Option value="">All</Option>
-                  <Option value="MTN">MTN</Option>
-                  <Option value="Telecel">Telecel</Option>
-                </Select>
-              </Form.Item>
-            </Col>
           </Row>
-
           <Row gutter={16}>
             <Form.Item>
               <Space>

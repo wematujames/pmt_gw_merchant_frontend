@@ -1,12 +1,22 @@
 "use client";
-import CollectionsGrapgh from "./components/CollectionsGrapgh";
-import DisbursementsGrapgh from "./components/DisbursementsGrapgh";
 import StatisticsCards from "./components/Statistics";
 import Jumbotron from "./components/Jumbotron";
 import { useAuth } from "../../../../hooks/useAuth";
 import PageLoader from "../../PageLoader";
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
 
-const Dashboard: React.FC = () => {
+const CollectionsGrapgh = dynamic(
+  () => import("./components/CollectionsGrapgh"),
+  { ssr: false }
+);
+
+const DisbursementsGrapgh = dynamic(
+  () => import("./components/DisbursementsGrapgh"),
+  { ssr: false }
+);
+
+function Dashboard() {
   const authenticated = useAuth();
 
   if (!authenticated) return <PageLoader />;
@@ -19,6 +29,12 @@ const Dashboard: React.FC = () => {
       <DisbursementsGrapgh />
     </>
   );
-};
+}
 
-export default Dashboard;
+export default function DashboardSuspended() {
+  return (
+    <Suspense>
+      <Dashboard />
+    </Suspense>
+  );
+}

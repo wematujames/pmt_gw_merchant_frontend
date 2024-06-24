@@ -1,21 +1,81 @@
 "use client";
-
+import React, { useState } from "react";
+import { Card, Space, theme } from "antd";
+import Meta from "antd/es/card/Meta";
+import { AiOutlineTransaction } from "react-icons/ai";
+import { Tabs } from "antd";
+import { GrOverview } from "react-icons/gr";
+import OverView from "../components/OverView";
+import TransactionReport from "../components/UsersReport";
+import { TbReport } from "react-icons/tb";
 import { useAuth } from "../../../../hooks/useAuth";
-import { useLogout } from "../../../../hooks/useLogout";
 import PageLoader from "../../PageLoader";
 
-export default function DashboardPage() {
+const App: React.FC = () => {
   const authenticated = useAuth();
-  const logout = useLogout();
+  const { token } = theme.useToken();
+  const [activeTabKey, setActiveTabKey] = useState<string>("report");
 
-  if (!authenticated) {
-    return <PageLoader />;;
-  }
+  const tabs = [
+    {
+      key: "overview",
+      label: "Overview",
+      children: <OverView />,
+      icon: <GrOverview />,
+    },
+    {
+      key: "report",
+      label: "Report",
+      children: <TransactionReport />,
+      icon: <TbReport />,
+    },
+  ];
+
+  const onTabChange = (key: string) => setActiveTabKey(key);
+
+  if (!authenticated) return <PageLoader />;
 
   return (
-    <div>
-      <h1>Platform users</h1>
-      <p>Manage platform users</p>
-    </div>
+    <Card
+      tabProps={{ size: "large", centered: true }}
+      activeTabKey={activeTabKey}
+      onTabChange={onTabChange}
+    >
+      <Meta
+        title={
+          <Space
+            style={{
+              fontSize: token.fontSizeHeading4,
+              marginTop: -token.marginXXS,
+            }}
+          >
+            <AiOutlineTransaction />
+            <p>Transactions</p>
+          </Space>
+        }
+        description={
+          <p
+            style={{
+              fontSize: token.fontSizeSM,
+              marginBottom: token.marginXS,
+              marginTop: -token.marginXS,
+            }}
+          >
+            View all transaction and extract reports
+          </p>
+        }
+        style={{ marginTop: token.marginSM }}
+      />
+      <Tabs
+        size="large"
+        style={{ minHeight: "80vh" }}
+        activeKey={activeTabKey}
+        onTabClick={(key) => setActiveTabKey(key)}
+        centered
+        items={tabs}
+      />
+    </Card>
   );
-}
+};
+
+export default App;

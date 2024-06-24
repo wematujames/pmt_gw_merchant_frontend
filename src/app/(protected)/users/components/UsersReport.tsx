@@ -1,40 +1,24 @@
 "use client";
 import { Flex, Space, Table, TableColumnsType, theme } from "antd";
-import TransactionDetail from "./MerchantDetails";
-import FilterTransaction from "./FilterMerchants";
+import FilterTransaction from "./FilterUsers";
 import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
+import { getPlatformUsers } from "@/actions/users";
+import UserDetail from "./UserDetails";
 import moment from "moment";
-import { getPlatformMerchants } from "@/actions/merchants";
 
 const columns: TableColumnsType = [
   {
-    title: "Merchant ID",
-    dataIndex: "_id",
-    key: "_id",
-    ellipsis: { showTitle: true },
+    title: "Name",
+    dataIndex: "person",
+    key: "person",
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
-        <p>{record.merchantId}</p>
-        <small>{record._id}</small>
-      </Space>
-    ),
-  },
-  {
-    title: "Account Name",
-    dataIndex: "name",
-    key: "name",
-    render: (_: any, record: any) => (
-      <Space size={0} direction="vertical">
-        <p>{record.name}</p>
-        <Space size={20}>
-          <small>{record.active ? "Active" : "Inactive"}</small>
-          <small>
-            PV: {record.phoneVerified ? "Yes   " : "No   "}
-            EV: {record.emailVerified ? "Yes" : "No"}
-          </small>
-        </Space>
+        <p>
+          {record.person?.title} {record.person?.fName} {record.person?.lName}
+        </p>
+        <small>{record.email}</small>
       </Space>
     ),
   },
@@ -45,7 +29,21 @@ const columns: TableColumnsType = [
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
         <p>{record.phone}</p>
-        <small>{record.email}</small>
+        <small>
+          PV: {record.phoneVerified ? "Yes   " : "No   "}
+          EV: {record.emailVerified ? "Yes" : "No"}
+        </small>
+      </Space>
+    ),
+  },
+  {
+    title: "Status",
+    dataIndex: "active",
+    key: "active",
+    render: (_: any, record: any) => (
+      <Space size={0} direction="vertical">
+        <p>{record.active ? "Active" : "Inactive"}</p>
+        <p>{record.role}</p>
       </Space>
     ),
   },
@@ -55,7 +53,7 @@ const columns: TableColumnsType = [
     key: "createdBy",
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
-        <p>{record.createdBy}</p>
+        <p>{record.createdBy || "N/A"}</p>
         <small>{moment(record.createdAt).format("YYYY-MM-DD HH:mm:ss")}</small>
       </Space>
     ),
@@ -65,7 +63,7 @@ const columns: TableColumnsType = [
     key: "action",
     render: (_: any, record: any) => (
       <Space size={0}>
-        <TransactionDetail transaction={record} />
+        <UserDetail transaction={record} />
       </Space>
     ),
   },
@@ -76,9 +74,11 @@ function TransactionReport() {
   const [filter, setFilter] = useState({});
 
   const txnsQuery = useQuery({
-    queryKey: ["platform-merchants", filter],
-    queryFn: () => getPlatformMerchants(filter),
+    queryKey: ["transactions", filter],
+    queryFn: () => getPlatformUsers(filter),
   });
+
+  console.log(txnsQuery.data);
 
   return (
     <Table
@@ -101,11 +101,11 @@ function TransactionReport() {
       )}
       loading={txnsQuery.isLoading}
       sticky
-      size="small"
       rowHoverable
       scroll={{ x: true }}
       dataSource={txnsQuery.data}
       columns={columns}
+      size="small"
     />
   );
 }

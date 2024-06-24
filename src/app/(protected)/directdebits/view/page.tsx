@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { Card, Space, theme } from "antd";
 import Meta from "antd/es/card/Meta";
 import { useSearchParams } from "next/navigation";
@@ -12,7 +12,7 @@ import { useAuth } from "../../../../hooks/useAuth";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import PageLoader from "../../PageLoader";
 
-const App: React.FC = () => {
+const DirectDebitMandates: React.FC = () => {
   const authenticated = useAuth();
 
   const { token } = theme.useToken();
@@ -83,4 +83,10 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default function DirectDebitMandatesSuspended() {
+  return (
+    <Suspense>
+      <DirectDebitMandates />
+    </Suspense>
+  );
+}

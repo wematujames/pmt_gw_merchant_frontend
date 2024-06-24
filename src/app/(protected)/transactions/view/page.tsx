@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { Card, Space, theme } from "antd";
 import Meta from "antd/es/card/Meta";
 import { AiOutlineTransaction } from "react-icons/ai";
@@ -12,7 +12,7 @@ import { TbReport } from "react-icons/tb";
 import { useAuth } from "../../../../hooks/useAuth";
 import PageLoader from "../../PageLoader";
 
-const App: React.FC = () => {
+const Transactions: React.FC = () => {
   const authenticated = useAuth();
 
   const { token } = theme.useToken();
@@ -83,4 +83,10 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default function AppSuspended() {
+  return (
+    <Suspense>
+      <Transactions />
+    </Suspense>
+  );
+}
