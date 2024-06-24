@@ -21,6 +21,10 @@ export default function RootLayout({
 
   return (
     <html lang="en" content="noindex, nofollow">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Nerasika</title>
+      </head>
       <body className={inter.className}>
         <QueryClientProvider client={queryClient}>
           <AntdRegistry>{children}</AntdRegistry>
