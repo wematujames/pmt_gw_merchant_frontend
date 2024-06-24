@@ -16,9 +16,10 @@ const columns: TableColumnsType = [
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
         <p>
-          {record.person?.title} {record.person?.fName} {record.person?.lName}
+          {record?.person?.title} {record?.person?.fName}{" "}
+          {record?.person?.lName}
         </p>
-        <small>{record.email}</small>
+        <small>{record?.email}</small>
       </Space>
     ),
   },
@@ -77,8 +78,6 @@ function TransactionReport() {
     queryKey: ["transactions", filter],
     queryFn: () => getPlatformUsers(filter),
   });
-
-  console.log(txnsQuery.data);
 
   return (
     <Table

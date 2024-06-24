@@ -3,7 +3,7 @@ import { Line } from "@ant-design/plots";
 import { Card, theme } from "antd";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import NetworkStats from "./NetworkTnxStats";
-import SectionHeader from "./SectionHeader";
+import SectionHeader from "../../../components/SectionHeader";
 import { getDibursementStatics } from "@/actions/summary";
 import { useQuery } from "@tanstack/react-query";
 
@@ -15,6 +15,9 @@ export default function DisbursementsGrapgh() {
     queryFn: () => getDibursementStatics(),
   });
 
+  const graphData = disbursementStats.data?.graph || [];
+  const networks = disbursementStats.data?.networks || [];
+
   return (
     <Card style={{ marginTop: token.marginMD }}>
       <SectionHeader
@@ -23,13 +26,10 @@ export default function DisbursementsGrapgh() {
         icon={<BiMoneyWithdraw />}
       />
 
-      <NetworkStats
-        stats={disbursementStats.data?.networks}
-        loading={disbursementStats.isLoading}
-      />
+      <NetworkStats stats={networks} loading={disbursementStats.isLoading} />
 
       <Line
-        data={disbursementStats.data?.graph}
+        data={graphData}
         height={250}
         xField="day"
         yField="total"

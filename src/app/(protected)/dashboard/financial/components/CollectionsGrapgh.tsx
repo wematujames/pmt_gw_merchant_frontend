@@ -4,7 +4,7 @@ import { Line } from "@ant-design/plots";
 import NetworkStats from "./NetworkTnxStats";
 import { useQuery } from "@tanstack/react-query";
 import { getCollectionStatics } from "@/actions/summary";
-import SectionHeader from "./SectionHeader";
+import SectionHeader from "../../../components/SectionHeader";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 
 export default function CollectionsGrapgh() {
@@ -15,6 +15,8 @@ export default function CollectionsGrapgh() {
     queryFn: () => getCollectionStatics(),
   });
 
+  const graphData = collectionStats.data?.graph || [];
+  const networks = collectionStats.data?.networks || [];
   return (
     <Card style={{ marginTop: token.marginMD }}>
       <SectionHeader
@@ -22,13 +24,11 @@ export default function CollectionsGrapgh() {
         subText="Based on data from the past 7 days"
         icon={<FaMoneyBillTrendUp />}
       />
-      <NetworkStats
-        stats={collectionStats.data?.networks}
-        loading={collectionStats.isLoading}
-      />
+
+      <NetworkStats stats={networks} loading={collectionStats.isLoading} />
 
       <Line
-        data={collectionStats.data?.graph}
+        data={graphData}
         height={250}
         xField="day"
         yField="total"

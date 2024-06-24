@@ -40,6 +40,9 @@ const UserAvatar = () => {
   const userQuery = useQuery({
     queryKey: ["current-user"],
     queryFn: () => loadUser(),
+    refetchOnMount: true,
+    retry: true,
+    retryOnMount: true,
   });
 
   if (userQuery.isPending) return <Spin size="small" />;
@@ -49,10 +52,6 @@ const UserAvatar = () => {
     marginLeft: 0,
     padding: 0,
   };
-
-  if (userQuery.isError) {
-    logout();
-  }
 
   return (
     <Dropdown
@@ -69,12 +68,12 @@ const UserAvatar = () => {
                 style={{ backgroundColor: "#001550" }}
                 size={50}
               >
-                {userQuery.data.person.lName.slice(0, 1)}
-                {userQuery.data.person.fName.slice(0, 1)}
+                {userQuery.data?.person?.lName.slice(0, 1)}
+                {userQuery.data?.person?.fName.slice(0, 1)}
               </Avatar>
             }
-            title={`${userQuery.data.person.fName} ${userQuery.data.person.lName}`}
-            description={userQuery.data.email}
+            title={`${userQuery.data?.person?.fName} ${userQuery.data?.person?.lName}`}
+            description={userQuery.data?.email}
           />
           <Divider style={{ margin: 5 }} />
           {React.cloneElement(menu, { style: menuStyle })}
@@ -87,8 +86,8 @@ const UserAvatar = () => {
           style={{ backgroundColor: "#001550" }}
           size={{ lg: 45, xl: 50 }}
         >
-          {userQuery.data.person.lName.slice(0, 1)}
-          {userQuery.data.person.fName.slice(0, 1)}
+          {userQuery.data?.person?.lName.slice(0, 1)}
+          {userQuery.data?.person?.fName.slice(0, 1)}
         </Avatar>
       </Space>
     </Dropdown>

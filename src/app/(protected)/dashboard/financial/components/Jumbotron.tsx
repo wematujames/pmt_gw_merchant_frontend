@@ -9,7 +9,6 @@ const Jumbotron = () => {
   const userQuery = useQuery({
     queryKey: ["current-user"],
     queryFn: () => loadUser(),
-    enabled: false,
   });
 
   function getGreeting() {

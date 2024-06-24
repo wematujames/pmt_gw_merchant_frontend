@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Card, Space, theme } from "antd";
-import Meta from "antd/es/card/Meta";
-import { AiOutlineTransaction } from "react-icons/ai";
+import { Card, theme } from "antd";
 import { Tabs } from "antd";
 import { GrOverview } from "react-icons/gr";
 import OverView from "../components/OverView";
@@ -10,6 +8,8 @@ import TransactionReport from "../components/UsersReport";
 import { TbReport } from "react-icons/tb";
 import { useAuth } from "../../../../hooks/useAuth";
 import PageLoader from "../../PageLoader";
+import SectionHeader from "../../components/SectionHeader";
+import { FaUserGroup } from "react-icons/fa6";
 
 const App: React.FC = () => {
   const authenticated = useAuth();
@@ -41,30 +41,10 @@ const App: React.FC = () => {
       activeTabKey={activeTabKey}
       onTabChange={onTabChange}
     >
-      <Meta
-        title={
-          <Space
-            style={{
-              fontSize: token.fontSizeHeading4,
-              marginTop: -token.marginXXS,
-            }}
-          >
-            <AiOutlineTransaction />
-            <p>Transactions</p>
-          </Space>
-        }
-        description={
-          <p
-            style={{
-              fontSize: token.fontSizeSM,
-              marginBottom: token.marginXS,
-              marginTop: -token.marginXS,
-            }}
-          >
-            View all transaction and extract reports
-          </p>
-        }
-        style={{ marginTop: token.marginSM }}
+      <SectionHeader
+        leadText="Users"
+        subText="View users and extract reports"
+        icon={<FaUserGroup />}
       />
       <Tabs
         size="large"
