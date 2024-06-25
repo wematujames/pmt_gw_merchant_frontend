@@ -139,7 +139,7 @@ function TransactionReport() {
       sticky
       size="small"
       rowHoverable
-      scroll={{ x: true }}
+      scroll={{ x: "max-content" }}
       dataSource={txnsQuery.data}
       columns={columns}
     />

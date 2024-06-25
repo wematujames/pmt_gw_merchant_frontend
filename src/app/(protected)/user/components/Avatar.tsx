@@ -41,9 +41,9 @@ const UserAvatar = () => {
     queryKey: ["current-user"],
     queryFn: () => loadUser(),
     refetchOnMount: true,
-    retry: true,
-    retryOnMount: true,
   });
+
+  if (userQuery.isError) logout();
 
   if (userQuery.isPending) return <Spin size="small" />;
 

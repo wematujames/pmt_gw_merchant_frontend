@@ -101,7 +101,7 @@ function TransactionReport() {
       loading={txnsQuery.isLoading}
       sticky
       rowHoverable
-      scroll={{ x: true }}
+      scroll={{ x: "max-content" }}
       dataSource={txnsQuery.data}
       columns={columns}
       size="small"
