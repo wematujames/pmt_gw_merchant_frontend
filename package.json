@@ -7,7 +7,7 @@
     "local": "ENVIRONMENT=./env/.env.local next dev",
     "start": "next start",
     "lint": "next lint",
-    "build:dev": "ENVIRONMENT=./env/.env.dev next build",
+    "build:dev": "ENVIRONMENT=./env/.env.dev next build && rm -rf html && mv out html",
     "build:prod": "ENVIRONMENT=./env/.env.prod next build"
   },
   "dependencies": {

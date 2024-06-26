@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import setAuthTokenHeader from "@/actions/utils/setAuthToken";
 
 export function useAuth() {
     const [authenticated, setAuthenticated] = useState(false);
@@ -13,7 +12,6 @@ export function useAuth() {
             if (!token) {
                 router.push("/auth/login");
             } else {
-                setAuthTokenHeader()
                 setAuthenticated(true);
             }
         }, 3000)

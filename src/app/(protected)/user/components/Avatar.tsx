@@ -40,7 +40,9 @@ const UserAvatar = () => {
   const userQuery = useQuery({
     queryKey: ["current-user"],
     queryFn: () => loadUser(),
-    refetchOnMount: true,
+    // refetchOnMount: true,
+    // retry: true,
+    // retryOnMount: true,
   });
 
   if (userQuery.isError) logout();

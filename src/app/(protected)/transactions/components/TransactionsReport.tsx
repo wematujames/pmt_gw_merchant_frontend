@@ -42,7 +42,7 @@ const columns: TableColumnsType = [
         <p>{record.phone}</p>
         <small>
           {" "}
-          {record.desc.length > 12
+          {record.desc?.length > 12
             ? record.desc?.slice(0, 12) + "..."
             : record.desc}
         </small>
@@ -68,7 +68,7 @@ const columns: TableColumnsType = [
       <Space size={0} direction="vertical">
         <p>{record.status}</p>
         <small>
-          {record.statusReason.length > 10
+          {record.statusReason?.length > 10
             ? record.statusReason?.slice(0, 10) + "..."
             : record.statusReason}
         </small>
@@ -89,6 +89,7 @@ const columns: TableColumnsType = [
   {
     title: "Action",
     key: "action",
+    width: 80,
     render: (_: any, record: any) => (
       <Space size={0}>
         <TransactionDetail transaction={record} />

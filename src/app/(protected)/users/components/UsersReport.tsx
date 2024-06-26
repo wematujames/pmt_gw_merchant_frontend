@@ -41,6 +41,7 @@ const columns: TableColumnsType = [
     title: "Status",
     dataIndex: "active",
     key: "active",
+    width: 80,
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
         <p>{record.active ? "Active" : "Inactive"}</p>
@@ -62,6 +63,7 @@ const columns: TableColumnsType = [
   {
     title: "Action",
     key: "action",
+    width: 80,
     render: (_: any, record: any) => (
       <Space size={0}>
         <UserDetail transaction={record} />

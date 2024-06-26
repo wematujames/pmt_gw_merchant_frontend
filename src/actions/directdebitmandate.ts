@@ -1,7 +1,10 @@
 import axios from "axios";
+import setAuthTokenHeader from "./utils/setAuthToken";
 
 
 export const getDirectDebitMandates = async (_filter: any = {}) =>  {
+  setAuthTokenHeader()
+
   const filter = {} as any;
 
   Object.keys(_filter).forEach((key: any) => {

@@ -1,6 +1,7 @@
 "use client"
 
 import axios from "axios";
+import setAuthTokenHeader from "./utils/setAuthToken";
 export const login = async (email: string, password: string) =>  {
     const res = await axios(
       process.env.NEXT_PUBLIC_API_BASE_URL + "/platform/auth/login",
@@ -20,6 +21,7 @@ export const login = async (email: string, password: string) =>  {
 };
 
 export const loadUser = async () =>  {
+    setAuthTokenHeader()
     const res = await axios(
       "/platform/auth/user",
       {

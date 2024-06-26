@@ -1,7 +1,10 @@
 import axios from "axios";
+import setAuthTokenHeader from "./utils/setAuthToken";
 
 export const getTransactionsOverall = async (_filter: any = {}) =>  {
-   const res = await axios(
+   setAuthTokenHeader()
+
+  const res = await axios(
     "/platform/summary/transactionsoverall",
     {
       method: "GET",
@@ -16,6 +19,8 @@ export const getTransactionsOverall = async (_filter: any = {}) =>  {
 };
 
 export const getCollectionStatics = async (_filter: any = {}) =>  {
+   setAuthTokenHeader()
+
    const res = await axios(
     "/platform/summary/collectiontransactionstats",
     {
@@ -26,11 +31,13 @@ export const getCollectionStatics = async (_filter: any = {}) =>  {
       },
     }
   );
-  console.log(res.data.data)
+
   return res.data.data
 };
 
 export const getDibursementStatics = async (_filter: any = {}) =>  {
+     setAuthTokenHeader()
+
    const res = await axios(
     "/platform/summary/disbursementtransactionstats",
     {
@@ -41,6 +48,6 @@ export const getDibursementStatics = async (_filter: any = {}) =>  {
       },
     }
   );
-  console.log(res.data.data)
+
   return res.data.data
 };
