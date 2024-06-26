@@ -26,6 +26,7 @@ const columns: TableColumnsType = [
     title: "Amount ",
     dataIndex: "amount",
     key: "amount",
+    width: 120,
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
         <p>₵ {parseFloat(record.amount).toFixed(2)}</p>
@@ -63,6 +64,7 @@ const columns: TableColumnsType = [
     title: "Network",
     dataIndex: "network",
     key: "network",
+    width: 120,
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
         <p>{record.network}</p>
@@ -74,6 +76,7 @@ const columns: TableColumnsType = [
     title: "Status",
     dataIndex: "status",
     key: "status",
+    width: 120,
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
         <p>{record.active ? "Active" : "Inactive"}</p>
