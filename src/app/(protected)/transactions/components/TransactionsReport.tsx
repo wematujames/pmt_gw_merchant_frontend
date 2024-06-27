@@ -2,11 +2,13 @@
 import { Flex, Space, Table, TableColumnsType, theme } from "antd";
 import TransactionDetail from "./TransactionDetails";
 import FilterTransaction from "./FilterTransactions";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdNumbers } from "react-icons/md";
 import { getTransactions } from "@/actions/transactions";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import moment from "moment";
+
+// Function to fetch next page
 
 const columns: TableColumnsType = [
   {
@@ -41,7 +43,6 @@ const columns: TableColumnsType = [
       <Space size={0} direction="vertical">
         <p>{record.phone}</p>
         <small>
-          {" "}
           {record.desc?.length > 12
             ? record.desc?.slice(0, 12) + "..."
             : record.desc}
@@ -63,7 +64,7 @@ const columns: TableColumnsType = [
   {
     title: "Status",
     dataIndex: "status",
-    key: "network",
+    key: "status",
     render: (_: any, record: any) => (
       <Space size={0} direction="vertical">
         <p>{record.status}</p>
@@ -101,23 +102,33 @@ const columns: TableColumnsType = [
 function TransactionReport() {
   const { token } = theme.useToken();
   const [filter, setFilter] = useState({});
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const tableRef = useRef(null);
 
-  const txnsQuery = useQuery({
+  const txnsQuery = useInfiniteQuery({
     queryKey: ["transactions", filter],
-    queryFn: () => getTransactions(filter),
+    queryFn: ({ pageParam = 1 }) => getTransactions({ pageParam, filter }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      return lastPage?.meta?.pagination?.next?.page || false;
+    },
   });
+
+  // const fetchNextPage = () => {
+  //   if (txnsQuery.hasNextPage && !txnsQuery.isFetchingNextPage) {
+  //     txnsQuery.fetchNextPage();
+  //   }
+  // };
+
+  const transactions = txnsQuery.data?.pages.flatMap((page) => page.data) || [];
 
   return (
     <Table
       title={() => (
         <Flex justify="space-between">
-          <Space
-            style={{
-              fontSize: token.fontSizeHeading5,
-            }}
-          >
+          <Space style={{ fontSize: token.fontSizeHeading5 }}>
             <MdNumbers size={token.fontSizeIcon} />
-            Count:{txnsQuery?.data?.length}
+            Count: {transactions.length}
           </Space>
           <FilterTransaction
             filter={filter}
@@ -128,10 +139,12 @@ function TransactionReport() {
       )}
       loading={txnsQuery.isLoading}
       rowHoverable
-      scroll={{ x: "max-content" }}
-      dataSource={txnsQuery.data}
+      scroll={{ x: "max-content", y: 500 }}
+      dataSource={transactions}
       columns={columns}
       size="small"
+      rowKey="_id"
+      // pagination={false}
     />
   );
 }

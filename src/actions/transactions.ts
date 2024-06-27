@@ -2,11 +2,12 @@ import axios from "axios";
 import setAuthTokenHeader from "./utils/setAuthToken";
 
 export const getTransactions = async (_filter: any = {}) =>  {
+  console.log("filter", _filter)
   setAuthTokenHeader()
   
   const filter = {} as any;
 
-  Object.keys(_filter).forEach((key: any) => {
+  Object.keys(_filter.filter).forEach((key: any) => {
     if (_filter[key]) filter[key] = _filter[key]
   });
 
@@ -18,9 +19,9 @@ export const getTransactions = async (_filter: any = {}) =>  {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      params: filter
+      params: Object.assign(_filter.filter, {_page: _filter.pageParam})
     }
   );
 
-  return res.data.data;
+  return {data: res.data.data, meta: res.data.meta};
 };
