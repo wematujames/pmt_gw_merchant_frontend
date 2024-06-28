@@ -2,75 +2,75 @@
 import { Card, Statistic, theme, Row, Col, Space } from "antd";
 import CountUp from "react-countup";
 import type { StatisticProps } from "antd";
-import { useQuery } from "@tanstack/react-query";
-import { getTransactionsOverall } from "@/actions/summary";
+import { SummaryStats } from "@/types/types";
 
 const formatter: StatisticProps["formatter"] = (value) => (
-  <CountUp end={value as number} separator="," />
+  <CountUp decimal="." decimals={2} end={value as number} separator="," />
 );
 
-const StatisticsCards = () => {
+const StatisticsCards = ({
+  summaryStats,
+  loading,
+}: {
+  summaryStats: SummaryStats;
+  loading: boolean;
+}) => {
   const { token } = theme.useToken();
-
-  const txnOverall = useQuery({
-    queryKey: ["txns-overall"],
-    queryFn: () => getTransactionsOverall(),
-  });
 
   return (
     <Row gutter={[16, 16]}>
       <Col xs={24} sm={12} md={8} lg={6}>
         <Card>
           <Statistic
-            loading={txnOverall.isLoading}
+            loading={loading}
             formatter={formatter}
             title="Collections Today"
-            value={txnOverall.data?.colTodayAmt}
+            value={summaryStats.colTodayAmt}
             prefix="₵"
           />
           <Space direction="vertical">
-            <small>Count: {txnOverall.data?.colTodayCount}</small>
+            <small>Count: {summaryStats.colTodayCount}</small>
           </Space>
         </Card>
       </Col>
       <Col xs={24} sm={12} md={8} lg={6}>
         <Card>
           <Statistic
-            loading={txnOverall.isLoading}
+            loading={loading}
             formatter={formatter}
             title="Total Collections"
-            value={txnOverall.data?.colTotalAmt}
+            value={summaryStats.colTotalAmt}
             prefix="₵"
           />
           <Space direction="vertical">
-            <small>Count: {txnOverall.data?.disTodayCount}</small>
+            <small>Count: {summaryStats.colTotalCount}</small>
           </Space>
         </Card>
       </Col>
       <Col xs={24} sm={12} md={8} lg={6}>
         <Card>
           <Statistic
-            loading={txnOverall.isLoading}
+            loading={loading}
             formatter={formatter}
             title="Disbursements Today"
-            value={txnOverall.data?.disTodayAmt}
+            value={summaryStats.disTodayAmt}
             prefix="₵"
           />
           <Space direction="vertical">
-            <small>Count: {txnOverall.data?.disTotalCount}</small>
+            <small>Count: {summaryStats.disTodayCount}</small>
           </Space>
         </Card>
       </Col>
       <Col xs={24} sm={12} md={8} lg={6}>
         <Card>
           <Statistic
-            loading={txnOverall.isLoading}
+            loading={loading}
             formatter={formatter}
             title="Total Disbursements"
-            value={txnOverall.data?.disTotalAmt}
+            value={summaryStats.disTotalAmt}
             prefix="₵"
           />
-          <small>Count: {txnOverall.data?.colTotalCount}</small>
+          <small>Count: {summaryStats.disTotalCount}</small>
         </Card>
       </Col>
     </Row>

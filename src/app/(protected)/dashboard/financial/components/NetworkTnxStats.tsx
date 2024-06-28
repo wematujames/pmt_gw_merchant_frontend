@@ -1,5 +1,5 @@
-import { Avatar, Card, Col, Row, theme } from "antd";
 import { NetworkCollectionStat } from "@/types/types";
+import { Avatar, Card, Col, Row, theme } from "antd";
 
 const { Meta } = Card;
 
@@ -11,6 +11,12 @@ function NetworkStats({
   loading: boolean;
 }) {
   const { token } = theme.useToken();
+
+  const logos = {
+    "MTN-MoMo": "/mtnghlogo.jpg",
+    "T-Cash": "/tcashlogo.jpg",
+    "AT-Cash": "/atcashlogo.jpg",
+  };
 
   return (
     <Row justify="space-evenly">
@@ -26,7 +32,7 @@ function NetworkStats({
             loading={loading}
           >
             <Meta
-              avatar={<Avatar src={netrk.logo} size={64} />}
+              avatar={<Avatar src={logos[netrk.network]} size={64} />}
               title={netrk.network}
               description={
                 <>

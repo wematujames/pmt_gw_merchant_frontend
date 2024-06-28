@@ -1,22 +1,22 @@
 "use client";
-import { Card, theme } from "antd";
+import { Card, Spin, theme } from "antd";
 import { Line } from "@ant-design/plots";
 import NetworkStats from "./NetworkTnxStats";
-import { useQuery } from "@tanstack/react-query";
-import { getCollectionStatics } from "@/actions/summary";
 import SectionHeader from "../../../components/SectionHeader";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 
-export default function CollectionsGrapgh() {
+export default function CollectionsGrapgh({
+  collectionsSummary,
+  loading,
+}: {
+  loading: boolean;
+  collectionsSummary: any;
+}) {
   const { token } = theme.useToken();
 
-  const collectionStats = useQuery({
-    queryKey: ["collections-overview"],
-    queryFn: () => getCollectionStatics(),
-  });
+  const graphData = collectionsSummary?.graph || [];
+  const networks = collectionsSummary?.networks || [];
 
-  const graphData = collectionStats.data?.graph || [];
-  const networks = collectionStats.data?.networks || [];
   return (
     <Card style={{ marginTop: token.marginMD }}>
       <SectionHeader
@@ -25,10 +25,12 @@ export default function CollectionsGrapgh() {
         icon={<FaMoneyBillTrendUp />}
       />
 
-      <NetworkStats stats={networks} loading={collectionStats.isLoading} />
+      <NetworkStats stats={networks} loading={loading} />
 
       <Line
         data={graphData}
+        loadingTemplate={<Spin>Loading</Spin>}
+        loading={loading}
         height={250}
         xField="day"
         yField="total"

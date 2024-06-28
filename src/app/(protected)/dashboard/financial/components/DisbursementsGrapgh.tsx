@@ -1,22 +1,21 @@
 "use client";
 import { Line } from "@ant-design/plots";
-import { Card, theme } from "antd";
+import { Card, Spin, theme } from "antd";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import NetworkStats from "./NetworkTnxStats";
 import SectionHeader from "../../../components/SectionHeader";
-import { getDibursementStatics } from "@/actions/summary";
-import { useQuery } from "@tanstack/react-query";
 
-export default function DisbursementsGrapgh() {
+export default function DisbursementsGrapgh({
+  disbursmentsSummary,
+  loading,
+}: {
+  loading: boolean;
+  disbursmentsSummary: any;
+}) {
   const { token } = theme.useToken();
 
-  const disbursementStats = useQuery({
-    queryKey: ["disbursements-overview"],
-    queryFn: () => getDibursementStatics(),
-  });
-
-  const graphData = disbursementStats.data?.graph || [];
-  const networks = disbursementStats.data?.networks || [];
+  const graphData = disbursmentsSummary.graph || [];
+  const networks = disbursmentsSummary.networks || [];
 
   return (
     <Card style={{ marginTop: token.marginMD }}>
@@ -26,10 +25,12 @@ export default function DisbursementsGrapgh() {
         icon={<BiMoneyWithdraw />}
       />
 
-      <NetworkStats stats={networks} loading={disbursementStats.isLoading} />
+      <NetworkStats stats={networks} loading={loading} />
 
       <Line
         data={graphData}
+        loading={loading}
+        loadingTemplate={<Spin>Loading</Spin>}
         height={250}
         xField="day"
         yField="total"

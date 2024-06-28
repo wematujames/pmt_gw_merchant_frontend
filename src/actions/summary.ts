@@ -20,7 +20,7 @@ export const getTransactionsOverall = async (_filter: any = {}) =>  {
 
 export const getCollectionStatics = async (_filter: any = {}) =>  {
    setAuthTokenHeader()
-
+   console.log("making collection stats request")
    const res = await axios(
     "/platform/summary/collectiontransactionstats",
     {
@@ -31,6 +31,8 @@ export const getCollectionStatics = async (_filter: any = {}) =>  {
       },
     }
   );
+
+  console.log("collections", res.data)
 
   return res.data.data
 };

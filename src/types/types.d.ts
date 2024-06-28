@@ -11,14 +11,24 @@ export interface ResetPasswordData {
     resetToken: string,
 }
 
-export interface StatCardItem{
+export interface SummaryStats {
+    colTodayCount: string |number;
+    colTodayAmt: string | number;
+    colTotalCount: string | number;
+    colTotalAmt: string | number;
+    disTodayCount: string | number;
+    disTodayAmt: string | number;
+    disTotalCount: string | number;
+    disTotalAmt: string | number;
+}
+export interface SummaryStatItem{
     title: string,
     value: number,
     prefix: string,
 }
 
 export interface NetworkCollectionStat{
-    network: string,
+    network: "MTN-MoMo" | "T-Cash" | "AT-Cash",
     logo: string,
     today: number,
     allTime: number,
