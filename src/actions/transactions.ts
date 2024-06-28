@@ -2,7 +2,6 @@ import axios from "axios";
 import setAuthTokenHeader from "./utils/setAuthToken";
 
 export const getTransactions = async (_filter: any = {}) =>  {
-  console.log("filter", _filter)
   setAuthTokenHeader()
   
   const filter = {} as any;
