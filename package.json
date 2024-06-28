@@ -7,9 +7,9 @@
     "local": "ENVIRONMENT=./env/.env.local next dev",
     "start": "ENVIRONMENT=./env/.env.production next start",
     "lint": "next lint",
-    "build:local": "ENVIRONMENT=./env/.env.local next build && rm -rf html && mv out html",
-    "build:dev": "ENVIRONMENT=./env/.env.development next build && rm -rf html && mv out html",
-    "build:prod": "ENVIRONMENT=./env/.env.production next build"
+    "build:local": "ENVIRONMENT=env/.env.local next build && rm -rf html && mv out html",
+    "build:dev": "ENVIRONMENT=env/.env.development next build && rm -rf html && mv out html",
+    "build:prod": "ENVIRONMENT=env/.env.production next build"
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.0",

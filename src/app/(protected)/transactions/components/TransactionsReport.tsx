@@ -139,12 +139,11 @@ function TransactionReport() {
       )}
       loading={txnsQuery.isLoading}
       rowHoverable
-      scroll={{ x: "max-content", y: 500 }}
+      scroll={{ x: "max-content" }}
       dataSource={transactions}
       columns={columns}
       size="small"
       rowKey="_id"
-      // pagination={false}
     />
   );
 }
