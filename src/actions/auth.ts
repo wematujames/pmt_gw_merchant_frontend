@@ -58,3 +58,50 @@ export const resetPassword = async (resetToken: string, newPassword: string) => 
     );
 };
 
+export const updateUser = async ( updates: Object) =>  {
+  setAuthTokenHeader()
+  return axios(
+    "/platform/auth/user/updatedetails",
+    {
+      method: "POST",
+      headers: {  Accept: "application/json","Content-Type": "application/json", },
+      data: updates,
+    }
+  );
+};
+
+export const updatePassword = async ( currentPassword: string, newPassword: string) =>  {
+  setAuthTokenHeader()
+  return axios(
+    "/platform/auth/user/updatepassword",
+    {
+      method: "POST",
+      headers: {  Accept: "application/json","Content-Type": "application/json", },
+      data: {currentPassword, newPassword},
+    }
+  );
+};
+
+export const getQrCode = async () =>  {
+  setAuthTokenHeader()
+  return axios(
+    "/platform/auth/genqrcode",
+    {
+      method: "GET",
+      headers: {  Accept: "application/json","Content-Type": "application/json", },
+    }
+  );
+};
+
+export const enable2Fa = async ( verficationCode: string) =>  {
+  setAuthTokenHeader()
+  return axios(
+    "/platform/auth/user/enablemultifa",
+    {
+      method: "POST",
+      headers: {  Accept: "application/json","Content-Type": "application/json", },
+      data: { verficationCode },
+    }
+  );
+};
+

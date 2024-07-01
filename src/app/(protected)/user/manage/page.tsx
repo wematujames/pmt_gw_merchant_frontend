@@ -18,16 +18,16 @@ const tabs = [
     icon: <BiUserCircle />,
   },
   {
-    key: "2fa",
-    label: `2-Factor Authentication`,
-    children: <TwoFactorAuth />,
-    icon: <BsLockFill />,
-  },
-  {
     key: "password",
     label: `Password`,
     children: <UpdatePassword />,
     icon: <CgPassword />,
+  },
+  {
+    key: "2fa",
+    label: `2-Factor Authentication`,
+    children: <TwoFactorAuth />,
+    icon: <BsLockFill />,
   },
 ];
 
