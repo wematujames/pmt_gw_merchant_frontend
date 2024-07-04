@@ -5,9 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button, Col, Flex, Form, Input, Row } from "antd";
 
 function TwoFactorAuth() {
-  const onFinish = (vals: any) => {
-    console.log("form vals", vals);
-  };
+  const onFinish = (vals: any) => {};
 
   const currentUser = useQuery({
     queryKey: ["current-user"],

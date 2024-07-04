@@ -25,7 +25,7 @@ function UpdatePhone() {
 
   const onFinish = (vals: any) => {
     const sanitized = removeUndefinedValues(vals);
-    console.log("sanitized", sanitized);
+    // console.log("sanitized", sanitized);
     // updateUserMutation.mutate(sanitized);
   };
 

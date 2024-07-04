@@ -14,7 +14,7 @@ function UpdateEmail() {
   const updateUserMutation = useMutation({
     mutationKey: ["update-current-user"],
     mutationFn: (data: any) => {
-      console.log("mutation data", data);
+      // console.log("mutation data", data);
       return updateUserEmail(data);
     },
     onError: (err) => {},
@@ -22,7 +22,7 @@ function UpdateEmail() {
 
   const onFinish = (vals: any) => {
     const sanitized = removeUndefinedValues(vals);
-    console.log("sanitized", sanitized);
+    // console.log("sanitized", sanitized);
     // updateUserMutation.mutate(sanitized);
   };
 

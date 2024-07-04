@@ -7,7 +7,7 @@ export const getTransactions = async (_filter: any = {}) =>  {
   const filter = {} as any;
 
   Object.keys(_filter.filter).forEach((key: any) => {
-    if (_filter[key]) filter[key] = _filter[key]
+    if (_filter.filter[key]) filter[key] = _filter.filter[key]
   });
 
   const res = await axios(

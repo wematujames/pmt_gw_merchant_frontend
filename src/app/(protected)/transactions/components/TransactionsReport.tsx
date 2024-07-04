@@ -8,8 +8,6 @@ import { getTransactions } from "@/actions/transactions";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import moment from "moment";
 
-// Function to fetch next page
-
 const columns: TableColumnsType = [
   {
     title: "ID",
@@ -101,7 +99,12 @@ const columns: TableColumnsType = [
 
 function TransactionReport() {
   const { token } = theme.useToken();
-  const [filter, setFilter] = useState({});
+
+  const [filter, setFilter] = useState({
+    startDate: moment().startOf("day").toISOString(),
+    endDate: moment().endOf("day").toISOString(),
+  });
+
   const [scrollPosition, setScrollPosition] = useState(0);
   const tableRef = useRef(null);
 

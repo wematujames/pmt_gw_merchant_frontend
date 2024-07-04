@@ -34,17 +34,19 @@ export default function FilterTransaction({
     setOpen(false);
   };
 
-  const onFinish = (vals: any) => {
+  const onFinish = (formVals: any) => {
     onClose();
 
-    setFilter((prev: any) => ({ ...prev, ...vals }));
+    const vals = Object.fromEntries(
+      Object.entries(formVals).filter(([key, value]) => Boolean(value))
+    );
 
-    if (vals.dateTime?.length) {
-      setFilter((prev: any) => ({ ...prev, startDate: vals.dateTime[0].$d }));
-      setFilter((prev: any) => ({ ...prev, endDate: vals.dateTime[1].$d }));
+    if (vals.dateTime) {
+      vals.startDate = (vals as any).dateTime[0].$d;
+      vals.endDate = (vals as any).dateTime[1].$d;
     }
 
-    setFilter((prev: any) => ({ ...prev, dateTime: undefined }));
+    setFilter({ ...vals, dateTime: undefined });
 
     txnsQuery.refetch(filter);
   };

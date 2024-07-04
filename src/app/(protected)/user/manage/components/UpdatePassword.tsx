@@ -20,7 +20,7 @@ function UpdatePassword() {
 
   const onFinish = (vals: any) => {
     const sanitized = removeUndefinedValues(vals);
-    console.log("sanitized", sanitized);
+    // console.log("sanitized", sanitized);
     // updateUserPassword.mutate(sanitized);
   };
 
