@@ -9,12 +9,26 @@ import UpdateProfile from "./components/UpdateProfile";
 import TwoFactorAuth from "./components/TwoFactorAuth";
 import UpdatePassword from "./components/UpdatePassword";
 import { Suspense, useState } from "react";
+import UpdatePhone from "./components/UpdatePhone";
+import UpdateEmail from "./components/UpdateEmail";
 
 const tabs = [
   {
     key: "profile",
     label: `Profile`,
     children: <UpdateProfile />,
+    icon: <BiUserCircle />,
+  },
+  {
+    key: "phone",
+    label: `Phone`,
+    children: <UpdatePhone />,
+    icon: <BiUserCircle />,
+  },
+  {
+    key: "email",
+    label: `Email`,
+    children: <UpdateEmail />,
     icon: <BiUserCircle />,
   },
   {

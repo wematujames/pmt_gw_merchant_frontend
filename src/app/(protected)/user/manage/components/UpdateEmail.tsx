@@ -1,45 +1,56 @@
 "use client";
 
-import { loadUser, updatePassword } from "@/actions/auth";
+import { loadUser, updateUserEmail } from "@/actions/auth";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { Button, Col, Flex, Form, Input, Row, Select } from "antd";
-const { Option } = Select;
-function UpdatePassword() {
-  const currentUser = useQuery({
+import { Button, Col, Flex, Form, Input, Row } from "antd";
+
+function UpdateEmail() {
+  const userQuery = useQuery({
     queryKey: ["current-user"],
     queryFn: () => loadUser(),
   });
 
-  const updateUserPassword = useMutation({
+  const updateUserMutation = useMutation({
     mutationKey: ["update-current-user"],
-    mutationFn: (data: any) =>
-      updatePassword(data.currentPassword, data.newPassword),
-    onError: () => {},
+    mutationFn: (data: any) => {
+      console.log("mutation data", data);
+      return updateUserEmail(data);
+    },
+    onError: (err) => {},
   });
 
   const onFinish = (vals: any) => {
     const sanitized = removeUndefinedValues(vals);
     console.log("sanitized", sanitized);
-    // updateUserPassword.mutate(sanitized);
+    // updateUserMutation.mutate(sanitized);
   };
 
   return (
     <Flex justify="center" flex="vertical" content="center">
-      <Form layout="vertical" requiredMark onFinish={onFinish}>
+      <Form
+        initialValues={{
+          currentEmail: userQuery.data?.email,
+          newEmail: "",
+          password: "",
+        }}
+        layout="vertical"
+        requiredMark
+        onFinish={onFinish}
+      >
         <Row gutter={16}>
           <Col span={24}>
-            <Form.Item name="currentPassword" label="Current Password">
-              <Input type="password" />
+            <Form.Item name="currentEmail" label="Current Email">
+              <Input readOnly type="email" />
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item name="newPassword" label="New Password">
-              <Input type="password" />
+            <Form.Item name="newEmail" label="New Email">
+              <Input type="email" />
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item label="Confirm New Password">
+            <Form.Item name="password" label="Password">
               <Input type="password" />
             </Form.Item>
           </Col>
@@ -57,4 +68,4 @@ function UpdatePassword() {
   );
 }
 
-export default UpdatePassword;
+export default UpdateEmail;

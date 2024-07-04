@@ -26,9 +26,11 @@ export default function RootLayout({
         <title>Nerasika</title>
       </head>
       <body className={inter.className}>
+        {/* <NotificationProvider> */}
         <QueryClientProvider client={queryClient}>
           <AntdRegistry>{children}</AntdRegistry>
         </QueryClientProvider>
+        {/* </NotificationProvider> */}
       </body>
     </html>
   );

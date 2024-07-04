@@ -60,10 +60,37 @@ export const resetPassword = async (resetToken: string, newPassword: string) => 
 
 export const updateUser = async ( updates: Object) =>  {
   setAuthTokenHeader()
+
   return axios(
     "/platform/auth/user/updatedetails",
     {
-      method: "POST",
+      method: "PUT",
+      headers: {  Accept: "application/json","Content-Type": "application/json", },
+      data: updates,
+    }
+  );
+};
+
+export const updateUserEmail = async ( updates: Object) =>  {
+  setAuthTokenHeader()
+
+  return axios(
+    "/platform/auth/user/updatedetails",
+    {
+      method: "PUT",
+      headers: {  Accept: "application/json","Content-Type": "application/json", },
+      data: updates,
+    }
+  );
+};
+
+export const updateUserMobile = async ( updates: Object) =>  {
+  setAuthTokenHeader()
+
+  return axios(
+    "/platform/auth/user/updatedetails",
+    {
+      method: "PUT",
       headers: {  Accept: "application/json","Content-Type": "application/json", },
       data: updates,
     }
