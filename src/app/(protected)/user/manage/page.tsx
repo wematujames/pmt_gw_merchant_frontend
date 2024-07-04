@@ -3,7 +3,7 @@ import { useSearchParams } from "next/navigation";
 import { Card, Tabs } from "antd";
 import { CgPassword } from "react-icons/cg";
 import { BsLockFill } from "react-icons/bs";
-import { BiUserCircle } from "react-icons/bi";
+import { BiMobile, BiUserCircle } from "react-icons/bi";
 
 import UpdateProfile from "./components/UpdateProfile";
 import TwoFactorAuth from "./components/TwoFactorAuth";
@@ -11,6 +11,7 @@ import UpdatePassword from "./components/UpdatePassword";
 import { Suspense, useState } from "react";
 import UpdatePhone from "./components/UpdatePhone";
 import UpdateEmail from "./components/UpdateEmail";
+import { MdEmail } from "react-icons/md";
 
 const tabs = [
   {
@@ -23,13 +24,13 @@ const tabs = [
     key: "phone",
     label: `Phone`,
     children: <UpdatePhone />,
-    icon: <BiUserCircle />,
+    icon: <BiMobile />,
   },
   {
     key: "email",
     label: `Email`,
     children: <UpdateEmail />,
-    icon: <BiUserCircle />,
+    icon: <MdEmail />,
   },
   {
     key: "password",
