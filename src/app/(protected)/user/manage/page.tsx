@@ -38,13 +38,14 @@ const tabs = [
     children: <UpdatePassword />,
     icon: <CgPassword />,
   },
-  {
-    key: "2fa",
-    label: `2-Factor Authentication`,
-    children: <TwoFactorAuth />,
-    icon: <BsLockFill />,
-  },
 ];
+
+const twofa = {
+  key: "2fa",
+  label: `2-Factor Authentication`,
+  children: <TwoFactorAuth />,
+  icon: <BsLockFill />,
+};
 
 const User: React.FC = () => {
   const searchParams = useSearchParams();
