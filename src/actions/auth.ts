@@ -111,13 +111,15 @@ export const updatePassword = async ( currentPassword: string, newPassword: stri
 
 export const getQrCode = async () =>  {
   setAuthTokenHeader()
-  return axios(
+  const qrCode = await axios(
     "/platform/auth/genqrcode",
     {
       method: "GET",
       headers: {  Accept: "application/json","Content-Type": "application/json", },
     }
   );
+
+  return qrCode.data.data?.qrImage;
 };
 
 export const enable2Fa = async ( verficationCode: string) =>  {

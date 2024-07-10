@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { Form, Input, Button, Flex, Divider, Card } from "antd";
 import { MailOutlined } from "@ant-design/icons";
 import Image from "next/image";
@@ -15,8 +14,6 @@ import { ForgotPasswordData } from "@/types/types";
 const { Title } = Typography;
 
 export default function LoginPage() {
-  const router = useRouter();
-
   const [api, contextHolder] = message.useMessage();
 
   const onFinish = useMutation({

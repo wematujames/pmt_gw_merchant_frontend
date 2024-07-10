@@ -1,16 +1,11 @@
 "use client";
 
-import { enable2Fa, getQrCode, loadUser } from "@/actions/auth";
+import { enable2Fa, getQrCode } from "@/actions/auth";
+import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { Button, Col, Flex, Form, Image, Input, Row } from "antd";
 
 function TwoFactorAuth() {
-  const onFinish = (vals: any) => {};
-
-  const currentUser = useQuery({
-    queryKey: ["current-user"],
-    queryFn: () => loadUser(),
-  });
-
   const generateQrCode = useQuery({
     queryKey: ["current-user-2fa-qrcode"],
     queryFn: () => getQrCode(),
@@ -21,7 +16,43 @@ function TwoFactorAuth() {
     mutationFn: (data: any) => enable2Fa(data.verificationCode),
   });
 
-  return <></>;
+  const onFinish = (vals: any) => {
+    const sanitized = removeUndefinedValues(vals);
+    return console.log("2fa sanitized", sanitized);
+    enableUser2Fa.mutate(sanitized);
+  };
+
+  return (
+    <Flex justify="center" flex="vertical" content="center">
+      <Form layout="vertical" requiredMark onFinish={onFinish}>
+        <Row>
+          <Col span={24}>
+            <Flex justify="center" align="center">
+              <Image
+                alt="2fa-qrcode"
+                src={generateQrCode.data}
+                width={250}
+                height={250}
+              />
+            </Flex>
+          </Col>
+          <Col span={24}>
+            <Form.Item name="verificationCode" label="2FA Verification Code">
+              <Input />
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Row>
+          <Form.Item>
+            <Button htmlType="submit" type="primary">
+              Submit
+            </Button>
+          </Form.Item>
+        </Row>
+      </Form>
+    </Flex>
+  );
 }
 
 export default TwoFactorAuth;
