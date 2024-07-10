@@ -20,43 +20,56 @@ function UpdateProfile() {
       queryClient.invalidateQueries({
         queryKey: ["current-user"],
       }),
-    onError: (err) => {},
+    onError: (err) => {
+      // console.log(err.response);
+    },
   });
 
   const onFinish = (vals: any) => {
     const sanitized = removeUndefinedValues(vals);
-    // console.log("sanitized", sanitized);
     updateUserMutation.mutate(sanitized);
   };
 
   return (
     <Flex justify="center" flex="vertical" content="center">
       <Form
+        requiredMark
         initialValues={{
           fName: userQuery.data?.person?.fName,
           lName: userQuery.data?.person?.lName,
-          // password: "",
+          password: "",
         }}
         layout="vertical"
-        requiredMark
         onFinish={onFinish}
       >
         <Row gutter={15}>
           <Col span={24}>
-            <Form.Item name="fName" label="First Name">
+            <Form.Item
+              rules={[{ required: true, message: "First name is required" }]}
+              name="fName"
+              label="First Name"
+            >
               <Input placeholder="Wematu" />
             </Form.Item>
           </Col>
 
           <Col span={24}>
-            <Form.Item name="lName" label="Last Name">
+            <Form.Item
+              rules={[{ required: true, message: "Last name is required" }]}
+              name="lName"
+              label="Last Name"
+            >
               <Input placeholder="James" />
             </Form.Item>
           </Col>
 
           <Col span={24}>
-            <Form.Item name="" label="Password">
-              <Input readOnly type="password" />
+            <Form.Item
+              rules={[{ required: true, message: "Password is required" }]}
+              name="password"
+              label="Password"
+            >
+              <Input.Password type="password" />
             </Form.Item>
           </Col>
         </Row>

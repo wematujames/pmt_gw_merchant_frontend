@@ -11,19 +11,15 @@ function UpdateEmail() {
     queryFn: () => loadUser(),
   });
 
-  const updateUserMutation = useMutation({
-    mutationKey: ["update-current-user"],
-    mutationFn: (data: any) => {
-      // console.log("mutation data", data);
-      return updateUserEmail(data);
-    },
+  const updateEmailMutation = useMutation({
+    mutationKey: ["update-user-email"],
+    mutationFn: (data: any) => updateUserEmail(data),
     onError: (err) => {},
   });
 
   const onFinish = (vals: any) => {
     const sanitized = removeUndefinedValues(vals);
-    // console.log("sanitized", sanitized);
-    // updateUserMutation.mutate(sanitized);
+    updateEmailMutation.mutate(sanitized);
   };
 
   return (
@@ -45,13 +41,21 @@ function UpdateEmail() {
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item name="newEmail" label="New Email">
+            <Form.Item
+              rules={[{ required: true, message: "New email is required" }]}
+              name="newEmail"
+              label="New Email"
+            >
               <Input type="email" />
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item name="password" label="Password">
-              <Input type="password" />
+            <Form.Item
+              rules={[{ required: true, message: "Password is required" }]}
+              name="password"
+              label="Password"
+            >
+              <Input.Password type="password" />
             </Form.Item>
           </Col>
         </Row>

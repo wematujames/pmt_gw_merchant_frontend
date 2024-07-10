@@ -75,7 +75,7 @@ export const updateUserEmail = async ( updates: Object) =>  {
   setAuthTokenHeader()
 
   return axios(
-    "/platform/auth/user/updatedetails",
+    "/platform/auth/user/updateemail",
     {
       method: "PUT",
       headers: {  Accept: "application/json","Content-Type": "application/json", },
@@ -88,7 +88,7 @@ export const updateUserMobile = async ( updates: Object) =>  {
   setAuthTokenHeader()
 
   return axios(
-    "/platform/auth/user/updatedetails",
+    "/platform/auth/user/updatemobile",
     {
       method: "PUT",
       headers: {  Accept: "application/json","Content-Type": "application/json", },
@@ -97,14 +97,14 @@ export const updateUserMobile = async ( updates: Object) =>  {
   );
 };
 
-export const updatePassword = async ( currentPassword: string, newPassword: string) =>  {
+export const updatePassword = async ( currentPassword: string, newPassword: string, confirmNewPassword: string) =>  {
   setAuthTokenHeader()
   return axios(
     "/platform/auth/user/updatepassword",
     {
-      method: "POST",
+      method: "PUT",
       headers: {  Accept: "application/json","Content-Type": "application/json", },
-      data: {currentPassword, newPassword},
+      data: {currentPassword, newPassword, confirmNewPassword},
     }
   );
 };

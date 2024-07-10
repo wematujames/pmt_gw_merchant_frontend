@@ -14,14 +14,20 @@ function UpdatePassword() {
   const updateUserPassword = useMutation({
     mutationKey: ["update-current-user"],
     mutationFn: (data: any) =>
-      updatePassword(data.currentPassword, data.newPassword),
-    onError: () => {},
+      updatePassword(
+        data.currentPassword,
+        data.newPassword,
+        data.confirmNewPassword
+      ),
+    onError: (err) => {},
   });
 
   const onFinish = (vals: any) => {
     const sanitized = removeUndefinedValues(vals);
-    // console.log("sanitized", sanitized);
-    // updateUserPassword.mutate(sanitized);
+
+    if (sanitized.newPassword !== sanitized.confirm)
+      console.log("sanitized", sanitized);
+    updateUserPassword.mutate(sanitized);
   };
 
   return (
@@ -29,18 +35,32 @@ function UpdatePassword() {
       <Form layout="vertical" requiredMark onFinish={onFinish}>
         <Row gutter={16}>
           <Col span={24}>
-            <Form.Item name="currentPassword" label="Current Password">
-              <Input type="password" />
+            <Form.Item
+              rules={[
+                { required: true, message: "Current password is required" },
+              ]}
+              name="currentPassword"
+              label="Current Password"
+            >
+              <Input.Password type="password" />
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item name="newPassword" label="New Password">
-              <Input type="password" />
+            <Form.Item
+              rules={[{ required: true, message: "New password is required" }]}
+              name="newPassword"
+              label="New Password"
+            >
+              <Input.Password type="password" />
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item label="Confirm New Password">
-              <Input type="password" />
+            <Form.Item
+              name="confirmNewPassword"
+              rules={[{ required: true, message: "Confirm new password" }]}
+              label="Confirm New Password"
+            >
+              <Input.Password type="password" />
             </Form.Item>
           </Col>
         </Row>

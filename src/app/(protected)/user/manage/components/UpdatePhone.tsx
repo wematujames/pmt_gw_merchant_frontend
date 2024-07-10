@@ -13,20 +13,21 @@ function UpdatePhone() {
     queryFn: () => loadUser(),
   });
 
-  const updateUserPhone = useMutation({
-    mutationKey: ["update-current-user"],
+  const updateUserMobileMutation = useMutation({
+    mutationKey: ["update-user-phone"],
     mutationFn: (data: any) => updateUserMobile(data),
     onSuccess: () =>
       queryClient.invalidateQueries({
         queryKey: ["current-user"],
       }),
-    onError: () => {},
+    onError: (err) => {
+      // console.log(err.response);
+    },
   });
 
   const onFinish = (vals: any) => {
     const sanitized = removeUndefinedValues(vals);
-    // console.log("sanitized", sanitized);
-    // updateUserMutation.mutate(sanitized);
+    updateUserMobileMutation.mutate(sanitized);
   };
 
   return (
@@ -34,8 +35,8 @@ function UpdatePhone() {
       <Form
         initialValues={{
           currentPhone: userQuery.data?.phone,
-          phone: "",
-          // password: ""
+          newPhone: "",
+          password: "",
         }}
         layout="vertical"
         requiredMark
@@ -48,13 +49,21 @@ function UpdatePhone() {
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item name="phone" label="New Phone Number">
+            <Form.Item
+              rules={[{ required: true, message: "New email is required" }]}
+              name="newPhone"
+              label="New Phone Number"
+            >
               <Input type="text" />
             </Form.Item>
           </Col>
           <Col span={24}>
-            <Form.Item name="" label="Password">
-              <Input readOnly type="password" />
+            <Form.Item
+              rules={[{ required: true, message: "Password is required" }]}
+              name="password"
+              label="Password"
+            >
+              <Input.Password type="password" />
             </Form.Item>
           </Col>
         </Row>
