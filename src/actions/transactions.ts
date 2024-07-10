@@ -22,5 +22,5 @@ export const getTransactions = async (_filter: any = {}) =>  {
     }
   );
 
-  return {data: res.data.data, meta: res.data.meta};
+  return { data: res.data.data, meta: res.data.meta };
 };
