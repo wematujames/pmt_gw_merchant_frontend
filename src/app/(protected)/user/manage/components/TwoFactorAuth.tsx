@@ -43,6 +43,7 @@ function TwoFactorAuth() {
             <Form.Item
               rules={[
                 { required: true, message: "Verification code is required" },
+                { len: 6, message: "VC must be 6 characters" },
               ]}
               name="verificationCode"
               label="2FA Verification Code"

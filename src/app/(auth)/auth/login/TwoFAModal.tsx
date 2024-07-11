@@ -56,14 +56,8 @@ function TwoFAModal({
               label="2FA Verification Code"
               name="verificationCode"
               rules={[
-                {
-                  required: true,
-                  message: "Verification code is required",
-                },
-                {
-                  len: 6,
-                  message: "VC must be 6 characters",
-                },
+                { required: true, message: "Verification code is required" },
+                { len: 6, message: "VC must be 6 characters" },
               ]}
             >
               <Input />
