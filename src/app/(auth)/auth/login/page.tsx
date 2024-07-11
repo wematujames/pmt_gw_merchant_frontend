@@ -12,18 +12,27 @@ import { login } from "@/actions/auth";
 import { LoginCredentials } from "@/types/types";
 import { AxiosError } from "axios";
 import { message } from "antd";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import TwoFAModal from "./TwoFAModal";
 const { Title } = Typography;
 
 export default function LoginPage() {
   const router = useRouter();
   const [api, contextHolder] = message.useMessage();
+  const [loginToken, setLoginToken] = useState("null");
+  const [open2faModal, setOpen2faModal] = useState(false);
 
   const onFinish = useMutation({
     mutationKey: ["login-user"],
     mutationFn: (credentials: LoginCredentials) =>
       login(credentials.email, credentials.password),
     onSuccess: (res) => {
+      if (res.multiFAEnabled) {
+        setOpen2faModal(true);
+        setLoginToken(res.loginToken);
+        return;
+      }
+
       router.push("/dashboard/financial");
     },
     onError: (err: AxiosError<Error>) => {
@@ -38,6 +47,11 @@ export default function LoginPage() {
   return (
     <>
       {contextHolder}
+      <TwoFAModal
+        loginToken={loginToken}
+        open={open2faModal}
+        setOpen={setOpen2faModal}
+      />
       <Flex
         className={styles.authLogin}
         justify="center"

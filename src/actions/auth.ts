@@ -15,6 +15,24 @@ export const login = async (email: string, password: string) =>  {
       }
     );
 
+    if (res.data.data.token){
+      localStorage.setItem("token", res.data.data.token);
+    }
+
+    return res.data.data;
+};
+
+export const login2fa = async (verificationCode: string, loginToken: string) =>  {
+
+    const res = await axios(
+      process.env.NEXT_PUBLIC_API_BASE_URL + "/platform/auth/login2fa",
+      {
+        method: "POST",
+        headers: { Accept: "application/json","Content-Type": "application/json" },
+        data: { verificationCode, loginToken },
+      }
+    );
+
     localStorage.setItem("token", res.data.data.token);
 
     return res.data.data;
@@ -125,7 +143,7 @@ export const getQrCode = async () =>  {
 export const enable2Fa = async ( verficationCode: string) =>  {
   setAuthTokenHeader()
   return axios(
-    "/platform/auth/user/enablemultifa",
+    "/platform/auth/enablemultifa",
     {
       method: "POST",
       headers: {  Accept: "application/json","Content-Type": "application/json", },

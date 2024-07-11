@@ -25,8 +25,8 @@ function UpdatePassword() {
   const onFinish = (vals: any) => {
     const sanitized = removeUndefinedValues(vals);
 
-    if (sanitized.newPassword !== sanitized.confirm)
-      console.log("sanitized", sanitized);
+    if (sanitized.newPassword !== sanitized.confirmNewPassword) return;
+
     updateUserPassword.mutate(sanitized);
   };
 

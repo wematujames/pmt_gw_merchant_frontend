@@ -9,6 +9,10 @@ function TwoFactorAuth() {
   const generateQrCode = useQuery({
     queryKey: ["current-user-2fa-qrcode"],
     queryFn: () => getQrCode(),
+    refetchInterval: 28000,
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+    refetchOnMount: true,
   });
 
   const enableUser2Fa = useMutation({
@@ -18,7 +22,6 @@ function TwoFactorAuth() {
 
   const onFinish = (vals: any) => {
     const sanitized = removeUndefinedValues(vals);
-    return console.log("2fa sanitized", sanitized);
     enableUser2Fa.mutate(sanitized);
   };
 
@@ -37,7 +40,13 @@ function TwoFactorAuth() {
             </Flex>
           </Col>
           <Col span={24}>
-            <Form.Item name="verificationCode" label="2FA Verification Code">
+            <Form.Item
+              rules={[
+                { required: true, message: "Verification code is required" },
+              ]}
+              name="verificationCode"
+              label="2FA Verification Code"
+            >
               <Input />
             </Form.Item>
           </Col>

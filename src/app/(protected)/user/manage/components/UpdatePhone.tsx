@@ -20,9 +20,7 @@ function UpdatePhone() {
       queryClient.invalidateQueries({
         queryKey: ["current-user"],
       }),
-    onError: (err) => {
-      // console.log(err.response);
-    },
+    onError: (err) => {},
   });
 
   const onFinish = (vals: any) => {
