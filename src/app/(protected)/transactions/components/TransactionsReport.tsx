@@ -1,5 +1,5 @@
 "use client";
-import { Flex, Space, Table, TableColumnsType, theme } from "antd";
+import { Button, Flex, Space, Table, TableColumnsType, theme } from "antd";
 import TransactionDetail from "./TransactionDetails";
 import FilterTransaction from "./FilterTransactions";
 import { useRef, useState } from "react";
@@ -7,7 +7,8 @@ import { MdNumbers } from "react-icons/md";
 import { getTransactions } from "@/actions/transactions";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import moment from "moment";
-
+import exportData from "@/utils/exportData";
+import { BiExport } from "react-icons/bi";
 const columns: TableColumnsType = [
   {
     title: "ID",
@@ -133,11 +134,22 @@ function TransactionReport() {
             <MdNumbers size={token.fontSizeIcon} />
             Count: {transactions.length}
           </Space>
-          <FilterTransaction
-            filter={filter}
-            setFilter={setFilter}
-            txnsQuery={txnsQuery}
-          />
+          <Space>
+            <FilterTransaction
+              filter={filter}
+              setFilter={setFilter}
+              txnsQuery={txnsQuery}
+            />
+            <Button
+              size="large"
+              icon={<BiExport />}
+              type="primary"
+              disabled={txnsQuery.isFetching || !transactions.length}
+              onClick={() => exportData(transactions, "transactions")}
+            >
+              Export
+            </Button>
+          </Space>
         </Flex>
       )}
       loading={txnsQuery.isLoading}
