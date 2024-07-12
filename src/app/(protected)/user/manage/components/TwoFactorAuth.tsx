@@ -9,10 +9,6 @@ function TwoFactorAuth() {
   const generateQrCode = useQuery({
     queryKey: ["current-user-2fa-qrcode"],
     queryFn: () => getQrCode(),
-    refetchInterval: 28000,
-    refetchOnWindowFocus: true,
-    refetchOnReconnect: true,
-    refetchOnMount: true,
   });
 
   const enableUser2Fa = useMutation({
