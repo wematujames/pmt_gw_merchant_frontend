@@ -22,7 +22,7 @@ import {
 
 const { Title } = Typography;
 
-function LoginPage() {
+function ResetPasswordPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -120,7 +120,7 @@ function LoginPage() {
                   },
                 ]}
               >
-                <Input
+                <Input.Password
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Confirm Password"
@@ -144,10 +144,10 @@ function LoginPage() {
   );
 }
 
-export default function LoginPageSuspended() {
+export default function ResetPasswordPageSuspended() {
   return (
     <Suspense>
-      <LoginPage />
+      <ResetPasswordPage />
     </Suspense>
   );
 }
