@@ -1,11 +1,14 @@
 "use client";
 
 import { loadUser, updatePassword } from "@/actions/auth";
+import { useLogout } from "@/hooks/useLogout";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button, Col, Flex, Form, Input, Row, Select } from "antd";
 const { Option } = Select;
 function UpdatePassword() {
+  const logout = useLogout();
+
   const currentUser = useQuery({
     queryKey: ["current-user"],
     queryFn: () => loadUser(),
@@ -19,6 +22,7 @@ function UpdatePassword() {
         data.newPassword,
         data.confirmNewPassword
       ),
+    onSuccess: () => logout(),
     onError: (err) => {},
   });
 

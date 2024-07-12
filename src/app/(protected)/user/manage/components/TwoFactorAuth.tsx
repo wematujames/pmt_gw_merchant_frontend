@@ -1,11 +1,14 @@
 "use client";
 
 import { enable2Fa, getQrCode } from "@/actions/auth";
+import { useLogout } from "@/hooks/useLogout";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button, Col, Flex, Form, Image, Input, Row } from "antd";
 
 function TwoFactorAuth() {
+  const logout = useLogout();
+
   const generateQrCode = useQuery({
     queryKey: ["current-user-2fa-qrcode"],
     queryFn: () => getQrCode(),
@@ -14,6 +17,7 @@ function TwoFactorAuth() {
   const enableUser2Fa = useMutation({
     mutationKey: ["enable-2fa-current-user"],
     mutationFn: (data: any) => enable2Fa(data.verificationCode),
+    onSuccess: () => logout(),
   });
 
   const onFinish = (vals: any) => {
