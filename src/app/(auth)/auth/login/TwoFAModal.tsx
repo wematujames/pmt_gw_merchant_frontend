@@ -1,8 +1,10 @@
 import { login2fa } from "@/actions/auth";
+import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation } from "@tanstack/react-query";
 import { Col, Form, Input, Modal, Row } from "antd";
 import { useForm } from "antd/es/form/Form";
+import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -17,13 +19,19 @@ function TwoFAModal({
 }) {
   const [form] = useForm();
   const router = useRouter();
+  const { openMessage } = useMessage();
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const nKey = "2faMsg";
 
   const login2faMutation = useMutation({
     mutationKey: ["update-user-email"],
     mutationFn: (data: any) => login2fa(data.verificationCode, loginToken),
-    onSuccess: (res) => router.push("/dashboard/financial"),
-    onError: (err) => {
+    onSuccess: () => {
+      openMessage("success", "Logged in");
+      return router.push("/dashboard/financial");
+    },
+    onError: (err: AxiosError<{ message: string }>) => {
+      openMessage("error", err.response?.data.message as string);
       setConfirmLoading(false);
     },
   });

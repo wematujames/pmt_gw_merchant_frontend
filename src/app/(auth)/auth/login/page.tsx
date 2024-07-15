@@ -11,14 +11,15 @@ import { useMutation } from "@tanstack/react-query";
 import { login } from "@/actions/auth";
 import { LoginCredentials } from "@/types/types";
 import { AxiosError } from "axios";
-import { message } from "antd";
 import { useEffect, useState } from "react";
 import TwoFAModal from "./TwoFAModal";
+import { useMessage } from "@/hooks/useMessage";
+
 const { Title } = Typography;
 
 export default function LoginPage() {
   const router = useRouter();
-  const [api, contextHolder] = message.useMessage();
+  const { openMessage } = useMessage();
   const [loginToken, setLoginToken] = useState("null");
   const [open2faModal, setOpen2faModal] = useState(false);
 
@@ -33,20 +34,22 @@ export default function LoginPage() {
         return;
       }
 
+      openMessage("success", "Logged in");
       router.push("/dashboard/financial");
     },
-    onError: (err: AxiosError<Error>) => {
-      api.error(err.response?.data.message as string);
+    onError: (err: AxiosError<{ message: string }>) => {
+      openMessage("error", err.response?.data.message as string);
     },
   });
 
   useEffect(() => {
-    if (localStorage.getItem("token")) router.push("/dashboard/financial");
+    if (localStorage.getItem("token")) {
+      router.push("/dashboard/financial");
+    }
   });
 
   return (
     <>
-      {contextHolder}
       <TwoFAModal
         loginToken={loginToken}
         open={open2faModal}

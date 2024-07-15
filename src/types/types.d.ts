@@ -33,3 +33,29 @@ export interface NetworkCollectionStat{
     today: number,
     allTime: number,
 }
+
+/* Notification context */
+export type NotificationType = "success" | "info" | "warning" | "error";
+
+export interface NotificationContextType {
+  openNotification: (
+    type: NotificationType,
+    message: string,
+    description: string
+  ) => void;
+}
+
+export interface NotificationProviderProps {
+  children: ReactNode;
+}
+
+/* Message context type */
+type MessageType = "success" | "info" | "warning" | "error" | "loading";
+
+interface MessageContextType {
+  openMessage: (
+    type: MessageType,
+    content: string,
+    duration?: number,
+  ) => void;
+}

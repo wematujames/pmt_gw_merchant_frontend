@@ -3,6 +3,8 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import NotificationProvider from "@/context/NotificationContext";
+import MessageProvider from "@/context/MessageContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -26,11 +28,13 @@ export default function RootLayout({
         <title>Nerasika</title>
       </head>
       <body className={inter.className}>
-        {/* <NotificationProvider> */}
-        <QueryClientProvider client={queryClient}>
-          <AntdRegistry>{children}</AntdRegistry>
-        </QueryClientProvider>
-        {/* </NotificationProvider> */}
+        <NotificationProvider>
+          <MessageProvider>
+            <QueryClientProvider client={queryClient}>
+              <AntdRegistry>{children}</AntdRegistry>
+            </QueryClientProvider>
+          </MessageProvider>
+        </NotificationProvider>
       </body>
     </html>
   );

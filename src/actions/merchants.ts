@@ -1,5 +1,5 @@
-import axios from "axios";
 import setAuthTokenHeader from "./utils/setAuthToken";
+import nerasikaAxios from "./utils/nerasikaAxios";
 
 export const getPlatformMerchants = async (_filter: any = {}) =>  {
   setAuthTokenHeader()
@@ -10,7 +10,7 @@ export const getPlatformMerchants = async (_filter: any = {}) =>  {
     if (_filter[key]) filter[key] = _filter[key]
   });
 
-  const res = await axios(
+  const res = await nerasikaAxios(
     "/platform/merchants",
     {
       method: "GET",
