@@ -1,11 +1,11 @@
 "use client"
 
+import axios from "axios";
 import setAuthTokenHeader from "./utils/setAuthToken";
-import nerasikaAxios from "./utils/nerasikaAxios";
 
 export const login = async (email: string, password: string) =>  {
-    const res = await nerasikaAxios(
-      "/platform/auth/login",
+    const res = await axios(
+      process.env.NEXT_PUBLIC_API_BASE_URL + "/platform/auth/login",
       {
         method: "POST",
         headers: {
@@ -25,8 +25,8 @@ export const login = async (email: string, password: string) =>  {
 
 export const login2fa = async (verificationCode: string, loginToken: string) =>  {
 
-    const res = await nerasikaAxios(
-       "/platform/auth/login2fa",
+    const res = await axios(
+      process.env.NEXT_PUBLIC_API_BASE_URL + "/platform/auth/login2fa",
       {
         method: "POST",
         headers: { Accept: "application/json","Content-Type": "application/json" },
@@ -41,8 +41,7 @@ export const login2fa = async (verificationCode: string, loginToken: string) => 
 
 export const loadUser = async () =>  {
     setAuthTokenHeader()
-
-    const res = await nerasikaAxios(
+    const res = await axios(
       "/platform/auth/user",
       {
         method: "GET",
@@ -57,7 +56,7 @@ export const loadUser = async () =>  {
 };
 
 export const forgotPassword = async (email: string,) =>  {
-   return nerasikaAxios(
+   return axios(
       "/platform/auth/forgotpassword",
       {
         method: "POST",
@@ -68,7 +67,7 @@ export const forgotPassword = async (email: string,) =>  {
 };
 
 export const resetPassword = async (resetToken: string, newPassword: string) =>  {
-   return nerasikaAxios(
+   return axios(
       "/platform/auth/resetpassword",
       {
         method: "POST",
@@ -81,7 +80,7 @@ export const resetPassword = async (resetToken: string, newPassword: string) => 
 export const updateUser = async ( updates: Object) =>  {
   setAuthTokenHeader()
 
-  return nerasikaAxios(
+  return axios(
     "/platform/auth/user/updatedetails",
     {
       method: "PUT",
@@ -94,7 +93,7 @@ export const updateUser = async ( updates: Object) =>  {
 export const updateUserEmail = async ( updates: Object) =>  {
   setAuthTokenHeader()
 
-  return nerasikaAxios(
+  return axios(
     "/platform/auth/user/updateemail",
     {
       method: "PUT",
@@ -107,7 +106,7 @@ export const updateUserEmail = async ( updates: Object) =>  {
 export const updateUserMobile = async ( updates: Object) =>  {
   setAuthTokenHeader()
 
-  return nerasikaAxios(
+  return axios(
     "/platform/auth/user/updatemobile",
     {
       method: "PUT",
@@ -119,8 +118,7 @@ export const updateUserMobile = async ( updates: Object) =>  {
 
 export const updatePassword = async ( currentPassword: string, newPassword: string, confirmNewPassword: string) =>  {
   setAuthTokenHeader()
-
-  return nerasikaAxios(
+  return axios(
     "/platform/auth/user/updatepassword",
     {
       method: "PUT",
@@ -132,8 +130,7 @@ export const updatePassword = async ( currentPassword: string, newPassword: stri
 
 export const getQrCode = async () =>  {
   setAuthTokenHeader()
-
-  const qrCode = await nerasikaAxios(
+  const qrCode = await axios(
     "/platform/auth/genqrcode",
     {
       method: "GET",
@@ -146,8 +143,7 @@ export const getQrCode = async () =>  {
 
 export const enable2Fa = async ( verficationCode: string) =>  {
   setAuthTokenHeader()
-
-  return nerasikaAxios(
+  return axios(
     "/platform/auth/enablemultifa",
     {
       method: "POST",
