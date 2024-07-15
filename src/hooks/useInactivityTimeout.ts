@@ -2,7 +2,7 @@ import { useEffect, useRef, useCallback } from "react";
 
 const useInactivityTimeout = (
   onTimeout: () => void,
-  timeoutDuration: number = 5 * 60 * 1000
+  timeoutDuration: number = 3 * 60 * 1000
 ) => {
   const timeoutRef = useRef(null) as any;
 
