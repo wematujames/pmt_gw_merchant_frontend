@@ -2,10 +2,17 @@ import React from "react";
 import { Button, Col, Input, Modal, Row } from "antd";
 import { BsEye } from "react-icons/bs";
 import { RxReload } from "react-icons/rx";
+import { useQuery } from "@tanstack/react-query";
+import { getTransaction } from "@/actions/transactions";
 
-export default function TxnDetails({ transaction }: { transaction: any }) {
+export default function TxnDetails({ txnId }: { txnId: any }) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
+
+  const txnQuery = useQuery({
+    queryKey: ["txn-detail"],
+    queryFn: () => getTransaction(txnId),
+  });
 
   const showLoading = () => {
     setOpen(true);
@@ -35,7 +42,7 @@ export default function TxnDetails({ transaction }: { transaction: any }) {
     CreatedAt: txn.createdAt,
   });
 
-  const txnTransformed = transformTxn(transaction);
+  const txnTransformed = transformTxn(txnQuery.data || {});
 
   return (
     <>
@@ -43,17 +50,17 @@ export default function TxnDetails({ transaction }: { transaction: any }) {
         type="default"
         icon={<BsEye />}
         size="middle"
-        onClick={showLoading}
+        onClick={() => setOpen(true)}
       />
 
       <Modal
         open={open}
         width={1000}
-        loading={loading}
+        loading={txnQuery.isFetching}
         onCancel={() => setOpen(false)}
-        title={"Transaction: " + transaction._id}
+        title={"Transaction: " + txnId}
         footer={
-          <Button block type="default" onClick={showLoading}>
+          <Button block type="default" onClick={() => txnQuery.refetch()}>
             <RxReload />
             Check Status
           </Button>

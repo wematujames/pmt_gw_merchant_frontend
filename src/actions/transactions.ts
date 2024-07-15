@@ -24,3 +24,20 @@ export const getTransactions = async (_filter: any = {}) =>  {
 
   return { data: res.data.data, meta: res.data.meta };
 };
+
+export const getTransaction = async (txnId: string) =>  {
+  setAuthTokenHeader()
+  
+  const res = await axios(
+    `/platform/transactions/${txnId}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  return res.data.data ;
+};

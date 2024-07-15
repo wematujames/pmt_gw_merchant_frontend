@@ -2,13 +2,14 @@
 import { Button, Flex, Space, Table, TableColumnsType, theme } from "antd";
 import TransactionDetail from "./TransactionDetails";
 import FilterTransaction from "./FilterTransactions";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
 import { getTransactions } from "@/actions/transactions";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import moment from "moment";
 import exportData from "@/utils/exportData";
 import { BiExport } from "react-icons/bi";
+import { TbReload } from "react-icons/tb";
 const columns: TableColumnsType = [
   {
     title: "ID",
@@ -92,7 +93,7 @@ const columns: TableColumnsType = [
     width: 80,
     render: (_: any, record: any) => (
       <Space size={0}>
-        <TransactionDetail transaction={record} />
+        <TransactionDetail txnId={record._id} />
       </Space>
     ),
   },
@@ -106,9 +107,6 @@ function TransactionReport() {
     endDate: moment().endOf("day").toISOString(),
   });
 
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const tableRef = useRef(null);
-
   const txnsQuery = useInfiniteQuery({
     queryKey: ["transactions", filter],
     queryFn: ({ pageParam = 1 }) => getTransactions({ pageParam, filter }),
@@ -117,12 +115,6 @@ function TransactionReport() {
       return lastPage?.meta?.pagination?.next?.page || false;
     },
   });
-
-  // const fetchNextPage = () => {
-  //   if (txnsQuery.hasNextPage && !txnsQuery.isFetchingNextPage) {
-  //     txnsQuery.fetchNextPage();
-  //   }
-  // };
 
   const transactions = txnsQuery.data?.pages.flatMap((page) => page.data) || [];
 
@@ -144,11 +136,18 @@ function TransactionReport() {
               size="large"
               icon={<BiExport />}
               type="primary"
-              disabled={txnsQuery.isFetching || !transactions.length}
+              disabled={txnsQuery.isFetching || !transactions?.length}
               onClick={() => exportData(transactions, "transactions")}
-            >
-              Export
-            </Button>
+              title="Export"
+            />
+            <Button
+              size="large"
+              icon={<TbReload />}
+              type="primary"
+              disabled={txnsQuery.isFetching}
+              onClick={() => txnsQuery.refetch()}
+              title="Reload"
+            />
           </Space>
         </Flex>
       )}

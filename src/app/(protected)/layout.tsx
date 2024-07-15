@@ -6,6 +6,8 @@ import UserAvatar from "./user/components/Avatar";
 import Link from "next/link";
 import Image from "next/image";
 import AppSideMenu from "./AppSideMenu";
+import useInactivityTimeout from "@/hooks/useInactivityTimeout";
+import { useLogout } from "@/hooks/useLogout";
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function ProtectedLayout({
@@ -14,6 +16,9 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }>) {
   const { token } = theme.useToken();
+  const logout = useLogout();
+
+  useInactivityTimeout(logout);
 
   return (
     <Layout hasSider>
