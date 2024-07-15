@@ -2,12 +2,15 @@
 
 import { enable2Fa, getQrCode } from "@/actions/auth";
 import { useLogout } from "@/hooks/useLogout";
+import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button, Col, Flex, Form, Image, Input, Row } from "antd";
+import { AxiosError } from "axios";
 
 function TwoFactorAuth() {
   const logout = useLogout();
+  const { openMessage } = useMessage();
 
   const generateQrCode = useQuery({
     queryKey: ["current-user-2fa-qrcode"],
@@ -17,7 +20,13 @@ function TwoFactorAuth() {
   const enableUser2Fa = useMutation({
     mutationKey: ["enable-2fa-current-user"],
     mutationFn: (data: any) => enable2Fa(data.verificationCode),
-    onSuccess: () => logout(),
+    onSuccess: () => {
+      openMessage("success", "2FA: Success");
+      logout();
+    },
+    onError: (err: AxiosError<{ message: string }>) => {
+      openMessage("error", err.response?.data.message as string);
+    },
   });
 
   const onFinish = (vals: any) => {

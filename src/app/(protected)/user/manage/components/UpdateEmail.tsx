@@ -1,11 +1,15 @@
 "use client";
 
 import { loadUser, updateUserEmail } from "@/actions/auth";
+import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button, Col, Flex, Form, Input, Row } from "antd";
+import { AxiosError } from "axios";
 
 function UpdateEmail() {
+  const { openMessage } = useMessage();
+
   const userQuery = useQuery({
     queryKey: ["current-user"],
     queryFn: () => loadUser(),
@@ -14,7 +18,12 @@ function UpdateEmail() {
   const updateEmailMutation = useMutation({
     mutationKey: ["update-user-email"],
     mutationFn: (data: any) => updateUserEmail(data),
-    onError: (err) => {},
+    onSuccess: () => {
+      openMessage("success", "Email updated, verification link sent");
+    },
+    onError: (err: AxiosError<{ message: string }>) => {
+      openMessage("error", err.response?.data.message as string);
+    },
   });
 
   const onFinish = (vals: any) => {

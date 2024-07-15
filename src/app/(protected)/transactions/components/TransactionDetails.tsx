@@ -14,15 +14,6 @@ export default function TxnDetails({ txnId }: { txnId: any }) {
     queryFn: () => getTransaction(txnId),
   });
 
-  const showLoading = () => {
-    setOpen(true);
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  };
-
   const transformTxn: any = (txn: any) => ({
     Status: txn.status,
     Reason: txn.statusReason,

@@ -2,12 +2,15 @@
 
 import { loadUser, updatePassword } from "@/actions/auth";
 import { useLogout } from "@/hooks/useLogout";
+import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button, Col, Flex, Form, Input, Row, Select } from "antd";
+import { AxiosError } from "axios";
 const { Option } = Select;
 function UpdatePassword() {
   const logout = useLogout();
+  const { openMessage } = useMessage();
 
   const currentUser = useQuery({
     queryKey: ["current-user"],
@@ -22,8 +25,13 @@ function UpdatePassword() {
         data.newPassword,
         data.confirmNewPassword
       ),
-    onSuccess: () => logout(),
-    onError: (err) => {},
+    onSuccess: () => {
+      openMessage("success", "Password updated, please login");
+      logout();
+    },
+    onError: (err: AxiosError<{ message: string }>) => {
+      openMessage("error", err.response?.data.message as string);
+    },
   });
 
   const onFinish = (vals: any) => {

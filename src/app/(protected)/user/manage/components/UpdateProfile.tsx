@@ -1,12 +1,15 @@
 "use client";
 
 import { loadUser, updateUser } from "@/actions/auth";
+import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Col, Flex, Form, Input, Row } from "antd";
+import { AxiosError } from "axios";
 
 function UpdateProfile() {
   const queryClient = useQueryClient();
+  const { openMessage } = useMessage();
 
   const userQuery = useQuery({
     queryKey: ["current-user"],
@@ -16,11 +19,15 @@ function UpdateProfile() {
   const updateUserMutation = useMutation({
     mutationKey: ["update-current-user"],
     mutationFn: (data: any) => updateUser(data),
-    onSuccess: () =>
+    onSuccess: () => {
+      openMessage("success", "Profile updated");
       queryClient.invalidateQueries({
         queryKey: ["current-user"],
-      }),
-    onError: (err) => {},
+      });
+    },
+    onError: (err: AxiosError<{ message: string }>) => {
+      openMessage("error", err.response?.data.message as string);
+    },
   });
 
   const onFinish = (vals: any) => {
