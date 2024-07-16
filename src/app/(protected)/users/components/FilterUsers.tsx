@@ -14,7 +14,7 @@ import { FiFilter } from "react-icons/fi";
 
 const { Option } = Select;
 
-export default function FilterTransaction({
+export default function FilterUsers({
   txnsQuery,
   filter,
   setFilter,
@@ -58,14 +58,12 @@ export default function FilterTransaction({
         size="large"
         onClick={showDrawer}
         icon={<FiFilter />}
-      >
-        Filter
-      </Button>
+      />
       <Drawer title="Filter Users" width={720} onClose={onClose} open={open}>
         <Form layout="vertical" requiredMark onFinish={onFinish}>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="_id" label="Email">
+              <Form.Item name="email" label="Email">
                 <Input placeholder="jwematu@nerasolgh.com" />
               </Form.Item>
             </Col>

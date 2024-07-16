@@ -103,6 +103,33 @@ export const updateUserEmail = async ( updates: Object) =>  {
   );
 };
 
+export const verifyUserEmail = async ( token: string) =>  {
+  setAuthTokenHeader()
+
+  // return true;
+  return axios(
+    "/platform/auth/user/updateemail",
+    {
+      method: "PUT",
+      headers: {  Accept: "application/json","Content-Type": "application/json", },
+      data: {token},
+    }
+  );
+};
+
+export const resendEmailVeriLink = async ( token: string) =>  {
+  setAuthTokenHeader()
+
+  return axios(
+    "/platform/auth/user/updateemail",
+    {
+      method: "PUT",
+      headers: {  Accept: "application/json","Content-Type": "application/json", },
+      data: {token},
+    }
+  );
+};
+
 export const updateUserMobile = async ( updates: Object) =>  {
   setAuthTokenHeader()
 

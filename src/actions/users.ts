@@ -24,3 +24,21 @@ export const getPlatformUsers = async (_filter: any = {}) =>  {
 
   return res.data.data;
 };
+
+export const createUser = async (data: object = {}) =>  {
+  setAuthTokenHeader()
+
+  const res = await axios(
+    "/platform/users",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      data
+    }
+  );
+
+  return res.data.data;
+};

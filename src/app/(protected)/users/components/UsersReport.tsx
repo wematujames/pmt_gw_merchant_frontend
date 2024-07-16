@@ -1,12 +1,13 @@
 "use client";
 import { Flex, Space, Table, TableColumnsType, theme } from "antd";
-import FilterTransaction from "./FilterUsers";
+import FilterUsers from "./FilterUsers";
 import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import { getPlatformUsers } from "@/actions/users";
 import UserDetail from "./UserDetails";
 import moment from "moment";
+import CreateUser from "./CreateUser";
 
 const columns: TableColumnsType = [
   {
@@ -77,7 +78,7 @@ function TransactionReport() {
   const [filter, setFilter] = useState({});
 
   const txnsQuery = useQuery({
-    queryKey: ["transactions", filter],
+    queryKey: ["platform-users", filter],
     queryFn: () => getPlatformUsers(filter),
   });
 
@@ -93,11 +94,15 @@ function TransactionReport() {
             <MdNumbers size={token.fontSizeIcon} />
             Count:{txnsQuery?.data?.length}
           </Space>
-          <FilterTransaction
-            filter={filter}
-            setFilter={setFilter}
-            txnsQuery={txnsQuery}
-          />
+          <Space>
+            <FilterUsers
+              filter={filter}
+              setFilter={setFilter}
+              txnsQuery={txnsQuery}
+            />
+
+            <CreateUser />
+          </Space>
         </Flex>
       )}
       loading={txnsQuery.isLoading}
