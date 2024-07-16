@@ -3,12 +3,15 @@
 import { loadUser, updateUserEmail } from "@/actions/auth";
 import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Col, Flex, Form, Input, Row } from "antd";
+import { useForm } from "antd/es/form/Form";
 import { AxiosError } from "axios";
 
 function UpdateEmail() {
   const { openMessage } = useMessage();
+  const [form] = useForm();
+  const queryClient = useQueryClient();
 
   const userQuery = useQuery({
     queryKey: ["current-user"],
@@ -16,9 +19,13 @@ function UpdateEmail() {
   });
 
   const updateEmailMutation = useMutation({
-    mutationKey: ["update-user-email"],
+    mutationKey: ["update-current-user-email"],
     mutationFn: (data: any) => updateUserEmail(data),
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["update-current-user-email"],
+      });
+      form.resetFields();
       openMessage("success", "Email updated, verification link sent");
     },
     onError: (err: AxiosError<{ message: string }>) => {
@@ -34,6 +41,7 @@ function UpdateEmail() {
   return (
     <Flex justify="center" flex="vertical" content="center">
       <Form
+        form={form}
         initialValues={{
           currentEmail: userQuery.data?.email,
           newEmail: "",

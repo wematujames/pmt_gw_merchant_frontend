@@ -5,11 +5,13 @@ import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Col, Flex, Form, Input, Row } from "antd";
+import { useForm } from "antd/es/form/Form";
 import { AxiosError } from "axios";
 
 function UpdateProfile() {
   const queryClient = useQueryClient();
   const { openMessage } = useMessage();
+  const [form] = useForm();
 
   const userQuery = useQuery({
     queryKey: ["current-user"],
@@ -20,9 +22,10 @@ function UpdateProfile() {
     mutationKey: ["update-current-user"],
     mutationFn: (data: any) => updateUser(data),
     onSuccess: () => {
+      form.resetFields(["password"]);
       openMessage("success", "Profile updated");
       queryClient.invalidateQueries({
-        queryKey: ["current-user"],
+        queryKey: ["update-current-user"],
       });
     },
     onError: (err: AxiosError<{ message: string }>) => {
@@ -38,6 +41,7 @@ function UpdateProfile() {
   return (
     <Flex justify="center" flex="vertical" content="center">
       <Form
+        form={form}
         requiredMark
         initialValues={{
           fName: userQuery.data?.person?.fName,

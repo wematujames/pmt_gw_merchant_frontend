@@ -4,14 +4,16 @@ import { enable2Fa, getQrCode } from "@/actions/auth";
 import { useLogout } from "@/hooks/useLogout";
 import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Col, Flex, Form, Image, Input, Row } from "antd";
+import { useForm } from "antd/es/form/Form";
 import { AxiosError } from "axios";
 
 function TwoFactorAuth() {
   const logout = useLogout();
   const { openMessage } = useMessage();
-
+  const queryClient = useQueryClient();
+  const [form] = useForm();
   const generateQrCode = useQuery({
     queryKey: ["current-user-2fa-qrcode"],
     queryFn: () => getQrCode(),
@@ -21,6 +23,10 @@ function TwoFactorAuth() {
     mutationKey: ["enable-2fa-current-user"],
     mutationFn: (data: any) => enable2Fa(data.verificationCode),
     onSuccess: () => {
+      form.resetFields();
+      queryClient.invalidateQueries({
+        queryKey: ["enable-2fa-current-user"],
+      });
       openMessage("success", "2FA: Success");
       logout();
     },
@@ -36,7 +42,7 @@ function TwoFactorAuth() {
 
   return (
     <Flex justify="center" flex="vertical" content="center">
-      <Form layout="vertical" requiredMark onFinish={onFinish}>
+      <Form form={form} layout="vertical" requiredMark onFinish={onFinish}>
         <Row>
           <Col span={24}>
             <Flex justify="center" align="center">

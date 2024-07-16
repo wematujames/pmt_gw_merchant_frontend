@@ -5,11 +5,13 @@ import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button, Col, Flex, Form, Input, Row } from "antd";
+import { useForm } from "antd/es/form/Form";
 import { AxiosError } from "axios";
 
 function UpdatePhone() {
   const queryClient = useQueryClient();
   const { openMessage } = useMessage();
+  const [form] = useForm();
 
   const userQuery = useQuery({
     queryKey: ["current-user"],
@@ -21,10 +23,10 @@ function UpdatePhone() {
     mutationFn: (data: any) => updateUserMobile(data),
     onSuccess: () => {
       openMessage("success", "Phone updated");
-
       queryClient.invalidateQueries({
-        queryKey: ["current-user"],
+        queryKey: ["update-user-phone"],
       });
+      form.resetFields();
     },
     onError: (err: AxiosError<{ message: string }>) => {
       openMessage("error", err.response?.data.message as string);
@@ -39,6 +41,7 @@ function UpdatePhone() {
   return (
     <Flex justify="center" flex="vertical" content="center">
       <Form
+        form={form}
         initialValues={{
           currentPhone: userQuery.data?.phone,
           newPhone: "",

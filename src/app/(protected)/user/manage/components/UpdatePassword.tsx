@@ -1,24 +1,21 @@
 "use client";
 
-import { loadUser, updatePassword } from "@/actions/auth";
+import { updatePassword } from "@/actions/auth";
 import { useLogout } from "@/hooks/useLogout";
 import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { Button, Col, Flex, Form, Input, Row, Select } from "antd";
+import { useMutation } from "@tanstack/react-query";
+import { Button, Col, Flex, Form, Input, Row } from "antd";
+import { useForm } from "antd/es/form/Form";
 import { AxiosError } from "axios";
-const { Option } = Select;
+
 function UpdatePassword() {
   const logout = useLogout();
   const { openMessage } = useMessage();
-
-  const currentUser = useQuery({
-    queryKey: ["current-user"],
-    queryFn: () => loadUser(),
-  });
+  const [form] = useForm();
 
   const updateUserPassword = useMutation({
-    mutationKey: ["update-current-user"],
+    mutationKey: ["update-current-user-password"],
     mutationFn: (data: any) =>
       updatePassword(
         data.currentPassword,
@@ -26,6 +23,7 @@ function UpdatePassword() {
         data.confirmNewPassword
       ),
     onSuccess: () => {
+      form.resetFields();
       openMessage("success", "Password updated, please login");
       logout();
     },
@@ -44,7 +42,7 @@ function UpdatePassword() {
 
   return (
     <Flex justify="center" flex="vertical" content="center">
-      <Form layout="vertical" requiredMark onFinish={onFinish}>
+      <Form form={form} layout="vertical" requiredMark onFinish={onFinish}>
         <Row gutter={16}>
           <Col span={24}>
             <Form.Item
