@@ -51,7 +51,7 @@ export default function Permissions({ user }: { user: any }) {
       />
       <Modal
         open={open}
-        width={1000}
+        width={750}
         loading={permissionsQuery.isPending}
         onCancel={() => setOpen(false)}
         title={"Permissions for: " + user?.person?.fName}
@@ -70,7 +70,9 @@ export default function Permissions({ user }: { user: any }) {
           <Row>
             {permissionsQuery.data?.map((i: any) => (
               <Col key={i._id} span={8}>
-                <Checkbox value={i._id}>{i.name}</Checkbox>
+                <Checkbox value={i._id}>
+                  {i.name.slice(0, 30) + (i.name?.length > 30 ? "..." : "")}
+                </Checkbox>
               </Col>
             ))}
           </Row>
