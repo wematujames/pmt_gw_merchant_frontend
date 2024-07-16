@@ -9,7 +9,7 @@ const EmailVerificationSuccess: React.FC = () => (
     title="Email verification successful"
     subTitle=""
     extra={
-      <Button type="primary" key="console">
+      <Button type="primary" key="console" href="/auth/login">
         Go To Home
       </Button>
     }
