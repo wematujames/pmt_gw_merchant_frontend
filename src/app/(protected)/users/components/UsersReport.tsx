@@ -8,6 +8,7 @@ import { getPlatformUsers } from "@/actions/users";
 import UserDetail from "./UserDetails";
 import moment from "moment";
 import CreateUser from "./CreateUser";
+import Permissions from "./Permissions";
 
 const columns: TableColumnsType = [
   {
@@ -66,8 +67,9 @@ const columns: TableColumnsType = [
     key: "action",
     width: 80,
     render: (_: any, record: any) => (
-      <Space size={0}>
+      <Space size={5}>
         <UserDetail transaction={record} />
+        <Permissions user={record} />
       </Space>
     ),
   },
