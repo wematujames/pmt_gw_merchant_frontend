@@ -32,7 +32,6 @@ function ResetPasswordPage() {
       router.push("/auth/login");
     },
     onError: (err: AxiosError<Error>) => {
-      console.log(err.response);
       openMessage("error", err.response?.data.message as string);
     },
   });

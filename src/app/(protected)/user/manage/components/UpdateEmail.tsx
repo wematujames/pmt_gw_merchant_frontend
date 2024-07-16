@@ -46,7 +46,11 @@ function UpdateEmail() {
         <Row gutter={16}>
           <Col span={24}>
             <Form.Item name="currentEmail" label="Current Email">
-              <Input readOnly type="email" />
+              <Input
+                readOnly
+                type="email"
+                addonAfter={"V: " + userQuery.data?.emailVerified}
+              />
             </Form.Item>
           </Col>
           <Col span={24}>

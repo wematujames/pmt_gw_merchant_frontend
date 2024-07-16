@@ -51,7 +51,11 @@ function UpdatePhone() {
         <Row gutter={16}>
           <Col span={24}>
             <Form.Item name="currentPhone" label="Current Phone Number">
-              <Input readOnly type="text" />
+              <Input
+                readOnly
+                type="text"
+                addonAfter={"V: " + userQuery.data?.phoneVerified}
+              />
             </Form.Item>
           </Col>
           <Col span={24}>

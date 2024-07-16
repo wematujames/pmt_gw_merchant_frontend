@@ -16,10 +16,10 @@ export default function CreateUser({}: {}) {
   const [form] = useForm();
 
   const createUserMutation = useMutation({
-    mutationKey: ["update-current-user"],
+    mutationKey: ["create-new-user"],
     mutationFn: (data: any) => createUser(data),
     onSuccess: () => {
-      openMessage("success", "Profile updated");
+      openMessage("success", "User created");
       form.resetFields();
       setOpen(false);
 
@@ -54,12 +54,20 @@ export default function CreateUser({}: {}) {
         <Form layout="vertical" form={form} requiredMark onFinish={onFinish}>
           <Row gutter={5}>
             <Col span={12}>
-              <Form.Item name="fName" label="First Name">
+              <Form.Item
+                rules={[{ required: true, message: "First name is required" }]}
+                name="fName"
+                label="First Name"
+              >
                 <Input placeholder="Wematu" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="lName" label="Last Name">
+              <Form.Item
+                rules={[{ required: true, message: "Last name is required" }]}
+                name="lName"
+                label="Last Name"
+              >
                 <Input placeholder="James" />
               </Form.Item>
             </Col>
@@ -67,12 +75,22 @@ export default function CreateUser({}: {}) {
 
           <Row gutter={5}>
             <Col span={12}>
-              <Form.Item name="email" label="Email">
+              <Form.Item
+                rules={[{ required: true, message: "Email is required" }]}
+                name="email"
+                label="Email"
+              >
                 <Input placeholder="jwematu@nerasolgh.com" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="phone" label="Phone">
+              <Form.Item
+                rules={[
+                  { required: true, message: "Mobile number is required" },
+                ]}
+                name="phone"
+                label="Phone"
+              >
                 <Input placeholder="233554268378" />
               </Form.Item>
             </Col>

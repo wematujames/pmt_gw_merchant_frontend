@@ -106,13 +106,12 @@ export const updateUserEmail = async ( updates: Object) =>  {
 export const verifyUserEmail = async ( token: string) =>  {
   setAuthTokenHeader()
 
-  // return true;
   return axios(
-    "/platform/auth/user/updateemail",
+    process.env.NEXT_PUBLIC_API_BASE_URL + "/platform/auth/user/verifyemail",
     {
       method: "PUT",
       headers: {  Accept: "application/json","Content-Type": "application/json", },
-      data: {token},
+      data: { token },
     }
   );
 };

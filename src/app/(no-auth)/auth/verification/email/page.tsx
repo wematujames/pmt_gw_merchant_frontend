@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Button, Result } from "antd";
 import VerifyEmailFailed from "./Failed";
 import EmailVerificationSuccess from "./Success";
-import styles from "../../../utility.module.css";
+import styles from "../../../../utility.module.css";
 const VerifyEmail: React.FC = () => {
   const { openMessage } = useMessage();
   const searchParams = useSearchParams();
@@ -18,7 +18,7 @@ const VerifyEmail: React.FC = () => {
 
   const verifyEmailMutation = useMutation({
     mutationKey: ["verify-email"],
-    mutationFn: () => verifyUserEmail(""),
+    mutationFn: () => verifyUserEmail(token as string),
     onError: (err: AxiosError<{ message: string }>) => {
       openMessage("error", err.response?.data.message as string);
     },
