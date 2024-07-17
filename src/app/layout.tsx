@@ -5,7 +5,10 @@ import "./globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import NotificationProvider from "@/context/NotificationContext";
 import MessageProvider from "@/context/MessageContext";
+import setAuthTokenHeader from "@/actions/utils/setAuthToken";
 const inter = Inter({ subsets: ["latin"] });
+
+setAuthTokenHeader();
 
 export default function RootLayout({
   children,

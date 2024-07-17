@@ -36,7 +36,7 @@ export const getCollectionStatics = async (_filter: any = {}) =>  {
 };
 
 export const getDibursementStatics = async (_filter: any = {}) =>  {
-     setAuthTokenHeader()
+   setAuthTokenHeader()
 
    const res = await axios(
     "/platform/summary/disbursementtransactionstats",

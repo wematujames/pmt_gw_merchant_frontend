@@ -11,7 +11,8 @@ export const getDirectDebitMandates = async (_filter: any = {}) =>  {
     if (_filter[key]) filter[key] = _filter[key]
   });
 
-  const res = await axios("/platform/directdebit/mandates",
+  const res = await axios(
+    "/platform/directdebit/mandates",
     {
       method: "GET",
       headers: {

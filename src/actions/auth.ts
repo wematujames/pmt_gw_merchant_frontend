@@ -5,7 +5,7 @@ import setAuthTokenHeader from "./utils/setAuthToken";
 
 export const login = async (email: string, password: string) =>  {
     const res = await axios(
-      process.env.NEXT_PUBLIC_API_BASE_URL + "/platform/auth/login",
+      "/platform/auth/login",
       {
         method: "POST",
         headers: {
@@ -26,7 +26,7 @@ export const login = async (email: string, password: string) =>  {
 export const login2fa = async (verificationCode: string, loginToken: string) =>  {
 
     const res = await axios(
-      process.env.NEXT_PUBLIC_API_BASE_URL + "/platform/auth/login2fa",
+      "/platform/auth/login2fa",
       {
         method: "POST",
         headers: { Accept: "application/json","Content-Type": "application/json" },
@@ -107,7 +107,7 @@ export const verifyUserEmail = async ( token: string) =>  {
   setAuthTokenHeader()
 
   return axios(
-    process.env.NEXT_PUBLIC_API_BASE_URL + "/platform/auth/user/verifyemail",
+    "/platform/auth/user/verifyemail",
     {
       method: "PUT",
       headers: {  Accept: "application/json","Content-Type": "application/json", },
