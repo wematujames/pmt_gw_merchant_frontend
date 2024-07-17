@@ -58,7 +58,7 @@ export default function LoginPage() {
               vertical
             >
               <Title level={4}>Forgot Password</Title>
-              <Divider style={{ background: "#e1e1ef", marginTop: 10 }} />
+              <Divider style={{ marginTop: 10 }} />
             </Flex>
 
             <Form.Item

@@ -32,10 +32,7 @@ function ResetPasswordPage() {
       router.push("/auth/login");
     },
     onError: (err: AxiosError<Error>) => {
-      openMessage(
-        "error",
-        (err.response?.data.message) || err.message
-      );
+      openMessage("error", err.response?.data.message || err.message);
     },
   });
 
@@ -70,7 +67,7 @@ function ResetPasswordPage() {
               vertical
             >
               <Title level={4}>Reset Your Password</Title>
-              <Divider style={{ background: "#e1e1ef", marginTop: 10 }} />
+              <Divider style={{ marginTop: 10 }} />
             </Flex>
 
             <Form.Item

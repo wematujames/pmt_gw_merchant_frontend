@@ -55,7 +55,7 @@ export default function ProtectedLayout({
               />
             </Link>
           </Flex>
-          <Divider style={{ background: "#e1e1ef", margin: 0 }} />
+          <Divider style={{ margin: 0 }} />
           <AppSideMenu />
         </Sider>
         <Layout>

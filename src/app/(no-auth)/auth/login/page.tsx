@@ -38,10 +38,7 @@ export default function LoginPage() {
       router.push("/dashboard/financial");
     },
     onError: (err: AxiosError<{ message: string }>) => {
-      openMessage(
-        "error",
-        (err.response?.data.message) || err.message 
-      );
+      openMessage("error", err.response?.data.message || err.message);
     },
   });
 
@@ -98,7 +95,7 @@ export default function LoginPage() {
                 vertical
               >
                 <Title level={4}>Sign In To Your Account</Title>
-                <Divider style={{ background: "#e1e1ef", marginTop: 10 }} />
+                <Divider style={{ marginTop: 10 }} />
               </Flex>
 
               <Form.Item

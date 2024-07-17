@@ -1,15 +1,14 @@
 "use client";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { Inter } from "next/font/google";
+import { montserrat } from "@/fonts/fonts";
 import "./globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import NotificationProvider from "@/context/NotificationContext";
 import MessageProvider from "@/context/MessageContext";
 import { useEffect } from "react";
 import setAuthTokenHeader from "@/actions/utils/setAuthToken";
-const inter = Inter({ subsets: ["latin"] });
-
-// setAuthTokenHeader();
+import { ConfigProvider } from "antd";
+import theme from "@/themes/default";
 
 export default function RootLayout({
   children,
@@ -32,11 +31,13 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Nerasika</title>
       </head>
-      <body className={inter.className}>
+      <body className={montserrat.className}>
         <NotificationProvider>
           <MessageProvider>
             <QueryClientProvider client={queryClient}>
-              <AntdRegistry>{children}</AntdRegistry>
+              <ConfigProvider theme={theme}>
+                <AntdRegistry>{children}</AntdRegistry>
+              </ConfigProvider>
             </QueryClientProvider>
           </MessageProvider>
         </NotificationProvider>

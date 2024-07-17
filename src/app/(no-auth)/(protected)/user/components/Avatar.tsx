@@ -1,6 +1,6 @@
 import { LockOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Avatar, Card, Divider, Dropdown, Space, Spin, theme } from "antd";
-import { useLogout } from "../../../../hooks/useLogout";
+import { useLogout } from "../../../../../hooks/useLogout";
 import { useQuery } from "@tanstack/react-query";
 import { loadUser } from "@/actions/auth";
 import Meta from "antd/es/card/Meta";
@@ -67,11 +67,7 @@ const UserAvatar = () => {
         >
           <Meta
             avatar={
-              <Avatar
-                shape="square"
-                style={{ backgroundColor: "#001550" }}
-                size={50}
-              >
+              <Avatar shape="square" size={50}>
                 {userQuery.data?.person?.lName.slice(0, 1)}
                 {userQuery.data?.person?.fName.slice(0, 1)}
               </Avatar>
@@ -85,11 +81,7 @@ const UserAvatar = () => {
       )}
     >
       <Space>
-        <Avatar
-          shape="square"
-          style={{ backgroundColor: "#001550" }}
-          size={{ lg: 45, xl: 50 }}
-        >
+        <Avatar shape="square" size={{ lg: 45, xl: 50 }}>
           {userQuery.data?.person?.lName.slice(0, 1)}
           {userQuery.data?.person?.fName.slice(0, 1)}
         </Avatar>

@@ -88,22 +88,6 @@ export default function FilterTransaction({
               </Form.Item>
             </Col>
           </Row>
-
-          {/* <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                name="dateTime"
-                label="DateTime"
-                rules={[{ required: true, message: "Select date range" }]}
-              >
-                <DatePicker.RangePicker
-                  style={{ width: "100%" }}
-                  getPopupContainer={(trigger) => trigger.parentElement!}
-                />
-              </Form.Item>
-            </Col>
-          </Row> */}
-
           <Row gutter={16}>
             <Form.Item>
               <Space>
