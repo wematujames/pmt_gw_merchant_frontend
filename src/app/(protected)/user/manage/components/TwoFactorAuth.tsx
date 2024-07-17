@@ -43,37 +43,47 @@ function TwoFactorAuth() {
   return (
     <Flex justify="center" flex="vertical" content="center">
       <Form form={form} layout="vertical" requiredMark onFinish={onFinish}>
+        <Flex justify="center" align="center">
+          <Row>
+            <Col span={24}>
+              <Flex justify="center" align="center">
+                <Image
+                  alt="2fa-qrcode"
+                  src={generateQrCode.data}
+                  width={250}
+                  height={250}
+                />
+              </Flex>
+            </Col>
+            <Col span={24}>
+              <Flex justify="center" align="center">
+                <Form.Item
+                  name="verificationCode"
+                  label="2FA Verification Code"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Verification code is required",
+                    },
+                    { len: 6, message: "VC must be 6 characters" },
+                  ]}
+                >
+                  <Input.OTP length={6} itemType="number" />
+                </Form.Item>
+              </Flex>
+            </Col>
+          </Row>
+        </Flex>
         <Row>
           <Col span={24}>
             <Flex justify="center" align="center">
-              <Image
-                alt="2fa-qrcode"
-                src={generateQrCode.data}
-                width={250}
-                height={250}
-              />
+              <Form.Item>
+                <Button block htmlType="submit" type="primary">
+                  Submit
+                </Button>
+              </Form.Item>
             </Flex>
           </Col>
-          <Col span={24}>
-            <Form.Item
-              rules={[
-                { required: true, message: "Verification code is required" },
-                { len: 6, message: "VC must be 6 characters" },
-              ]}
-              name="verificationCode"
-              label="2FA Verification Code"
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-        </Row>
-
-        <Row>
-          <Form.Item>
-            <Button htmlType="submit" type="primary">
-              Submit
-            </Button>
-          </Form.Item>
         </Row>
       </Form>
     </Flex>

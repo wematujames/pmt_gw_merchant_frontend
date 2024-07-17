@@ -68,7 +68,7 @@ function TwoFAModal({
                 { len: 6, message: "VC must be 6 characters" },
               ]}
             >
-              <Input />
+              <Input.OTP length={6} />
             </Form.Item>
           </Col>
         </Row>
