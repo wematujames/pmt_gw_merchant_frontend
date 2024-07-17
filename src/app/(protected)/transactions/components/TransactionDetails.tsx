@@ -1,13 +1,33 @@
 import React from "react";
-import { Button, Col, Input, Modal, Row } from "antd";
+import { Button, Col, Input, Modal, Row, Space, theme } from "antd";
 import { BsEye } from "react-icons/bs";
 import { RxReload } from "react-icons/rx";
 import { useQuery } from "@tanstack/react-query";
 import { getTransaction } from "@/actions/transactions";
 
-export default function TxnDetails({ txnId }: { txnId: any }) {
+export default function TxnDetails({
+  txnId,
+  status,
+}: {
+  txnId: any;
+  status: "successful" | "pending" | "failed";
+}) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
+  const { token } = theme.useToken();
+
+  const getRecColor = (status: string) => {
+    switch (status) {
+      case "successful":
+        return token["green7"];
+      case "pending":
+        return token["yellow7"];
+      case "failed":
+        return token["red7"];
+      default:
+        return "black";
+    }
+  };
 
   const txnQuery = useQuery({
     queryKey: ["txn-detail"],
@@ -41,6 +61,10 @@ export default function TxnDetails({ txnId }: { txnId: any }) {
         type="default"
         icon={<BsEye />}
         size="middle"
+        style={{
+          color: getRecColor(status),
+          borderColor: getRecColor(status),
+        }}
         onClick={() => setOpen(true)}
       />
 
@@ -49,7 +73,16 @@ export default function TxnDetails({ txnId }: { txnId: any }) {
         width={1000}
         loading={txnQuery.isFetching}
         onCancel={() => setOpen(false)}
-        title={"Transaction: " + txnId}
+        title={
+          <Space
+            style={{
+              color: getRecColor(txnTransformed.Status),
+              fontWeight: token.fontWeightStrong,
+            }}
+          >
+            Transaction: {txnId}
+          </Space>
+        }
         footer={
           <Button block type="default" onClick={() => txnQuery.refetch()}>
             <RxReload />

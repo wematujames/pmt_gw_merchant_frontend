@@ -76,6 +76,9 @@ const theme: ThemeConfig = {
     },
     "Alert": {
       "colorInfoBg": "rgb(253, 253, 253)"
+    },
+    "Input": {
+      "colorIcon": "rgb(20, 40, 104)"
     }
   }
 };

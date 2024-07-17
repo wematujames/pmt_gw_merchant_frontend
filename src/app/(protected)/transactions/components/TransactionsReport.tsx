@@ -17,11 +17,11 @@ function TransactionReport() {
   const getRecColor = (status: string) => {
     switch (status) {
       case "successful":
-        return token["green"];
+        return token["green7"];
       case "pending":
-        return token["yellow"];
+        return token["yellow7"];
       case "failed":
-        return token["red"];
+        return token["red7"];
       default:
         return "black";
     }
@@ -35,7 +35,7 @@ function TransactionReport() {
       ellipsis: { showTitle: true },
       render: (_: any, record: any) => (
         <Space direction="vertical">
-          <p>{record._id}</p>
+          <p style={{ fontWeight: token.fontWeightStrong }}>{record._id}</p>
           <small>{record.merchantRef}</small>
           <small>{record.merchant}</small>
         </Space>
@@ -47,8 +47,17 @@ function TransactionReport() {
       key: "amount",
       render: (_: any, record: any) => (
         <Space direction="vertical">
-          <p>₵ {parseFloat(record.amount).toFixed(2)}</p>
-          <small>{record.type}</small>
+          <p style={{ fontWeight: token.fontWeightStrong }}>
+            ₵ {parseFloat(record.amount).toFixed(2)}
+          </p>
+          <small
+            style={{
+              color: getRecColor(record.status),
+              fontWeight: token.fontWeightStrong,
+            }}
+          >
+            {record.type}
+          </small>
         </Space>
       ),
     },
@@ -58,7 +67,7 @@ function TransactionReport() {
       key: "phone",
       render: (_: any, record: any) => (
         <Space direction="vertical">
-          <p>{record.phone}</p>
+          <p style={{ fontWeight: token.fontWeightStrong }}>{record.phone}</p>
           <small>
             {record.desc?.length > 12
               ? record.desc?.slice(0, 12) + "..."
@@ -73,7 +82,7 @@ function TransactionReport() {
       key: "network",
       render: (_: any, record: any) => (
         <Space direction="vertical">
-          <p>{record.network}</p>
+          <p style={{ fontWeight: token.fontWeightStrong }}>{record.network}</p>
           <small>{record.processor}</small>
         </Space>
       ),
@@ -84,13 +93,16 @@ function TransactionReport() {
       key: "status",
       render: (_: any, record: any) => (
         <Space
-          style={{ color: getRecColor(record.status) }}
+          style={{
+            color: getRecColor(record.status),
+            fontWeight: token.fontWeightStrong,
+          }}
           direction="vertical"
         >
-          <p style={{ margin: 0 }}>{record.status}</p>
-          <small style={{ margin: 0 }}>
-            {record.statusReason?.length > 10
-              ? record.statusReason?.slice(0, 10) + "..."
+          <p>{record.status}</p>
+          <small>
+            {record.statusReason?.length > 15
+              ? record.statusReason?.slice(0, 15) + "..."
               : record.statusReason}
           </small>
         </Space>
@@ -115,7 +127,7 @@ function TransactionReport() {
       width: 80,
       render: (_: any, record: any) => (
         <Space>
-          <TransactionDetail txnId={record._id} />
+          <TransactionDetail status={record.status} txnId={record._id} />
         </Space>
       ),
     },
