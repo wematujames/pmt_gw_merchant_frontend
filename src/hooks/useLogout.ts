@@ -1,11 +1,18 @@
+import { logoutUser } from "@/actions/auth";
 import { useRouter } from "next/navigation";
 
 export function useLogout() {
     const router = useRouter();
 
-    const logout = () => {
-        localStorage.removeItem("token");
-        router.push("/auth/login");
+    const logout = async () => {
+        try {
+            await logoutUser()
+        } catch (err) {
+            
+        } finally {
+            localStorage.removeItem("token");
+            router.push("/auth/login");
+        }
     };
 
     return logout;
