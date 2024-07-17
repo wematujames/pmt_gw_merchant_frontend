@@ -18,10 +18,7 @@ export default function RootLayout({
 }>) {
   const queryClient = new QueryClient({
     defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-        refetchOnMount: true,
-      },
+      queries: { refetchOnWindowFocus: false },
     },
   });
 
