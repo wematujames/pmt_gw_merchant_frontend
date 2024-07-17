@@ -1,7 +1,7 @@
 "use client";
 import StatisticsCards from "./components/Statistics";
 import Jumbotron from "./components/Jumbotron";
-import { useAuth } from "../../../../../hooks/useAuth";
+import { useAuth } from "../../../../hooks/useAuth";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import PageLoader from "../../PageLoader";

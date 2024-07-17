@@ -2,17 +2,17 @@
 import React, { Suspense, useState } from "react";
 import { Card, Space, theme } from "antd";
 import Meta from "antd/es/card/Meta";
-import { AiOutlineTransaction } from "react-icons/ai";
 import { useSearchParams } from "next/navigation";
 import { Tabs } from "antd";
 import { GrOverview } from "react-icons/gr";
 import OverView from "../components/OverView";
-import TransactionReport from "../components/TransactionsReport";
+import TransactionReport from "../components/MerchantsReport";
 import { TbReport } from "react-icons/tb";
-import { useAuth } from "../../../../../hooks/useAuth";
+import { useAuth } from "../../../../hooks/useAuth";
+import { FaStore } from "react-icons/fa6";
 import PageLoader from "../../PageLoader";
 
-const Transactions: React.FC = () => {
+const Merchants: React.FC = () => {
   const authenticated = useAuth();
 
   const { token } = theme.useToken();
@@ -54,8 +54,8 @@ const Transactions: React.FC = () => {
               marginTop: -token.marginXXS,
             }}
           >
-            <AiOutlineTransaction />
-            <p>Transactions</p>
+            <FaStore />
+            <p>Merchants</p>
           </Space>
         }
         description={
@@ -66,7 +66,7 @@ const Transactions: React.FC = () => {
               marginTop: -token.marginXS,
             }}
           >
-            View all transaction and extract reports
+            View and manage platform merchants
           </p>
         }
         style={{ marginTop: token.marginSM }}
@@ -83,10 +83,10 @@ const Transactions: React.FC = () => {
   );
 };
 
-export default function AppSuspended() {
+export default function MerchantsSuspended() {
   return (
     <Suspense>
-      <Transactions />
+      <Merchants />
     </Suspense>
   );
 }

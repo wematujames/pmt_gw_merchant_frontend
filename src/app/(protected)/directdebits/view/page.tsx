@@ -6,13 +6,13 @@ import { useSearchParams } from "next/navigation";
 import { Tabs } from "antd";
 import { GrOverview } from "react-icons/gr";
 import OverView from "../components/OverView";
-import TransactionReport from "../components/MerchantsReport";
+import TransactionReport from "../components/DDebitMandatesReport";
 import { TbReport } from "react-icons/tb";
-import { useAuth } from "../../../../../hooks/useAuth";
-import { FaStore } from "react-icons/fa6";
+import { useAuth } from "../../../../hooks/useAuth";
+import { CiMoneyCheck1 } from "react-icons/ci";
 import PageLoader from "../../PageLoader";
 
-const Merchants: React.FC = () => {
+const DirectDebitMandates: React.FC = () => {
   const authenticated = useAuth();
 
   const { token } = theme.useToken();
@@ -54,8 +54,8 @@ const Merchants: React.FC = () => {
               marginTop: -token.marginXXS,
             }}
           >
-            <FaStore />
-            <p>Merchants</p>
+            <CiMoneyCheck1 />
+            <p>Direct Debit Mandates</p>
           </Space>
         }
         description={
@@ -66,7 +66,7 @@ const Merchants: React.FC = () => {
               marginTop: -token.marginXS,
             }}
           >
-            View and manage platform merchants
+            View and manage direct debit mandates
           </p>
         }
         style={{ marginTop: token.marginSM }}
@@ -83,10 +83,10 @@ const Merchants: React.FC = () => {
   );
 };
 
-export default function MerchantsSuspended() {
+export default function DirectDebitMandatesSuspended() {
   return (
     <Suspense>
-      <Merchants />
+      <DirectDebitMandates />
     </Suspense>
   );
 }
