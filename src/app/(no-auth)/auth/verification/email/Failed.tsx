@@ -13,7 +13,10 @@ const VerifyEmailFailed: React.FC = () => {
     mutationKey: ["resend-verification-email-link"],
     mutationFn: () => resendEmailVeriLink(""),
     onError: (err: AxiosError<{ message: string }>) => {
-      openMessage("error", err.response?.data.message as string);
+      openMessage(
+        "error",
+        (err.response?.data.message) || err.message
+      );
     },
   });
 

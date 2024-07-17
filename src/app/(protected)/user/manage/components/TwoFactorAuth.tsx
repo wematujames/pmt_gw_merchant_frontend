@@ -31,7 +31,10 @@ function TwoFactorAuth() {
       logout();
     },
     onError: (err: AxiosError<{ message: string }>) => {
-      openMessage("error", err.response?.data.message as string);
+      openMessage(
+        "error",
+        (err.response?.data.message ) || err.message
+      );
     },
   });
 

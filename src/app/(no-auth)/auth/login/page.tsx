@@ -38,7 +38,10 @@ export default function LoginPage() {
       router.push("/dashboard/financial");
     },
     onError: (err: AxiosError<{ message: string }>) => {
-      openMessage("error", err.response?.data.message as string);
+      openMessage(
+        "error",
+        (err.response?.data.message) || err.message 
+      );
     },
   });
 

@@ -7,11 +7,13 @@ import Meta from "antd/es/card/Meta";
 import React from "react";
 import { CgProfile } from "react-icons/cg";
 import Link from "next/link";
+import { useMessage } from "@/hooks/useMessage";
 
 const { useToken } = theme;
 const UserAvatar = () => {
   const { token } = useToken();
   const logout = useLogout();
+  const { openMessage } = useMessage();
 
   const items = [
     {
@@ -42,7 +44,10 @@ const UserAvatar = () => {
     queryFn: () => loadUser(),
   });
 
-  if (userQuery.isError) logout();
+  if (userQuery.isError) {
+    openMessage("info", "Session expired. Please log in");
+    logout();
+  }
 
   if (userQuery.isPending) return <Spin size="small" />;
 

@@ -29,12 +29,13 @@ function UpdateProfile() {
       });
     },
     onError: (err: AxiosError<{ message: string }>) => {
-      openMessage("error", err.response?.data.message as string);
+      openMessage("error", err.response?.data.message || err.message);
     },
   });
 
   const onFinish = (vals: any) => {
     const sanitized = removeUndefinedValues(vals);
+    console.log(vals);
     updateUserMutation.mutate(sanitized);
   };
 

@@ -20,7 +20,10 @@ const VerifyEmail: React.FC = () => {
     mutationKey: ["verify-email"],
     mutationFn: () => verifyUserEmail(token as string),
     onError: (err: AxiosError<{ message: string }>) => {
-      openMessage("error", err.response?.data.message as string);
+      openMessage(
+        "error",
+        (err.response?.data.message ) || err.message
+      );
     },
   });
 

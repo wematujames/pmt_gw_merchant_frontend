@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useMessage } from "@/hooks/useMessage";
 import { MdUpdate } from "react-icons/md";
 import { TbLockAccess } from "react-icons/tb";
+import { AxiosError } from "axios";
 
 export default function Permissions({ user }: { user: any }) {
   const queryClient = useQueryClient();
@@ -27,9 +28,8 @@ export default function Permissions({ user }: { user: any }) {
       openMessage("success", "User permissions updated");
       queryClient.invalidateQueries({ queryKey: ["platform-users"] });
     },
-    onError: (err) => {
-      console.log(err);
-      openMessage("error", "Coult not update permissions");
+    onError: (err: AxiosError<{ message: string }>) => {
+      openMessage("error", err.response?.data.message || err.message);
     },
   });
 
