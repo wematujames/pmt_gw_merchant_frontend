@@ -4,7 +4,8 @@ const theme: ThemeConfig = {
   "token": {
     "colorPrimary": "#142868",
     "colorInfo": "#142868",
-    "colorSuccess": "#7bc657"
+    "colorSuccess": "#7bc657",
+    "wireframe": true
   },
   "components": {
     "Table": {
@@ -32,7 +33,8 @@ const theme: ThemeConfig = {
       "contentLineHeight": 1.6,
       "onlyIconSize": 20,
       "onlyIconSizeLG": 22,
-      "onlyIconSizeSM": 18
+      "onlyIconSizeSM": 18,
+      "defaultBorderColor": "rgb(20, 40, 104)"
     },
     "Layout": {
       "bodyBg": "rgb(238, 240, 242)",
