@@ -91,7 +91,7 @@ export default function FilterTransaction({
               <Form.Item name="type" label="Type">
                 <Select defaultActiveFirstOption defaultValue="">
                   <Option value="">All</Option>
-                  <Option value="collection-c2b">Collection</Option>
+                  <Option value="collection">Collection</Option>
                   <Option value="collection-dd">DD Collection</Option>
                   <Option value="disbursement-b2c">Disbursement</Option>
                 </Select>
@@ -120,7 +120,7 @@ export default function FilterTransaction({
                 >
                   <Option value="">All</Option>
                   {merchantIds.data?.map((i: any) => (
-                    <Option key={i._id} value={i.merchantId}>
+                    <Option key={i._id} value={i._id}>
                       {i.merchantId}
                     </Option>
                   ))}
@@ -129,7 +129,7 @@ export default function FilterTransaction({
             </Col>
             <Col span={12}>
               <Form.Item name="processorTerminalRef" label="External Txn ID">
-                <Input placeholder="0000000000309141" />
+                <Input placeholder="40733500385" />
               </Form.Item>
             </Col>
           </Row>
