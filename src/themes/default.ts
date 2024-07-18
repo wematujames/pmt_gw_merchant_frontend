@@ -25,7 +25,7 @@ const theme: ThemeConfig = {
       "colorText": "rgb(52, 67, 87)",
       "colorLink": "rgb(50, 64, 138)"
     },
-    "Button": {
+      "Button": {
       "primaryShadow": "0 1px 0 rgba(5, 145, 255, 0.1)",
       "dangerShadow": "0 1px 0 rgba(255, 38, 5, 0.06)",
       "defaultShadow": "0 1px 0 rgba(0, 0, 0, 0.02)",
@@ -44,7 +44,7 @@ const theme: ThemeConfig = {
       "lightTriggerColor": "rgb(20, 40, 104)"
     },
     "Card": {
-      "colorBorderSecondary": "rgb(229, 233, 242)",
+      "colorBorderSecondary": "rgba(20, 40, 104, 0.15)",
       "borderRadiusLG": 10
     },
     "Select": {
