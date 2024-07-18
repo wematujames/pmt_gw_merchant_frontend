@@ -41,6 +41,7 @@ export default function UserDetail({ user }: { user: any }) {
         width={1000}
         onCancel={() => setOpen(false)}
         title={`Details: ${user?.person?.fName} ${user?.person?.lName}`}
+        footer={false}
       >
         <Row gutter={[10, 5]}>
           {Object.keys(userTransformed).map((key) => (

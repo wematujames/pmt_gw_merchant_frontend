@@ -1,26 +1,12 @@
 import React from "react";
 import { Button, Col, Input, Modal, Row, Space, theme } from "antd";
 import { BsEye } from "react-icons/bs";
-import { RxReload } from "react-icons/rx";
-import { useQuery } from "@tanstack/react-query";
-import { getTransaction } from "@/actions/transactions";
 import { getRecColor } from "@/utils/common";
 
-export default function TxnDetails({
-  txnId,
-  status,
-}: {
-  txnId: any;
-  status: "successful" | "pending" | "failed";
-}) {
+export default function TxnDetails({ txn }: { txn: any }) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
   const { token } = theme.useToken();
-
-  const txnQuery = useQuery({
-    queryKey: ["txn-detail"],
-    queryFn: () => getTransaction(txnId),
-  });
 
   const transformTxn: any = (txn: any) => ({
     Status: txn.status,
@@ -37,11 +23,11 @@ export default function TxnDetails({
     Merchant: txn.merchant,
     MerchantRef: txn.merchantRef,
     CallbackURl: txn.merchantCallbackURL,
-    ExternalRef: txn.processorTerminalRef,
+    ExternalRef: txn.processorTerminalRef || "N/A",
     CreatedAt: txn.createdAt,
   });
 
-  const txnTransformed = transformTxn(txnQuery.data || {});
+  const txnTransformed = transformTxn(txn || {});
 
   return (
     <>
@@ -50,8 +36,8 @@ export default function TxnDetails({
         icon={<BsEye />}
         size="middle"
         style={{
-          color: getRecColor(status, token),
-          borderColor: getRecColor(status, token),
+          color: getRecColor(txn.status, token),
+          borderColor: getRecColor(txn.status, token),
         }}
         onClick={() => setOpen(true)}
       />
@@ -59,19 +45,13 @@ export default function TxnDetails({
       <Modal
         open={open}
         width={1000}
-        loading={txnQuery.isFetching}
         onCancel={() => setOpen(false)}
         title={
-          <Space style={{ color: getRecColor(status, token) }}>
-            Transaction: {txnId}
+          <Space style={{ color: getRecColor(txn.status, token) }}>
+            Transaction: {txn._id}
           </Space>
         }
-        footer={
-          <Button block type="default" onClick={() => txnQuery.refetch()}>
-            <RxReload />
-            Check Status
-          </Button>
-        }
+        footer={false}
       >
         <Row gutter={[10, 5]}>
           {Object.keys(txnTransformed).map((key) => (

@@ -131,7 +131,7 @@ function TransactionReport() {
       width: 80,
       render: (_: any, record: any) => (
         <Space>
-          <TransactionDetail status={record.status} txnId={record._id} />
+          <TransactionDetail txn={record} />
         </Space>
       ),
     },
