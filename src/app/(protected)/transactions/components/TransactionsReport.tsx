@@ -19,22 +19,10 @@ import moment from "moment";
 import exportData from "@/utils/exportData";
 import { BiExport } from "react-icons/bi";
 import { TbReload } from "react-icons/tb";
+import { getRecColor } from "@/utils/common";
 
 function TransactionReport() {
   const { token } = theme.useToken();
-
-  const getRecColor = (status: string) => {
-    switch (status) {
-      case "successful":
-        return token["green7"];
-      case "pending":
-        return token["yellow7"];
-      case "failed":
-        return token["red7"];
-      default:
-        return "black";
-    }
-  };
 
   const columns: TableColumnsType = [
     {
@@ -63,7 +51,7 @@ function TransactionReport() {
           </Typography.Text>
           <small
             style={{
-              color: getRecColor(record.status),
+              color: getRecColor(record.status, token),
               fontWeight: token.fontWeightStrong,
             }}
           >
@@ -108,10 +96,10 @@ function TransactionReport() {
       key: "status",
       render: (_: any, record: any) => (
         <Space direction="vertical">
-          <Tag color={getRecColor(record.status)}>{record.status}</Tag>
+          <Tag color={getRecColor(record.status, token)}>{record.status}</Tag>
           <small
             style={{
-              color: getRecColor(record.status),
+              color: getRecColor(record.status, token),
               fontWeight: token.fontWeightStrong,
             }}
           >

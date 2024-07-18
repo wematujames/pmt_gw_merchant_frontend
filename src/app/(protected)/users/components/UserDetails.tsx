@@ -1,41 +1,31 @@
 import React from "react";
 import { Button, Col, Input, Modal, Row } from "antd";
 import { BsEye } from "react-icons/bs";
-import { RxReload } from "react-icons/rx";
 
-export default function UserDetail({ transaction }: { transaction: any }) {
+export default function UserDetail({ user }: { user: any }) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
 
-  const showLoading = () => {
-    setOpen(true);
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+  const transformUser: any = (user: any) => {
+    return {
+      "First Name": user.person?.fName,
+      "Last Name": user.person?.lName,
+      Status: user.active ? "Active" : "Inactive",
+      Reason: user.statusReason || "N/A",
+      Phone: user.phone,
+      "Phone Verified": user.phoneVerified,
+      Email: user.email,
+      "Email Verified": user.emailVerified,
+      "Old Phones": user.oldPhones?.join(",") || "N/A",
+      "Old Emails": user.oldEmail?.join(",") || "N/A",
+      "2FA Eabled": user.multiFA?.enabled ? "Yes" : "No",
+      "Account Locked": user.accountLock?.active ? "Yes" : "No",
+      CreatedBy: user.createdBy || "N/A",
+      CreatedAt: user.createdAt,
+    };
   };
 
-  const transformTxn: any = (txn: any) => ({
-    Status: txn.status,
-    Reason: txn.statusReason,
-    Processor: txn.processor,
-    "Amount ₵": parseFloat(txn.amount).toFixed(2),
-    Reversed: txn.reversed,
-    "Original Amount ₵": parseFloat(txn.originalAmount).toFixed(2),
-    "Reversal Amount ₵": parseFloat(txn.originalAmount).toFixed(2),
-    Account: txn.phone,
-    Narration: txn.desc,
-    Type: txn.type,
-    Network: txn.network,
-    Merchant: txn.merchant,
-    MerchantRef: txn.merchantRef,
-    CallbackURl: txn.merchantCallbackURL,
-    ExternalRef: txn.processorTerminalRef,
-    CreatedAt: txn.createdAt,
-  });
-
-  const txnTransformed = transformTxn(transaction);
+  const userTransformed = transformUser(user);
 
   return (
     <>
@@ -43,29 +33,22 @@ export default function UserDetail({ transaction }: { transaction: any }) {
         type="default"
         icon={<BsEye />}
         size="middle"
-        onClick={showLoading}
+        onClick={() => setOpen(true)}
       />
 
       <Modal
         open={open}
         width={1000}
-        loading={loading}
         onCancel={() => setOpen(false)}
-        title={"Transaction: " + transaction._id}
-        footer={
-          <Button block type="default" onClick={showLoading}>
-            <RxReload />
-            Check Status
-          </Button>
-        }
+        title={`Details: ${user?.person?.fName} ${user?.person?.lName}`}
       >
         <Row gutter={[10, 5]}>
-          {Object.keys(txnTransformed).map((key) => (
+          {Object.keys(userTransformed).map((key) => (
             <Col key={key} lg={12} style={{ width: "100%" }}>
               <Input
                 readOnly
                 addonBefore={<p>{key}</p>}
-                value={txnTransformed[key]}
+                value={userTransformed[key]}
               />
             </Col>
           ))}

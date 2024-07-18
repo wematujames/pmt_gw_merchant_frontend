@@ -4,6 +4,7 @@ import { BsEye } from "react-icons/bs";
 import { RxReload } from "react-icons/rx";
 import { useQuery } from "@tanstack/react-query";
 import { getTransaction } from "@/actions/transactions";
+import { getRecColor } from "@/utils/common";
 
 export default function TxnDetails({
   txnId,
@@ -15,19 +16,6 @@ export default function TxnDetails({
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
   const { token } = theme.useToken();
-
-  const getRecColor = (status: string) => {
-    switch (status) {
-      case "successful":
-        return token["green7"];
-      case "pending":
-        return token["yellow7"];
-      case "failed":
-        return token["red7"];
-      default:
-        return "black";
-    }
-  };
 
   const txnQuery = useQuery({
     queryKey: ["txn-detail"],
@@ -62,8 +50,8 @@ export default function TxnDetails({
         icon={<BsEye />}
         size="middle"
         style={{
-          color: getRecColor(status),
-          borderColor: getRecColor(status),
+          color: getRecColor(status, token),
+          borderColor: getRecColor(status, token),
         }}
         onClick={() => setOpen(true)}
       />
@@ -74,7 +62,7 @@ export default function TxnDetails({
         loading={txnQuery.isFetching}
         onCancel={() => setOpen(false)}
         title={
-          <Space style={{ color: getRecColor(status) }}>
+          <Space style={{ color: getRecColor(status, token) }}>
             Transaction: {txnId}
           </Space>
         }

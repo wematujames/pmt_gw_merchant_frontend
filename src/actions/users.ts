@@ -25,6 +25,17 @@ export const getPlatformUsers = async (_filter: any = {}) =>  {
   return res.data.data;
 };
 
+export const getPlatformUser = async (userId: string) =>  {
+  setAuthTokenHeader()
+  
+  const res = await axios(
+    "/platform/users/" + userId,
+    { method: "GET" }
+  );
+
+  return res.data.data;
+};
+
 export const createUser = async (data: object = {}) =>  {
   setAuthTokenHeader()
 
