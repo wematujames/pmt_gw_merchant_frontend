@@ -1,7 +1,6 @@
 "use client";
 import React, { Suspense, useState } from "react";
-import { Card, Space, theme } from "antd";
-import Meta from "antd/es/card/Meta";
+import { Card, theme } from "antd";
 import { useSearchParams } from "next/navigation";
 import { Tabs } from "antd";
 import { GrOverview } from "react-icons/gr";
@@ -11,6 +10,7 @@ import { TbReport } from "react-icons/tb";
 import { useAuth } from "../../../../hooks/useAuth";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import PageLoader from "../../PageLoader";
+import SectionHeader from "../../components/SectionHeader";
 
 const DirectDebitMandates: React.FC = () => {
   const authenticated = useAuth();
@@ -46,30 +46,10 @@ const DirectDebitMandates: React.FC = () => {
       activeTabKey={activeTabKey}
       onTabChange={onTabChange}
     >
-      <Meta
-        title={
-          <Space
-            style={{
-              fontSize: token.fontSizeHeading4,
-              marginTop: -token.marginXXS,
-            }}
-          >
-            <CiMoneyCheck1 />
-            <p>Direct Debit Mandates</p>
-          </Space>
-        }
-        description={
-          <p
-            style={{
-              fontSize: token.fontSizeSM,
-              marginBottom: token.marginXS,
-              marginTop: -token.marginXS,
-            }}
-          >
-            View and manage direct debit mandates
-          </p>
-        }
-        style={{ marginTop: token.marginSM }}
+      <SectionHeader
+        leadText="Direct Debit Mandates"
+        subText="View and manage direct debit mandates"
+        icon={<CiMoneyCheck1 />}
       />
       <Tabs
         size="large"

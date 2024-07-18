@@ -112,12 +112,8 @@ export default function FilterTransaction({
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="network" label="Network">
-                <Select defaultActiveFirstOption defaultValue="">
-                  <Option value="">All</Option>
-                  <Option value="MTN">MTN</Option>
-                  <Option value="Telecel">Telecel</Option>
-                </Select>
+              <Form.Item name="processorTerminalRef" label="External Txn ID">
+                <Input placeholder="0000000000309141" />
               </Form.Item>
             </Col>
           </Row>

@@ -21,7 +21,9 @@ const theme: ThemeConfig = {
       "margin": 10
     },
     "Typography": {
-      "colorTextHeading": "rgb(20, 40, 104)"
+      "colorTextHeading": "rgb(20, 40, 104)",
+      "colorText": "rgb(52, 67, 87)",
+      "colorLink": "rgb(50, 64, 138)"
     },
     "Button": {
       "primaryShadow": "0 1px 0 rgba(5, 145, 255, 0.1)",
@@ -34,7 +36,11 @@ const theme: ThemeConfig = {
       "onlyIconSize": 20,
       "onlyIconSizeLG": 22,
       "onlyIconSizeSM": 18,
-      "defaultBorderColor": "rgb(20, 40, 104)"
+      "defaultBorderColor": "rgb(20, 40, 104)",
+      "defaultHoverBg": "rgb(20, 40, 104)",
+      "defaultHoverColor": "rgb(255, 255, 255)",
+      "defaultActiveColor": "rgb(255, 255, 255)",
+      "defaultActiveBg": "rgb(20, 40, 104)"
     },
     "Layout": {
       "bodyBg": "rgb(238, 240, 242)",
@@ -69,7 +75,8 @@ const theme: ThemeConfig = {
       "itemSelectedColor": "rgba(253, 252, 252, 0.88)"
     },
     "Statistic": {
-      "colorText": "rgb(20, 40, 104)"
+      "colorText": "rgb(20, 40, 104)",
+      "colorTextHeading": "rgb(20, 40, 104)"
     },
     "Tooltip": {
       "colorBgSpotlight": "rgb(20, 40, 104)"

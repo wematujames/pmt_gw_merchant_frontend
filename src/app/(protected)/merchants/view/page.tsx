@@ -1,7 +1,6 @@
 "use client";
 import React, { Suspense, useState } from "react";
-import { Card, Space, theme } from "antd";
-import Meta from "antd/es/card/Meta";
+import { Card, theme } from "antd";
 import { useSearchParams } from "next/navigation";
 import { Tabs } from "antd";
 import { GrOverview } from "react-icons/gr";
@@ -11,6 +10,7 @@ import { TbReport } from "react-icons/tb";
 import { useAuth } from "../../../../hooks/useAuth";
 import { FaStore } from "react-icons/fa6";
 import PageLoader from "../../PageLoader";
+import SectionHeader from "../../components/SectionHeader";
 
 const Merchants: React.FC = () => {
   const authenticated = useAuth();
@@ -46,30 +46,10 @@ const Merchants: React.FC = () => {
       activeTabKey={activeTabKey}
       onTabChange={onTabChange}
     >
-      <Meta
-        title={
-          <Space
-            style={{
-              fontSize: token.fontSizeHeading4,
-              marginTop: -token.marginXXS,
-            }}
-          >
-            <FaStore />
-            <p>Merchants</p>
-          </Space>
-        }
-        description={
-          <p
-            style={{
-              fontSize: token.fontSizeSM,
-              marginBottom: token.marginXS,
-              marginTop: -token.marginXS,
-            }}
-          >
-            View and manage platform merchants
-          </p>
-        }
-        style={{ marginTop: token.marginSM }}
+      <SectionHeader
+        leadText="Merchants"
+        subText="View and manage platform merchants"
+        icon={<FaStore />}
       />
       <Tabs
         size="large"

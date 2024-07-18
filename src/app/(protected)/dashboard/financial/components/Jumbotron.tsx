@@ -1,7 +1,7 @@
 "use client";
 import { loadUser } from "@/actions/auth";
 import { useQuery } from "@tanstack/react-query";
-import { Card, theme } from "antd";
+import { Card, theme, Typography } from "antd";
 
 const Jumbotron = () => {
   const { token } = theme.useToken();
@@ -25,9 +25,9 @@ const Jumbotron = () => {
       bordered
       style={{ marginTop: token.marginXXS, marginBottom: token.marginSM }}
     >
-      <p style={{ fontSize: token.fontSizeHeading2 }}>
+      <Typography.Title style={{ fontSize: token.fontSizeHeading2 }}>
         {getGreeting()} {userQuery.data?.person?.fName}
-      </p>
+      </Typography.Title>
       <p style={{ fontSize: token.fontSize, color: token.colorBgMask }}>
         {"Here's"} your financial overview
       </p>

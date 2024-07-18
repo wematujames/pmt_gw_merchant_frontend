@@ -1,5 +1,5 @@
 import { NetworkCollectionStat } from "@/types/types";
-import { Avatar, Card, Col, Row, theme } from "antd";
+import { Avatar, Card, Col, Row, theme, Typography } from "antd";
 
 const { Meta } = Card;
 
@@ -33,7 +33,11 @@ function NetworkStats({
           >
             <Meta
               avatar={<Avatar src={logos[netrk.network]} size={64} />}
-              title={netrk.network}
+              title={
+                <Typography.Title level={5} style={{ margin: 0 }}>
+                  {netrk.network}
+                </Typography.Title>
+              }
               description={
                 <>
                   <small>

@@ -1,5 +1,5 @@
 "use client";
-import { Space, theme } from "antd";
+import { Space, theme, Typography } from "antd";
 import Meta from "antd/es/card/Meta";
 
 function SectionHeader({
@@ -16,28 +16,22 @@ function SectionHeader({
   return (
     <Meta
       title={
-        <p
-          style={{
-            fontSize: token.fontSizeHeading4,
-            marginTop: -token.marginXXS,
-          }}
-        >
-          <Space>
-            {icon}
-            <p>{leadText}</p>
-          </Space>
-        </p>
+        <Space>
+          {icon}
+          <Typography.Title level={4}>{leadText}</Typography.Title>
+        </Space>
       }
       description={
-        <p
+        <Typography.Paragraph
           style={{
             fontSize: token.fontSizeSM,
             marginBottom: token.marginXS,
             marginTop: -token.marginXS,
+            color: token.colorTextDescription,
           }}
         >
           {subText}
-        </p>
+        </Typography.Paragraph>
       }
     />
   );

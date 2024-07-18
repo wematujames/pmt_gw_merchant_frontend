@@ -1,5 +1,14 @@
 "use client";
-import { Button, Flex, Space, Table, TableColumnsType, theme } from "antd";
+import {
+  Button,
+  Flex,
+  Space,
+  Table,
+  TableColumnsType,
+  Tag,
+  theme,
+  Typography,
+} from "antd";
 import TransactionDetail from "./TransactionDetails";
 import FilterTransaction from "./FilterTransactions";
 import { useState } from "react";
@@ -35,7 +44,9 @@ function TransactionReport() {
       ellipsis: { showTitle: true },
       render: (_: any, record: any) => (
         <Space direction="vertical">
-          <p style={{ fontWeight: token.fontWeightStrong }}>{record._id}</p>
+          <Typography.Text style={{ fontWeight: token.fontWeightStrong }}>
+            {record._id}
+          </Typography.Text>
           <small>{record.merchantRef}</small>
           <small>{record.merchant}</small>
         </Space>
@@ -47,9 +58,9 @@ function TransactionReport() {
       key: "amount",
       render: (_: any, record: any) => (
         <Space direction="vertical">
-          <p style={{ fontWeight: token.fontWeightStrong }}>
+          <Typography.Text style={{ fontWeight: token.fontWeightStrong }}>
             ₵ {parseFloat(record.amount).toFixed(2)}
-          </p>
+          </Typography.Text>
           <small
             style={{
               color: getRecColor(record.status),
@@ -67,7 +78,9 @@ function TransactionReport() {
       key: "phone",
       render: (_: any, record: any) => (
         <Space direction="vertical">
-          <p style={{ fontWeight: token.fontWeightStrong }}>{record.phone}</p>
+          <Typography.Text style={{ fontWeight: token.fontWeightStrong }}>
+            {record.phone}
+          </Typography.Text>
           <small>
             {record.desc?.length > 12
               ? record.desc?.slice(0, 12) + "..."
@@ -82,7 +95,9 @@ function TransactionReport() {
       key: "network",
       render: (_: any, record: any) => (
         <Space direction="vertical">
-          <p style={{ fontWeight: token.fontWeightStrong }}>{record.network}</p>
+          <Typography.Text style={{ fontWeight: token.fontWeightStrong }}>
+            {record.network}
+          </Typography.Text>
           <small>{record.processor}</small>
         </Space>
       ),
@@ -92,15 +107,14 @@ function TransactionReport() {
       dataIndex: "status",
       key: "status",
       render: (_: any, record: any) => (
-        <Space
-          style={{
-            color: getRecColor(record.status),
-            fontWeight: token.fontWeightStrong,
-          }}
-          direction="vertical"
-        >
-          <p>{record.status}</p>
-          <small>
+        <Space direction="vertical">
+          <Tag color={getRecColor(record.status)}>{record.status}</Tag>
+          <small
+            style={{
+              color: getRecColor(record.status),
+              fontWeight: token.fontWeightStrong,
+            }}
+          >
             {record.statusReason?.length > 15
               ? record.statusReason?.slice(0, 15) + "..."
               : record.statusReason}
@@ -114,7 +128,9 @@ function TransactionReport() {
       key: "processorTerminalRef",
       render: (_: any, record: any) => (
         <Space direction="vertical">
-          <p>{record.processorTerminalRef || "N/A"}</p>
+          <Typography.Text>
+            {record.processorTerminalRef || "N/A"}
+          </Typography.Text>
           <small>
             {moment(record.createdAt).format("YYYY-MM-DD HH:mm:ss")}
           </small>

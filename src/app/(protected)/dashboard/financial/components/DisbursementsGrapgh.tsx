@@ -16,6 +16,7 @@ export default function DisbursementsGrapgh({
 
   const graphData = disbursmentsSummary.graph || [];
   const networks = disbursmentsSummary.networks || [];
+  console.log(disbursmentsSummary.graph);
 
   return (
     <Card style={{ marginTop: token.marginMD }}>
@@ -34,6 +35,7 @@ export default function DisbursementsGrapgh({
         height={250}
         xField="day"
         yField="total"
+        colorField={token["green-5"]}
         style={{ lineWidth: 2 }}
         interaction={{ tooltip: { marker: false } }}
         point={{ shapeField: "circle", sizeField: 4 }}

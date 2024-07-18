@@ -1,7 +1,6 @@
 "use client";
 import React, { Suspense, useState } from "react";
-import { Card, Space, theme } from "antd";
-import Meta from "antd/es/card/Meta";
+import { Card, theme } from "antd";
 import { AiOutlineTransaction } from "react-icons/ai";
 import { useSearchParams } from "next/navigation";
 import { Tabs } from "antd";
@@ -11,6 +10,7 @@ import TransactionReport from "../components/TransactionsReport";
 import { TbReport } from "react-icons/tb";
 import { useAuth } from "../../../../hooks/useAuth";
 import PageLoader from "../../PageLoader";
+import SectionHeader from "../../components/SectionHeader";
 
 const Transactions: React.FC = () => {
   const authenticated = useAuth();
@@ -46,30 +46,10 @@ const Transactions: React.FC = () => {
       activeTabKey={activeTabKey}
       onTabChange={onTabChange}
     >
-      <Meta
-        title={
-          <Space
-            style={{
-              fontSize: token.fontSizeHeading4,
-              marginTop: -token.marginXXS,
-            }}
-          >
-            <AiOutlineTransaction />
-            <p>Transactions</p>
-          </Space>
-        }
-        description={
-          <p
-            style={{
-              fontSize: token.fontSizeSM,
-              marginBottom: token.marginXS,
-              marginTop: -token.marginXS,
-            }}
-          >
-            View all transaction and extract reports
-          </p>
-        }
-        style={{ marginTop: token.marginSM }}
+      <SectionHeader
+        leadText="Transactions"
+        subText="View all transaction and extract reports"
+        icon={<AiOutlineTransaction />}
       />
       <Tabs
         size="large"

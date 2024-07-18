@@ -34,6 +34,7 @@ export default function CollectionsGrapgh({
         height={250}
         xField="day"
         yField="total"
+        colorField={token["green-5"]}
         style={{ lineWidth: 2 }}
         interaction={{ tooltip: { marker: false } }}
         point={{ shapeField: "circle", sizeField: 3 }}

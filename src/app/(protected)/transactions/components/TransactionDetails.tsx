@@ -74,12 +74,7 @@ export default function TxnDetails({
         loading={txnQuery.isFetching}
         onCancel={() => setOpen(false)}
         title={
-          <Space
-            style={{
-              color: getRecColor(txnTransformed.Status),
-              fontWeight: token.fontWeightStrong,
-            }}
-          >
+          <Space style={{ color: getRecColor(status) }}>
             Transaction: {txnId}
           </Space>
         }
