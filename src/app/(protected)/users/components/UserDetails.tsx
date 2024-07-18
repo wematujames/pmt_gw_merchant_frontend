@@ -1,10 +1,12 @@
 import React from "react";
-import { Button, Col, Input, Modal, Row } from "antd";
+import { Button, Col, Input, Modal, Row, Tag, theme, Typography } from "antd";
 import { BsEye } from "react-icons/bs";
+import { getRecColor } from "@/utils/common";
 
 export default function UserDetail({ user }: { user: any }) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
+  const { token } = theme.useToken();
 
   const transformUser: any = (user: any) => {
     return {
@@ -34,13 +36,24 @@ export default function UserDetail({ user }: { user: any }) {
         icon={<BsEye />}
         size="middle"
         onClick={() => setOpen(true)}
+        style={{
+          color: getRecColor(user.active, token),
+          borderColor: getRecColor(user.active, token),
+        }}
       />
 
       <Modal
         open={open}
         width={1000}
         onCancel={() => setOpen(false)}
-        title={`Details: ${user?.person?.fName} ${user?.person?.lName}`}
+        title={
+          <Typography.Title level={5}>
+            <Tag color={getRecColor(user.active, token)}>
+              {user.active ? "Active" : "Inactive"}
+            </Tag>
+            {`User: ${user?.person?.fName} ${user?.person?.lName}`}
+          </Typography.Title>
+        }
         footer={false}
       >
         <Row gutter={[10, 5]}>

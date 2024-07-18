@@ -1,6 +1,15 @@
 "use client";
 
-import { Button, Checkbox, Col, Modal, Row } from "antd";
+import {
+  Button,
+  Checkbox,
+  Col,
+  Modal,
+  Row,
+  Tag,
+  theme,
+  Typography,
+} from "antd";
 import { getPlatformPermissions } from "@/actions/permissions";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { updateUserPermissions } from "@/actions/permissions";
@@ -9,12 +18,14 @@ import { useMessage } from "@/hooks/useMessage";
 import { MdUpdate } from "react-icons/md";
 import { TbLockAccess } from "react-icons/tb";
 import { AxiosError } from "axios";
+import { getRecColor } from "@/utils/common";
 
 export default function Permissions({ user }: { user: any }) {
   const queryClient = useQueryClient();
   const [perms, setPerms] = useState([] as string[]);
   const { openMessage } = useMessage();
   const [open, setOpen] = useState<boolean>(false);
+  const { token } = theme.useToken();
 
   const permissionsQuery = useQuery({
     queryKey: ["platform-permissions"],
@@ -48,13 +59,30 @@ export default function Permissions({ user }: { user: any }) {
         icon={<TbLockAccess />}
         size="middle"
         onClick={() => setOpen(true)}
+        style={{
+          color: getRecColor(user.active, token),
+          borderColor: getRecColor(user.active, token),
+        }}
       />
       <Modal
         open={open}
         width={750}
         loading={permissionsQuery.isPending}
         onCancel={() => setOpen(false)}
-        title={"Permissions for: " + user?.person?.fName}
+        title={
+          <Typography.Text
+            style={{
+              fontWeight: token.fontWeightStrong,
+              color: token.colorPrimary,
+              fontSize: token.fontSizeLG,
+            }}
+          >
+            <Tag color={getRecColor(user.active, token)}>
+              {user.active ? "Active" : "Inactive"}
+            </Tag>
+            {"Permissions for: " + user?.person?.fName}
+          </Typography.Text>
+        }
         footer={
           <Button block type="default" onClick={handleSubmit}>
             <MdUpdate />

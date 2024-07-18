@@ -9,21 +9,24 @@ import {
   Row,
   Select,
   Space,
+  theme,
+  Typography,
 } from "antd";
 import { FiFilter } from "react-icons/fi";
 
 const { Option } = Select;
 
 export default function FilterTransaction({
-  txnsQuery,
+  mandatesQuery,
   filter,
   setFilter,
 }: {
-  txnsQuery: any;
+  mandatesQuery: any;
   filter: any;
   setFilter: any;
 }) {
   const [open, setOpen] = useState(false);
+  const { token } = theme.useToken();
 
   const showDrawer = () => {
     setOpen(true);
@@ -47,7 +50,7 @@ export default function FilterTransaction({
 
     setFilter({ ...vals, dateTime: undefined });
 
-    txnsQuery.refetch(filter);
+    mandatesQuery.refetch(filter);
   };
 
   return (
@@ -60,7 +63,22 @@ export default function FilterTransaction({
       >
         Filter
       </Button>
-      <Drawer title="Filter Mandates" width={720} onClose={onClose} open={open}>
+      <Drawer
+        title={
+          <Typography.Text
+            style={{
+              fontWeight: token.fontWeightStrong,
+              color: token.colorPrimary,
+              fontSize: token.fontSizeLG,
+            }}
+          >
+            Filter Mandates
+          </Typography.Text>
+        }
+        width={720}
+        onClose={onClose}
+        open={open}
+      >
         <Form layout="vertical" requiredMark onFinish={onFinish}>
           <Row gutter={16}>
             <Col span={12}>

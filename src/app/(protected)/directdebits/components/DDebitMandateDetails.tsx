@@ -1,39 +1,31 @@
 import React from "react";
-import { Button, Col, Input, Modal, Row } from "antd";
+import { Button, Col, Input, Modal, Row, Tag, theme, Typography } from "antd";
 import { BsEye } from "react-icons/bs";
-import { RxReload } from "react-icons/rx";
+import { getRecColor } from "@/utils/common";
 
-export default function TxnDetails({ transaction }: { transaction: any }) {
+export default function TxnDetails({ mandate }: { mandate: any }) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
+  const { token } = theme.useToken();
 
-  const showLoading = () => {
-    setOpen(true);
-    setLoading(true);
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  };
-
-  const transformTxn: any = (txn: any) => ({
-    Active: txn.active,
-    Reason: txn.statusReason,
-    "Amount ₵": parseFloat(txn.amount).toFixed(2),
-    Account: txn.phone,
-    Narration: txn.desc,
-    Network: txn.network,
-    Merchant: txn.merchant,
-    MerchantRef: txn.merchantRef,
-    MerchantCreateCallback: txn.merchantCreateDDMCallbackURL,
-    MerchantPayCallback: txn.merchantPayDDMCallbackURL,
-    MerchantUpdateCallback: txn.merchantUpdateCallbackURL,
-    MerchantCancelCallback: txn.merchantCancelCallbackURL,
-    ExternalRef: txn.processorTerminalRef,
-    CreatedAt: txn.createdAt,
+  const transformMandate: any = (mandate: any) => ({
+    Active: mandate.active,
+    Reason: mandate.statusReason,
+    "Amount ₵": parseFloat(mandate.amount).toFixed(2),
+    Account: mandate.phone,
+    Narration: mandate.desc,
+    Network: mandate.network,
+    Merchant: mandate.merchant,
+    MerchantRef: mandate.merchantRef,
+    MerchantCreateCallback: mandate.merchantCreateDDMCallbackURL,
+    MerchantPayCallback: mandate.merchantPayDDMCallbackURL,
+    MerchantUpdateCallback: mandate.merchantUpdateCallbackURL || "N/A",
+    MerchantCancelCallback: mandate.merchantCancelCallbackURL || "N/A",
+    ExternalRef: mandate.processorTerminalRef || "N/A",
+    CreatedAt: mandate.createdAt,
   });
 
-  const txnTransformed = transformTxn(transaction);
+  const txnTransformed = transformMandate(mandate);
 
   return (
     <>
@@ -41,21 +33,41 @@ export default function TxnDetails({ transaction }: { transaction: any }) {
         type="default"
         icon={<BsEye />}
         size="middle"
-        onClick={showLoading}
+        onClick={() => setOpen(true)}
+        style={{
+          color: getRecColor(
+            mandate.statusReason === "pending" ? "pending" : mandate.active,
+            token
+          ),
+          borderColor: getRecColor(
+            mandate.statusReason === "pending" ? "pending" : mandate.active,
+            token
+          ),
+        }}
       />
 
       <Modal
         open={open}
         width={1000}
-        loading={loading}
         onCancel={() => setOpen(false)}
-        title={"Transaction: " + transaction._id}
-        footer={
-          <Button block type="default" onClick={showLoading}>
-            <RxReload />
-            Check Status
-          </Button>
+        title={
+          <Typography.Title level={5}>
+            <Tag
+              color={getRecColor(
+                mandate.statusReason === "pending" ? "pending" : mandate.active,
+                token
+              )}
+            >
+              {mandate.statusReason === "pending"
+                ? "pending"
+                : mandate.active
+                ? "Active"
+                : "Inactive"}
+            </Tag>
+            {"Mandate: " + mandate._id}
+          </Typography.Title>
         }
+        footer={false}
       >
         <Row gutter={[10, 5]}>
           {Object.keys(txnTransformed).map((key) => (

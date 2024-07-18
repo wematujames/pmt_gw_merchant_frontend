@@ -36,7 +36,7 @@ function TransactionReport() {
             {record._id}
           </Typography.Text>
           <small>{record.merchantRef}</small>
-          <small>{record.merchant}</small>
+          <small>{record.merchant?.merchantId}</small>
         </Space>
       ),
     },

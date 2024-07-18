@@ -1,5 +1,16 @@
 import { useState } from "react";
-import { Button, Col, Drawer, Form, Input, Row, Select, Space } from "antd";
+import {
+  Button,
+  Col,
+  Drawer,
+  Form,
+  Input,
+  Row,
+  Select,
+  Space,
+  theme,
+  Typography,
+} from "antd";
 import { CgUserAdd } from "react-icons/cg";
 import { useMessage } from "@/hooks/useMessage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -14,6 +25,7 @@ export default function CreateUser({}: {}) {
   const { openMessage } = useMessage();
   const queryClient = useQueryClient();
   const [form] = useForm();
+  const { token } = theme.useToken();
 
   const createUserMutation = useMutation({
     mutationKey: ["create-new-user"],
@@ -48,7 +60,17 @@ export default function CreateUser({}: {}) {
       </Button>
 
       <Drawer
-        title="Create New User"
+        title={
+          <Typography.Text
+            style={{
+              fontWeight: token.fontWeightStrong,
+              color: token.colorPrimary,
+              fontSize: token.fontSizeLG,
+            }}
+          >
+            Create User
+          </Typography.Text>
+        }
         width={720}
         onClose={() => setOpen(false)}
         open={open}

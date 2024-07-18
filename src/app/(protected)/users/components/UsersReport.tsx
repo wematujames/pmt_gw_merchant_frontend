@@ -83,7 +83,7 @@ function UsersReport() {
       key: "createdBy",
       render: (_: any, record: any) => (
         <Space size={0} direction="vertical">
-          <p>{record.createdBy || "N/A"}</p>
+          <p>{record.createdBy?.email || "N/A"}</p>
           <small>
             {moment(record.createdAt).format("YYYY-MM-DD HH:mm:ss")}
           </small>

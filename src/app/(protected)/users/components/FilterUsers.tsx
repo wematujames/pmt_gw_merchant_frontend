@@ -9,6 +9,8 @@ import {
   Row,
   Select,
   Space,
+  theme,
+  Typography,
 } from "antd";
 import { FiFilter } from "react-icons/fi";
 
@@ -25,6 +27,7 @@ export default function FilterUsers({
 }) {
   const [open, setOpen] = useState(false);
   // const [filter, setFilter] = useState({});
+  const { token } = theme.useToken();
 
   const showDrawer = () => {
     setOpen(true);
@@ -62,7 +65,22 @@ export default function FilterUsers({
         Filter
       </Button>
 
-      <Drawer title="Filter Users" width={720} onClose={onClose} open={open}>
+      <Drawer
+        title={
+          <Typography.Text
+            style={{
+              fontWeight: token.fontWeightStrong,
+              color: token.colorPrimary,
+              fontSize: token.fontSizeLG,
+            }}
+          >
+            Filter Users
+          </Typography.Text>
+        }
+        width={720}
+        onClose={onClose}
+        open={open}
+      >
         <Form layout="vertical" requiredMark onFinish={onFinish}>
           <Row gutter={16}>
             <Col span={12}>

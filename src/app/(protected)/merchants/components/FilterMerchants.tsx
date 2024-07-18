@@ -1,5 +1,16 @@
 import { useState } from "react";
-import { Button, Col, Drawer, Form, Input, Row, Select, Space } from "antd";
+import {
+  Button,
+  Col,
+  Drawer,
+  Form,
+  Input,
+  Row,
+  Select,
+  Space,
+  theme,
+  Typography,
+} from "antd";
 import { FiFilter } from "react-icons/fi";
 
 const { Option } = Select;
@@ -14,7 +25,7 @@ export default function FilterTransaction({
   setFilter: any;
 }) {
   const [open, setOpen] = useState(false);
-
+  const { token } = theme.useToken();
   const showDrawer = () => {
     setOpen(true);
   };
@@ -51,7 +62,17 @@ export default function FilterTransaction({
         Filter
       </Button>
       <Drawer
-        title="Filter Transactions"
+        title={
+          <Typography.Text
+            style={{
+              fontWeight: token.fontWeightStrong,
+              color: token.colorPrimary,
+              fontSize: token.fontSizeLG,
+            }}
+          >
+            Filter Merchants
+          </Typography.Text>
+        }
         width={720}
         onClose={onClose}
         open={open}
