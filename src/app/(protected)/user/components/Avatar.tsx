@@ -75,7 +75,9 @@ const UserAvatar = () => {
             title={`${userQuery.data?.person?.fName} ${userQuery.data?.person?.lName}`}
             description={userQuery.data?.email}
           />
-          <Divider style={{ margin: 5 }} />
+          <Divider style={{ margin: 5, borderColor: "#f0f0f0" }}>
+            <small>Quick Access</small>
+          </Divider>
           {React.cloneElement(menu, { style: menuStyle })}
         </Card>
       )}
