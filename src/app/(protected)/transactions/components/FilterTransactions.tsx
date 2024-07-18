@@ -11,6 +11,8 @@ import {
   Space,
 } from "antd";
 import { FiFilter } from "react-icons/fi";
+import { useQuery } from "@tanstack/react-query";
+import { getPlatformMerchants } from "@/actions/merchants";
 
 const { Option } = Select;
 
@@ -24,15 +26,17 @@ export default function FilterTransaction({
   setFilter: any;
 }) {
   const [open, setOpen] = useState(false);
-  // const [filter, setFilter] = useState({});
 
-  const showDrawer = () => {
-    setOpen(true);
-  };
+  const showDrawer = () => setOpen(true);
+  const onClose = () => setOpen(false);
 
-  const onClose = () => {
-    setOpen(false);
-  };
+  const merchantIds = useQuery({
+    queryKey: ["merchants-ids"],
+    queryFn: () =>
+      getPlatformMerchants({
+        _select: "merchantId",
+      }),
+  });
 
   const onFinish = (formVals: any) => {
     onClose();
@@ -106,8 +110,18 @@ export default function FilterTransaction({
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item name="merchant" label="Merchant">
-                <Select defaultActiveFirstOption defaultValue="">
+                <Select
+                  listHeight={250}
+                  showSearch
+                  defaultActiveFirstOption
+                  defaultValue=""
+                >
                   <Option value="">All</Option>
+                  {merchantIds.data?.map((i: any) => (
+                    <Option key={i._id} value={i.merchantId}>
+                      {i.merchantId}
+                    </Option>
+                  ))}
                 </Select>
               </Form.Item>
             </Col>

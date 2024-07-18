@@ -35,7 +35,7 @@ function UpdateProfile() {
 
   const onFinish = (vals: any) => {
     const sanitized = removeUndefinedValues(vals);
-    console.log(vals);
+
     updateUserMutation.mutate(sanitized);
   };
 

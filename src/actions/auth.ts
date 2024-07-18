@@ -47,7 +47,7 @@ export const resetPassword = async (tkn: string, pwd: string) =>  {
 };
 
 export const updateUser = async ( updates: Object) =>  {
-  console.log("updates", updates)
+
   setAuthTokenHeader()
 
   return axios.put( "/platform/auth/user/updatedetails", updates );

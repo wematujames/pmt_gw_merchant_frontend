@@ -16,7 +16,6 @@ export default function DisbursementsGrapgh({
 
   const graphData = disbursmentsSummary.graph || [];
   const networks = disbursmentsSummary.networks || [];
-  console.log(disbursmentsSummary.graph);
 
   return (
     <Card style={{ marginTop: token.marginMD }}>
