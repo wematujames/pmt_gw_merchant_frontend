@@ -18,8 +18,8 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import moment from "moment";
 import exportData from "@/utils/exportData";
 import { BiExport } from "react-icons/bi";
-import { TbReload } from "react-icons/tb";
 import { getRecColor } from "@/utils/common";
+import { FiRefreshCw } from "react-icons/fi";
 
 function TransactionReport() {
   const { token } = theme.useToken();
@@ -174,15 +174,19 @@ function TransactionReport() {
               disabled={txnsQuery.isFetching || !transactions?.length}
               onClick={() => exportData(transactions, "transactions")}
               title="Export"
-            />
+            >
+              Export
+            </Button>
             <Button
               size="large"
-              icon={<TbReload />}
+              icon={<FiRefreshCw />}
               type="primary"
               disabled={txnsQuery.isFetching}
               onClick={() => txnsQuery.refetch()}
-              title="Reload"
-            />
+              title="Refresh"
+            >
+              Refresh
+            </Button>
           </Space>
         </Flex>
       )}

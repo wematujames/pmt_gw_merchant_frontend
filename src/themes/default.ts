@@ -30,17 +30,11 @@ const theme: ThemeConfig = {
       "dangerShadow": "0 1px 0 rgba(255, 38, 5, 0.06)",
       "defaultShadow": "0 1px 0 rgba(0, 0, 0, 0.02)",
       "fontWeight": 500,
-      "contentFontSize": 16,
-      "contentFontSizeLG": 18,
-      "contentLineHeight": 1.6,
-      "onlyIconSize": 20,
-      "onlyIconSizeLG": 22,
-      "onlyIconSizeSM": 18,
       "defaultBorderColor": "rgb(20, 40, 104)",
       "defaultHoverBg": "rgb(20, 40, 104)",
       "defaultHoverColor": "rgb(255, 255, 255)",
-      "defaultActiveColor": "rgb(255, 255, 255)",
-      "defaultActiveBg": "rgb(20, 40, 104)"
+      "defaultActiveColor": "rgb(20, 40, 104)",
+      "defaultActiveBg": "rgb(35, 56, 121)"
     },
     "Layout": {
       "bodyBg": "rgb(238, 240, 242)",

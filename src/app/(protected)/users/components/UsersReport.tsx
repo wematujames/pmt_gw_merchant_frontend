@@ -1,5 +1,14 @@
 "use client";
-import { Flex, Space, Table, TableColumnsType, Tag, theme } from "antd";
+import {
+  Button,
+  Flex,
+  Space,
+  Table,
+  TableColumnsType,
+  Tag,
+  theme,
+  Typography,
+} from "antd";
 import FilterUsers from "./FilterUsers";
 import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
@@ -10,12 +19,13 @@ import moment from "moment";
 import CreateUser from "./CreateUser";
 import Permissions from "./Permissions";
 import { getRecColor } from "@/utils/common";
+import { FiRefreshCw } from "react-icons/fi";
 
 function UsersReport() {
   const { token } = theme.useToken();
   const [filter, setFilter] = useState({});
 
-  const txnsQuery = useQuery({
+  const usersQuery = useQuery({
     queryKey: ["platform-users", filter],
     queryFn: () => getPlatformUsers(filter),
   });
@@ -27,10 +37,10 @@ function UsersReport() {
       key: "person",
       render: (_: any, record: any) => (
         <Space size={0} direction="vertical">
-          <p>
+          <Typography.Text style={{ fontWeight: token.fontWeightStrong }}>
             {record?.person?.title} {record?.person?.fName}{" "}
             {record?.person?.lName}
-          </p>
+          </Typography.Text>
           <small>{record?.email}</small>
         </Space>
       ),
@@ -103,23 +113,33 @@ function UsersReport() {
             }}
           >
             <MdNumbers size={token.fontSizeIcon} />
-            Count:{txnsQuery?.data?.length}
+            Count:{usersQuery?.data?.length}
           </Space>
           <Space>
             <FilterUsers
               filter={filter}
               setFilter={setFilter}
-              txnsQuery={txnsQuery}
+              usersQuery={usersQuery}
             />
             <CreateUser />
+            <Button
+              size="large"
+              icon={<FiRefreshCw />}
+              type="primary"
+              disabled={usersQuery.isFetching}
+              onClick={() => usersQuery.refetch()}
+              title="Refresh"
+            >
+              Refresh
+            </Button>
           </Space>
         </Flex>
       )}
-      loading={txnsQuery.isLoading}
+      loading={usersQuery.isLoading}
       sticky
       rowHoverable
       scroll={{ x: "max-content" }}
-      dataSource={txnsQuery.data}
+      dataSource={usersQuery.data}
       columns={columns}
       size="small"
     />

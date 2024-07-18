@@ -15,11 +15,11 @@ import { FiFilter } from "react-icons/fi";
 const { Option } = Select;
 
 export default function FilterUsers({
-  txnsQuery,
+  usersQuery,
   filter,
   setFilter,
 }: {
-  txnsQuery: any;
+  usersQuery: any;
   filter: any;
   setFilter: any;
 }) {
@@ -48,7 +48,7 @@ export default function FilterUsers({
 
     setFilter({ ...vals, dateTime: undefined });
 
-    txnsQuery.refetch(filter);
+    usersQuery.refetch(filter);
   };
 
   return (
@@ -58,7 +58,10 @@ export default function FilterUsers({
         size="large"
         onClick={showDrawer}
         icon={<FiFilter />}
-      />
+      >
+        Filter
+      </Button>
+
       <Drawer title="Filter Users" width={720} onClose={onClose} open={open}>
         <Form layout="vertical" requiredMark onFinish={onFinish}>
           <Row gutter={16}>

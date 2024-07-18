@@ -43,7 +43,9 @@ export default function CreateUser({}: {}) {
         size="large"
         onClick={() => setOpen(true)}
         icon={<CgUserAdd />}
-      />
+      >
+        Create
+      </Button>
 
       <Drawer
         title="Create New User"

@@ -63,7 +63,9 @@ export default function FilterTransaction({
         onClick={showDrawer}
         icon={<FiFilter />}
         title="Filter"
-      />
+      >
+        Filter
+      </Button>
       <Drawer
         title="Filter Transactions"
         width={720}
