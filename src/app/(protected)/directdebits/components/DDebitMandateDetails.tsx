@@ -15,7 +15,7 @@ export default function TxnDetails({ mandate }: { mandate: any }) {
     Account: mandate.phone,
     Narration: mandate.desc,
     Network: mandate.network,
-    Merchant: mandate.merchant,
+    Merchant: mandate.merchant?.merchantId,
     MerchantRef: mandate.merchantRef,
     MerchantCreateCallback: mandate.merchantCreateDDMCallbackURL,
     MerchantPayCallback: mandate.merchantPayDDMCallbackURL,
