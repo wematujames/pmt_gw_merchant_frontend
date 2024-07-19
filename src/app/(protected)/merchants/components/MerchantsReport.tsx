@@ -19,6 +19,7 @@ import { getPlatformMerchants } from "@/actions/merchants";
 import { getRecColor } from "@/utils/common";
 import { FiRefreshCw } from "react-icons/fi";
 import CreateMerchant from "./CreateMerchant";
+import EditMerchantDropDown from "./EditMerchantDropDown";
 
 function MerchantsReport() {
   const { token } = theme.useToken();
@@ -30,6 +31,18 @@ function MerchantsReport() {
   });
 
   const columns: TableColumnsType = [
+    {
+      title: "Action",
+      key: "action",
+      width: 80,
+      align: "center",
+      render: (_: any, record: any) => (
+        <Space size={5}>
+          <EditMerchantDropDown merchant={record} />
+          <TransactionDetail merchant={record} />
+        </Space>
+      ),
+    },
     {
       title: "Merchant ID",
       dataIndex: "_id",
@@ -112,16 +125,6 @@ function MerchantsReport() {
           <small>
             {moment(record.createdAt).format("YYYY-MM-DD HH:mm:ss")}
           </small>
-        </Space>
-      ),
-    },
-    {
-      title: "Action",
-      key: "action",
-      width: 80,
-      render: (_: any, record: any) => (
-        <Space size={0}>
-          <TransactionDetail merchant={record} />
         </Space>
       ),
     },
