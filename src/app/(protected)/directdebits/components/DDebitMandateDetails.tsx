@@ -74,7 +74,9 @@ export default function TxnDetails({ mandate }: { mandate: any }) {
             <Col key={key} lg={12} style={{ width: "100%" }}>
               <Input
                 readOnly
-                addonBefore={<p>{key}</p>}
+                addonBefore={
+                  <strong style={{ color: token.colorTextLabel }}>{key}</strong>
+                }
                 value={txnTransformed[key]}
               />
             </Col>

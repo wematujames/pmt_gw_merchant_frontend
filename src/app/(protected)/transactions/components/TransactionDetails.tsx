@@ -20,7 +20,7 @@ export default function TxnDetails({ txn }: { txn: any }) {
     Narration: txn.desc,
     Type: txn.type,
     Network: txn.network,
-    Merchant: txn.merchant,
+    Merchant: txn.merchant?.merchantId,
     MerchantRef: txn.merchantRef,
     CallbackURl: txn.merchantCallbackURL,
     ExternalRef: txn.processorTerminalRef || "N/A",
@@ -59,7 +59,9 @@ export default function TxnDetails({ txn }: { txn: any }) {
             <Col key={key} lg={12} style={{ width: "100%" }}>
               <Input
                 readOnly
-                addonBefore={<p>{key}</p>}
+                addonBefore={
+                  <strong style={{ color: token.colorTextLabel }}>{key}</strong>
+                }
                 value={txnTransformed[key]}
               />
             </Col>

@@ -58,7 +58,6 @@ export default function FilterUsers({
     <>
       <Button
         type="primary"
-        size="large"
         onClick={showDrawer}
         icon={<FiFilter />}
       >

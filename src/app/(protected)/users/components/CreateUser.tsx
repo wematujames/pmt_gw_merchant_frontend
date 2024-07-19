@@ -52,7 +52,6 @@ export default function CreateUser({}: {}) {
     <>
       <Button
         type="primary"
-        size="large"
         onClick={() => setOpen(true)}
         icon={<CgUserAdd />}
       >

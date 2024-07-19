@@ -123,7 +123,6 @@ function UsersReport() {
             />
             <CreateUser />
             <Button
-              size="large"
               icon={<FiRefreshCw />}
               type="primary"
               disabled={usersQuery.isFetching}

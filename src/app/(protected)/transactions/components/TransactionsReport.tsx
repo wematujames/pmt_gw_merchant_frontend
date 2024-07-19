@@ -168,7 +168,6 @@ function TransactionReport() {
               txnsQuery={txnsQuery}
             />
             <Button
-              size="large"
               icon={<BiExport />}
               type="primary"
               disabled={txnsQuery.isFetching || !transactions?.length}
@@ -178,7 +177,6 @@ function TransactionReport() {
               Export
             </Button>
             <Button
-              size="large"
               icon={<FiRefreshCw />}
               type="primary"
               disabled={txnsQuery.isFetching}

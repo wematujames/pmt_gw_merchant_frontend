@@ -22,7 +22,7 @@ export default function UserDetail({ user }: { user: any }) {
       "Old Emails": user.oldEmail?.join(",") || "N/A",
       "2FA Eabled": user.multiFA?.enabled ? "Yes" : "No",
       "Account Locked": user.accountLock?.active ? "Yes" : "No",
-      CreatedBy: user.createdBy || "N/A",
+      CreatedBy: user.createdBy?.email || "N/A",
       CreatedAt: user.createdAt,
     };
   };
@@ -61,7 +61,9 @@ export default function UserDetail({ user }: { user: any }) {
             <Col key={key} lg={12} style={{ width: "100%" }}>
               <Input
                 readOnly
-                addonBefore={<p>{key}</p>}
+                addonBefore={
+                  <strong style={{ color: token.colorTextLabel }}>{key}</strong>
+                }
                 value={userTransformed[key]}
               />
             </Col>

@@ -145,7 +145,6 @@ function MerchantsReport() {
               txnsQuery={txnsQuery}
             />
             <Button
-              size="large"
               icon={<FiRefreshCw />}
               type="primary"
               disabled={txnsQuery.isFetching}

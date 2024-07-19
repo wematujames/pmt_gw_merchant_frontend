@@ -182,7 +182,6 @@ function TransactionReport() {
               mandatesQuery={mandatesQuery}
             />
             <Button
-              size="large"
               icon={<FiRefreshCw />}
               type="primary"
               disabled={mandatesQuery.isFetching}
