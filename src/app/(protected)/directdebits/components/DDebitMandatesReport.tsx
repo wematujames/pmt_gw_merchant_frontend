@@ -31,6 +31,17 @@ function TransactionReport() {
 
   const columns: TableColumnsType = [
     {
+      title: "Action",
+      key: "action",
+      width: 80,
+      align: "center",
+      render: (_: any, record: any) => (
+        <Space size={0}>
+          <TransactionDetail mandate={record} />
+        </Space>
+      ),
+    },
+    {
       title: "ID",
       dataIndex: "_id",
       key: "_id",
@@ -148,16 +159,6 @@ function TransactionReport() {
           <small>
             {moment(record.createdAt).format("YYYY-MM-DD HH:mm:ss")}
           </small>
-        </Space>
-      ),
-    },
-    {
-      title: "Action",
-      key: "action",
-      width: 80,
-      render: (_: any, record: any) => (
-        <Space size={0}>
-          <TransactionDetail mandate={record} />
         </Space>
       ),
     },
