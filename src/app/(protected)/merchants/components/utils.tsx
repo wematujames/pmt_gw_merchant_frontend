@@ -47,7 +47,7 @@ export const transformMerchant: any = (merchant: any) => ({
   CreatedBy: merchant.createdBy?.email,
 });
 
-export const transformMerchantAccount: any = (account: any) => ({
+export const transformMerchantAccount: any = (account: any = {}) => ({
   "Balance ₵": account.balance,
   "Collected ₵": account.collected,
   "Disbursed ₵": account.disbursed,
