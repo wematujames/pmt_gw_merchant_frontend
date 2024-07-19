@@ -1,8 +1,18 @@
 import React from "react";
-import { Button, Col, Input, Modal, Row, Tag, theme, Typography } from "antd";
+import {
+  Button,
+  Col,
+  Collapse,
+  Input,
+  Modal,
+  Row,
+  Tag,
+  theme,
+  Typography,
+} from "antd";
 import { BsEye } from "react-icons/bs";
 import { getRecColor } from "@/utils/common";
-import { transformMerchant } from "./utils";
+import { transformMerchant, transformMerchantAccount } from "./utils";
 
 export default function TxnDetails({ merchant }: { merchant: any }) {
   const [open, setOpen] = React.useState<boolean>(false);
@@ -10,7 +20,7 @@ export default function TxnDetails({ merchant }: { merchant: any }) {
   const { token } = theme.useToken();
 
   const merchantTransformed = transformMerchant(merchant);
-
+  const accountTransformed = transformMerchantAccount(merchant?.account);
   return (
     <>
       <Button
@@ -38,6 +48,36 @@ export default function TxnDetails({ merchant }: { merchant: any }) {
         }
         footer={false}
       >
+        <Collapse
+          size="small"
+          style={{ marginBottom: token.marginSM }}
+          items={[
+            {
+              key: "1",
+              label: "Merchant Account Balance",
+              children: (
+                <p>
+                  <Row gutter={[10, 5]}>
+                    {Object.keys(accountTransformed).map((key) => (
+                      <Col key={key} lg={12} style={{ width: "100%" }}>
+                        <Input
+                          readOnly
+                          addonBefore={
+                            <strong style={{ color: token.colorTextLabel }}>
+                              {key}
+                            </strong>
+                          }
+                          value={accountTransformed[key]}
+                        />
+                      </Col>
+                    ))}
+                  </Row>
+                </p>
+              ),
+            },
+          ]}
+        />
+
         <Row gutter={[10, 5]}>
           {Object.keys(merchantTransformed).map((key) => (
             <Col key={key} lg={12} style={{ width: "100%" }}>

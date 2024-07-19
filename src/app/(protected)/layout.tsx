@@ -6,6 +6,7 @@ import UserAvatar from "./user/components/Avatar";
 import Link from "next/link";
 import Image from "next/image";
 import AppSideMenu from "./AppSideMenu";
+import useInactivityTimeout from "@/hooks/useInactivityTimeout";
 import { useLogout } from "@/hooks/useLogout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useMessage } from "@/hooks/useMessage";
@@ -32,7 +33,7 @@ export default function ProtectedLayout({
     },
   });
 
-  // useInactivityTimeout(logout);
+  useInactivityTimeout(logout);
 
   return (
     <QueryClientProvider client={queryClient}>

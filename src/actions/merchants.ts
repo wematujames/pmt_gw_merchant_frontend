@@ -24,3 +24,21 @@ export const getPlatformMerchants = async (_filter: any = {}) =>  {
 
   return res.data.data;
 };
+
+export const createMerchant = async (data: object = {}) =>  {
+  setAuthTokenHeader()
+
+  const res = await axios(
+    "/platform/merchants",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      data
+    }
+  );
+
+  return res.data.data;
+};

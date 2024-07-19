@@ -18,6 +18,7 @@ import moment from "moment";
 import { getPlatformMerchants } from "@/actions/merchants";
 import { getRecColor } from "@/utils/common";
 import { FiRefreshCw } from "react-icons/fi";
+import CreateMerchant from "./CreateMerchant";
 
 function MerchantsReport() {
   const { token } = theme.useToken();
@@ -144,6 +145,7 @@ function MerchantsReport() {
               setFilter={setFilter}
               txnsQuery={txnsQuery}
             />
+            <CreateMerchant />
             <Button
               icon={<FiRefreshCw />}
               type="primary"
