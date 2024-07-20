@@ -53,3 +53,46 @@ export const transformMerchantAccount: any = (account: any = {}) => ({
   "Disbursed ₵": account.disbursed,
   "Reversed ₵": account.reversed,
 });
+
+export const transformMerchantConfig: any = (config: any) => {
+  return {
+    collectionc2b: {
+      allowed: config.collectionc2bAllowed,
+      limit: config.collectionc2bLimit,
+    },
+    directDebit: {
+      allowed: config.directDebitAllowed,
+      limit: config.directDebitLimit,
+    },
+    disbursement: {
+      allowed: config.disbursementAllowed,
+      limit: config.disbursementLimit,
+    },
+    reversal: {
+      allowed: config.reversal,
+    },
+    updateDDAmount: {
+      allowed: config.updateDDAmount,
+    },
+    cancelDirectDebit: {
+      allowed: config.cancelDirectDebit,
+    },
+    statusCheck: {
+      allowed: config.statusCheck,
+    },
+    channels: {
+      mtn: {
+        allowed: config.channelsMTNAllowed,
+        processor: config.channelsMTNPro || "MTN-MoMo",
+      },
+      telecel: {
+        allowed: config.channelsTelecelAllowed,
+        processor: config.channelsTelecelPro || "T-Cash",
+      },
+      airtelTigo: {
+        allowed: config.channelsATAllowed,
+        processor: config.channelsATPro || "AT-Cash",
+      },
+    },
+  };
+};
