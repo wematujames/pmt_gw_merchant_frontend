@@ -101,17 +101,6 @@ function UsersReport() {
         </Space>
       ),
     },
-    {
-      title: "Action",
-      key: "action",
-      width: 80,
-      render: (_: any, record: any) => (
-        <Space size={5}>
-          <UserDetail user={record} />
-          <Permissions user={record} />
-        </Space>
-      ),
-    },
   ];
 
   return (

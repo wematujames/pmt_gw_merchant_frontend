@@ -53,11 +53,7 @@ export default function FilterTransaction({
 
   return (
     <>
-      <Button
-        type="primary"
-        onClick={showDrawer}
-        icon={<FiFilter />}
-      >
+      <Button type="primary" onClick={showDrawer} icon={<FiFilter />}>
         Filter
       </Button>
       <Drawer
@@ -79,12 +75,12 @@ export default function FilterTransaction({
         <Form layout="vertical" requiredMark onFinish={onFinish}>
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="_id" label="Mandate ID">
-                <Input placeholder="6648574ee18c5235e783f834" />
+              <Form.Item name="merchantId" label="Mandate ID">
+                <Input placeholder="4kTEdyiARWhWIZrqNJGO" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item name="phone" label="Account">
+              <Form.Item name="phone" label="Phone">
                 <Input placeholder="233554268378" />
               </Form.Item>
             </Col>
@@ -92,10 +88,8 @@ export default function FilterTransaction({
 
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="merchant" label="Merchant">
-                <Select defaultActiveFirstOption defaultValue="">
-                  <Option value="">All</Option>
-                </Select>
+              <Form.Item name="email" label="Email">
+                <Input placeholder="merchant@nerasolgh.com" />
               </Form.Item>
             </Col>
             <Col span={12}>

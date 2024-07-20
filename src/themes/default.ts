@@ -25,16 +25,15 @@ const theme: ThemeConfig = {
       "colorText": "rgb(52, 67, 87)",
       "colorLink": "rgb(50, 64, 138)"
     },
-      "Button": {
+    "Button": {
       "primaryShadow": "0 1px 0 rgba(5, 145, 255, 0.1)",
       "dangerShadow": "0 1px 0 rgba(255, 38, 5, 0.06)",
       "defaultShadow": "0 1px 0 rgba(0, 0, 0, 0.02)",
       "fontWeight": 500,
       "defaultBorderColor": "rgb(20, 40, 104)",
-      "defaultHoverBg": "rgb(20, 40, 104)",
-      "defaultHoverColor": "rgb(255, 255, 255)",
       "defaultActiveColor": "rgb(20, 40, 104)",
-      "defaultActiveBg": "rgb(35, 56, 121)"
+      "contentFontSizeSM": 14,
+      "contentFontSize": 12
     },
     "Layout": {
       "bodyBg": "rgb(238, 240, 242)",
