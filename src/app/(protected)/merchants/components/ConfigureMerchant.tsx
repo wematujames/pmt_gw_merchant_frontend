@@ -36,7 +36,8 @@ export default function ConfigureMerchant({ merchant }: { merchant: any }) {
 
   const updateMerchantConfigMutation = useMutation({
     mutationKey: ["upate-merchant-config"],
-    mutationFn: () => updateMerchantConfig(merchant._id as string, perms),
+    mutationFn: () =>
+      updateMerchantConfig(merchant?.config?._id as string, perms),
     onSuccess: () => {
       openMessage("success", "Merchant configuration updated");
       queryClient.invalidateQueries({ queryKey: ["platform-merchants"] });
@@ -47,12 +48,10 @@ export default function ConfigureMerchant({ merchant }: { merchant: any }) {
   });
 
   const handleSubmit = (vals: any) => {
-    return console.log("merchant", transformMerchantConfig(vals));
+    setPerms(transformMerchantConfig(vals));
 
     updateMerchantConfigMutation.mutate();
   };
-
-  console.log("reversal:", merchant.config.reversal?.allowed);
 
   return (
     <>
@@ -162,7 +161,7 @@ export default function ConfigureMerchant({ merchant }: { merchant: any }) {
 
             <Col lg={12} style={{ width: "100%" }}>
               <Space size={10}>
-                <Form.Item name="channelsMTNAllowed" label="MTN Txn">
+                <Form.Item name="channelsMTNAllowed" label="MTN Txns">
                   <Switch />
                 </Form.Item>
                 <Form.Item name="channelsMTNPro" label="Processor">
@@ -174,7 +173,7 @@ export default function ConfigureMerchant({ merchant }: { merchant: any }) {
             </Col>
             <Col lg={12} style={{ width: "100%" }}>
               <Space size={10}>
-                <Form.Item name="channelsTelecelAllowed" label="Telecel Txn">
+                <Form.Item name="channelsTelecelAllowed" label="Telecel Txns">
                   <Switch />
                 </Form.Item>
                 <Form.Item name="channelsTelecelPro" label="Processor">
@@ -186,7 +185,7 @@ export default function ConfigureMerchant({ merchant }: { merchant: any }) {
             </Col>
             <Col lg={12} style={{ width: "100%" }}>
               <Space size={10}>
-                <Form.Item name="channelsTelecelAllowed" label="Telecel Txn">
+                <Form.Item name="channelsATAllowed" label="AirtelTigo Txns">
                   <Switch />
                 </Form.Item>
                 <Form.Item name="channelsATPro" label="Processor">

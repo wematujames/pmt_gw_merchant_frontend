@@ -42,3 +42,21 @@ export const createMerchant = async (data: object = {}) =>  {
 
   return res.data.data;
 };
+
+export const updateMerchantConfig = async (configId: string, config: object = {}) =>  {
+  setAuthTokenHeader()
+
+  const res = await axios(
+    "/platform/merchantconfigs/" + configId,
+    {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      data: config
+    }
+  );
+
+  return res.data.data;
+};
