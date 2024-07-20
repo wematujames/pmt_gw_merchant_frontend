@@ -12,14 +12,7 @@ export const getPlatformMerchants = async (_filter: any = {}) =>  {
 
   const res = await axios(
     "/platform/merchants",
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      params: filter
-    }
+    { method: "GET", params: filter }
   );
 
   return res.data.data;
@@ -30,14 +23,7 @@ export const createMerchant = async (data: object = {}) =>  {
 
   const res = await axios(
     "/platform/merchants",
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      data
-    }
+    { method: "POST", data }
   );
 
   return res.data.data;
@@ -48,14 +34,18 @@ export const updateMerchantConfig = async (configId: string, config: object = {}
 
   const res = await axios(
     "/platform/merchantconfigs/" + configId,
-    {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      data: config
-    }
+    { method: "PUT", data: config }
+  );
+
+  return res.data.data;
+};
+
+export const updateMerchantStatus = async (merchantId: string, active: boolean) =>  {
+  setAuthTokenHeader()
+
+  const res = await axios(
+    "/platform/merchants/" + merchantId,
+    { method: "PUT", data: { active } }
   );
 
   return res.data.data;

@@ -16,7 +16,6 @@ import { updateUserPermissions } from "@/actions/permissions";
 import { useState } from "react";
 import { useMessage } from "@/hooks/useMessage";
 import { MdUpdate } from "react-icons/md";
-import { TbLockAccess } from "react-icons/tb";
 import { AxiosError } from "axios";
 import { getRecColor } from "@/utils/common";
 
@@ -54,16 +53,10 @@ export default function Permissions({ user }: { user: any }) {
 
   return (
     <>
-      <Button
-        type="default"
-        icon={<TbLockAccess />}
-        size="middle"
-        onClick={() => setOpen(true)}
-        style={{
-          color: getRecColor(user.active, token),
-          borderColor: getRecColor(user.active, token),
-        }}
-      />
+      <Typography.Text onClick={() => setOpen(true)}>
+        Permissions
+      </Typography.Text>
+
       <Modal
         open={open}
         width={750}

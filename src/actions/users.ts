@@ -53,3 +53,14 @@ export const createUser = async (data: object = {}) =>  {
 
   return res.data.data;
 };
+
+export const updateUserStatus = async (userId: string, active: boolean) =>  {
+  setAuthTokenHeader()
+
+  const res = await axios(
+    "/platform/users/" + userId,
+    { method: "PUT", data: { active } }
+  );
+
+  return res.data.data;
+};

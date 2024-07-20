@@ -2,22 +2,22 @@ import type { MenuProps } from "antd";
 import { Button, Dropdown, theme } from "antd";
 import { MdMoreVert } from "react-icons/md";
 import { getRecColor } from "@/utils/common";
-import { GrConfigure } from "react-icons/gr";
-import ConfigureMerchant from "./ConfigureMerchant";
-import ChangeMerchantStatus from "./ActDecMerchant";
+import ChangeUserStatus from "./ActDecUser";
+import Permissions from "./Permissions";
+import { TbLockAccess } from "react-icons/tb";
 
-const EditMerchantDropDown = ({ merchant }: { merchant: any }) => {
+const UserActionDropDown = ({ merchant }: { merchant: any }) => {
   const { token } = theme.useToken();
 
   const items: MenuProps["items"] = [
     {
       key: "1",
-      icon: <GrConfigure />,
-      label: <ConfigureMerchant merchant={merchant} />,
+      icon: <TbLockAccess />,
+      label: <Permissions user={merchant} />,
     },
     {
       key: "2",
-      label: <ChangeMerchantStatus merchant={merchant} />,
+      label: <ChangeUserStatus user={merchant} />,
       danger: merchant?.active ? true : false,
     },
   ];
@@ -37,4 +37,4 @@ const EditMerchantDropDown = ({ merchant }: { merchant: any }) => {
   );
 };
 
-export default EditMerchantDropDown;
+export default UserActionDropDown;

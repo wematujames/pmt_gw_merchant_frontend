@@ -56,6 +56,7 @@ export default function ConfigureMerchant({ merchant }: { merchant: any }) {
   return (
     <>
       <Typography.Text onClick={() => setOpen(true)}>Configure</Typography.Text>
+
       <Modal
         open={open}
         width={800}

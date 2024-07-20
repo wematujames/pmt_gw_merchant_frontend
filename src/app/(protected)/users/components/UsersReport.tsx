@@ -17,9 +17,9 @@ import { getPlatformUsers } from "@/actions/users";
 import UserDetail from "./UserDetails";
 import moment from "moment";
 import CreateUser from "./CreateUser";
-import Permissions from "./Permissions";
 import { getRecColor } from "@/utils/common";
 import { FiRefreshCw } from "react-icons/fi";
+import UserActionDropDown from "./UserActionDropDown";
 
 function UsersReport() {
   const { token } = theme.useToken();
@@ -37,8 +37,8 @@ function UsersReport() {
       width: 80,
       render: (_: any, record: any) => (
         <Space size={5}>
+          <UserActionDropDown merchant={record} />
           <UserDetail user={record} />
-          <Permissions user={record} />
         </Space>
       ),
     },
