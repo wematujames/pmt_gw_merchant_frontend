@@ -2,7 +2,7 @@ import { LockOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Avatar, Card, Divider, Dropdown, Space, Spin, theme } from "antd";
 import { useLogout } from "../../../../../hooks/useLogout";
 import { useQuery } from "@tanstack/react-query";
-import { loadUser } from "@/actions/auth";
+import { loadUser } from "@/app/nerasol/actions/auth";
 import Meta from "antd/es/card/Meta";
 import React from "react";
 import { CgProfile } from "react-icons/cg";

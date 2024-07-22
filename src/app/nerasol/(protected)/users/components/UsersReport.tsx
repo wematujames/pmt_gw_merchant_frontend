@@ -13,7 +13,7 @@ import FilterUsers from "./FilterUsers";
 import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
-import { getPlatformUsers } from "@/actions/users";
+import { getPlatformUsers } from "@/app/nerasol/actions/users";
 import UserDetail from "./UserDetails";
 import moment from "moment";
 import CreateUser from "./CreateUser";

@@ -14,7 +14,7 @@ import {
 } from "antd";
 import { FiFilter } from "react-icons/fi";
 import { useQuery } from "@tanstack/react-query";
-import { getPlatformMerchants } from "@/actions/merchants";
+import { getPlatformMerchants } from "@/app/nerasol/actions/merchants";
 
 const { Option } = Select;
 

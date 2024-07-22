@@ -15,7 +15,7 @@ import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
-import { getPlatformMerchants } from "@/actions/merchants";
+import { getPlatformMerchants } from "@/app/nerasol/actions/merchants";
 import { getRecColor } from "@/utils/common";
 import { FiRefreshCw } from "react-icons/fi";
 import CreateMerchant from "./CreateMerchant";

@@ -1,4 +1,4 @@
-import { login2fa } from "@/actions/auth";
+import { login2fa } from "@/app/nerasol/actions/auth";
 import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation } from "@tanstack/react-query";
@@ -31,10 +31,7 @@ function TwoFAModal({
       return router.push("/dashboard/financial");
     },
     onError: (err: AxiosError<{ message: string }>) => {
-      openMessage(
-        "error",
-        (err.response?.data.message) || err.message
-      );
+      openMessage("error", err.response?.data.message || err.message);
       setConfirmLoading(false);
     },
   });

@@ -6,7 +6,7 @@ import { useMessage } from "@/hooks/useMessage";
 import { AxiosError } from "axios";
 import { getRecColor } from "@/utils/common";
 import { IoMdSwitch } from "react-icons/io";
-import { updateUserStatus } from "@/actions/users";
+import { updateUserStatus } from "@/app/nerasol/actions/users";
 
 export default function ChangeMerchantStatus({ user }: { user: any }) {
   const queryClient = useQueryClient();

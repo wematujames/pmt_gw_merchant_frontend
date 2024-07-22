@@ -21,7 +21,7 @@ import { MdUpdate } from "react-icons/md";
 import { AxiosError } from "axios";
 import { getRecColor } from "@/utils/common";
 import { useForm } from "antd/es/form/Form";
-import { updateMerchantConfig } from "@/actions/merchants";
+import { updateMerchantConfig } from "@/app/nerasol/actions/merchants";
 import { transformMerchantConfig } from "./utils";
 
 const { Option } = Select;

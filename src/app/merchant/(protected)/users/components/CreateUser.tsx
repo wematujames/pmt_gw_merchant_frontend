@@ -16,7 +16,7 @@ import { useMessage } from "@/hooks/useMessage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useForm } from "antd/es/form/Form";
-import { createUser } from "@/actions/users";
+import { createUser } from "@/app/nerasol/actions/users";
 
 const { Option } = Select;
 
@@ -50,11 +50,7 @@ export default function CreateUser({}: {}) {
 
   return (
     <>
-      <Button
-        type="primary"
-        onClick={() => setOpen(true)}
-        icon={<CgUserAdd />}
-      >
+      <Button type="primary" onClick={() => setOpen(true)} icon={<CgUserAdd />}>
         Create
       </Button>
 

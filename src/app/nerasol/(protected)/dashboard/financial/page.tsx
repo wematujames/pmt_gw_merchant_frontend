@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import PageLoader from "../../PageLoader";
 import { useQuery } from "@tanstack/react-query";
-import { getTransactionsOverall } from "@/actions/summary";
+import { getTransactionsOverall } from "@/app/nerasol/actions/summary";
 
 const CollectionsGrapgh = dynamic(
   () => import("./components/CollectionsGrapgh"),

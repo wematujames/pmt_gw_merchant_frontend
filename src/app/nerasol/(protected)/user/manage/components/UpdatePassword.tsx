@@ -1,6 +1,6 @@
 "use client";
 
-import { updatePassword } from "@/actions/auth";
+import { updatePassword } from "@/app/nerasol/actions/auth";
 import { useLogout } from "@/hooks/useLogout";
 import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
@@ -28,10 +28,7 @@ function UpdatePassword() {
       logout();
     },
     onError: (err: AxiosError<{ message: string }>) => {
-      openMessage(
-        "error",
-        (err.response?.data.message ) || err.message
-      );
+      openMessage("error", err.response?.data.message || err.message);
     },
   });
 

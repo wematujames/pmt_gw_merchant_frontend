@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Result } from "antd";
 import styles from "../../../../utility.module.css";
 import { useMutation } from "@tanstack/react-query";
-import { resendEmailVeriLink } from "@/actions/auth";
+import { resendEmailVeriLink } from "@/app/nerasol/actions/auth";
 import { AxiosError } from "axios";
 import { useMessage } from "@/hooks/useMessage";
 
@@ -13,10 +13,7 @@ const VerifyEmailFailed: React.FC = () => {
     mutationKey: ["resend-verification-email-link"],
     mutationFn: () => resendEmailVeriLink(""),
     onError: (err: AxiosError<{ message: string }>) => {
-      openMessage(
-        "error",
-        (err.response?.data.message) || err.message
-      );
+      openMessage("error", err.response?.data.message || err.message);
     },
   });
 

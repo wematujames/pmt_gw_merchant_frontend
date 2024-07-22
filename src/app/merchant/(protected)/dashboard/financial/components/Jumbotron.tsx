@@ -1,5 +1,5 @@
 "use client";
-import { loadUser } from "@/actions/auth";
+import { loadUser } from "@/app/nerasol/actions/auth";
 import { useQuery } from "@tanstack/react-query";
 import { Card, theme, Typography } from "antd";
 

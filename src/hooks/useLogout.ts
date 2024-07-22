@@ -1,4 +1,4 @@
-import { logoutUser } from "@/actions/auth";
+import { logoutUser } from "@/app/nerasol/actions/auth";
 import { useRouter } from "next/navigation";
 
 export function useLogout(loginUrl?: string) {

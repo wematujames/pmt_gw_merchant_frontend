@@ -4,7 +4,7 @@ import React, { Suspense, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useMessage } from "@/hooks/useMessage";
 import { AxiosError } from "axios";
-import { verifyUserEmail } from "@/actions/auth";
+import { verifyUserEmail } from "@/app/nerasol/actions/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button, Result } from "antd";
 import VerifyEmailFailed from "./Failed";
@@ -20,10 +20,7 @@ const VerifyEmail: React.FC = () => {
     mutationKey: ["verify-email"],
     mutationFn: () => verifyUserEmail(token as string),
     onError: (err: AxiosError<{ message: string }>) => {
-      openMessage(
-        "error",
-        (err.response?.data.message ) || err.message
-      );
+      openMessage("error", err.response?.data.message || err.message);
     },
   });
 

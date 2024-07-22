@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import NotificationProvider from "@/context/NotificationContext";
 import MessageProvider from "@/context/MessageContext";
 import { useEffect } from "react";
-import setAuthTokenHeader from "@/actions/utils/setAuthToken";
+import setAuthTokenHeader from "@/app/nerasol/actions/utils/setAuthToken";
 import { ConfigProvider } from "antd";
 import theme from "@/themes/default";
 

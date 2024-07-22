@@ -1,6 +1,6 @@
 "use client";
 
-import { loadUser, updateUserMobile } from "@/actions/auth";
+import { loadUser, updateUserMobile } from "@/app/nerasol/actions/auth";
 import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -29,10 +29,7 @@ function UpdatePhone() {
       form.resetFields();
     },
     onError: (err: AxiosError<{ message: string }>) => {
-      openMessage(
-        "error",
-        (err.response?.data.message) || err.message
-      );
+      openMessage("error", err.response?.data.message || err.message);
     },
   });
 

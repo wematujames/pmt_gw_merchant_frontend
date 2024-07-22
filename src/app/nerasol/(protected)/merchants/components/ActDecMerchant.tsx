@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useMessage } from "@/hooks/useMessage";
 import { AxiosError } from "axios";
 import { getRecColor } from "@/utils/common";
-import { updateMerchantStatus } from "@/actions/merchants";
+import { updateMerchantStatus } from "@/app/nerasol/actions/merchants";
 import { IoMdSwitch } from "react-icons/io";
 
 const { Option } = Select;

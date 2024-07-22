@@ -16,7 +16,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useForm } from "antd/es/form/Form";
 import { MdOutlineAddBusiness } from "react-icons/md";
-import { createMerchant } from "@/actions/merchants";
+import { createMerchant } from "@/app/nerasol/actions/merchants";
 
 const { Option } = Select;
 

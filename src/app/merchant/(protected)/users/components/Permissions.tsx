@@ -10,9 +10,9 @@ import {
   theme,
   Typography,
 } from "antd";
-import { getPlatformPermissions } from "@/actions/permissions";
+import { getPlatformPermissions } from "@/app/nerasol/actions/permissions";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { updateUserPermissions } from "@/actions/permissions";
+import { updateUserPermissions } from "@/app/nerasol/actions/permissions";
 import { useState } from "react";
 import { useMessage } from "@/hooks/useMessage";
 import { MdUpdate } from "react-icons/md";
