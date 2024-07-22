@@ -15,7 +15,7 @@ export default function TxnDetails({ txn }: { txn: any }) {
     "Amount ₵": parseFloat(txn.amount).toFixed(2),
     Reversed: txn.reversed,
     "Original Amount ₵": parseFloat(txn.originalAmount).toFixed(2),
-    "Reversal Amount ₵": parseFloat(txn.originalAmount).toFixed(2),
+    "Reversal Amount ₵": parseFloat(txn.reversalAmount).toFixed(2),
     Account: txn.phone,
     Narration: txn.desc,
     Type: txn.type,

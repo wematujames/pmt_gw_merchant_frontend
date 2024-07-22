@@ -37,7 +37,7 @@ export default function FilterTransaction({
     queryKey: ["merchants-ids"],
     queryFn: () =>
       getPlatformMerchants({
-        _select: "merchantId",
+        _select: "merchantId name",
       }),
   });
 
@@ -130,10 +130,12 @@ export default function FilterTransaction({
                   defaultActiveFirstOption
                   defaultValue=""
                 >
-                  <Option value="">All</Option>
+                  <Option value="" key={""}>
+                    All
+                  </Option>
                   {merchantIds.data?.map((i: any) => (
                     <Option key={i._id} value={i._id}>
-                      {i.merchantId}
+                      {i.name}
                     </Option>
                   ))}
                 </Select>
