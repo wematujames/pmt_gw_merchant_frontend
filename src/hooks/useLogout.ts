@@ -1,7 +1,7 @@
 import { logoutUser } from "@/actions/auth";
 import { useRouter } from "next/navigation";
 
-export function useLogout() {
+export function useLogout(loginUrl?: string) {
     const router = useRouter();
 
     const logout = async () => {
@@ -11,7 +11,7 @@ export function useLogout() {
             
         } finally {
             localStorage.removeItem("token");
-            router.push("/auth/login");
+            router.push(loginUrl || "/nerasol/auth/login");
         }
     };
 
