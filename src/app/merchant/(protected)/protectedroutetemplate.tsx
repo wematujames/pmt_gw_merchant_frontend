@@ -1,11 +1,9 @@
 "use client";
 
 import { useAuth } from "../../../hooks/useAuth";
-import { useLogout } from "../../../hooks/useLogout";
 
 export default function DashboardPage() {
   const authenticated = useAuth("/merchant/auth/login");
-  const logout = useLogout();
 
   if (!authenticated) {
     return <div>Loading...</div>;

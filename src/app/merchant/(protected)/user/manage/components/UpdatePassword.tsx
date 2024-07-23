@@ -1,6 +1,6 @@
 "use client";
 
-import { updatePassword } from "@/app/nerasol/actions/auth";
+import { updatePassword } from "@/app/merchant/actions/auth";
 import { useLogout } from "@/hooks/useLogout";
 import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
@@ -10,7 +10,7 @@ import { useForm } from "antd/es/form/Form";
 import { AxiosError } from "axios";
 
 function UpdatePassword() {
-  const logout = useLogout();
+  const logout = useLogout("/merchant/auth/login");
   const { openMessage } = useMessage();
   const [form] = useForm();
 

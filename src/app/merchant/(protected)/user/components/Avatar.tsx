@@ -70,7 +70,7 @@ const UserAvatar = () => {
           <Meta
             avatar={
               <Avatar shape="square" size={50}>
-                {userQuery.data?.name?.slice(0, 2)}
+                {userQuery.data?.name?.slice(0, 2)?.toUpperCase()}
               </Avatar>
             }
             title={userQuery.data?.name}

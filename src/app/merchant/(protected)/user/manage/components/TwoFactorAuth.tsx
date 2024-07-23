@@ -1,6 +1,6 @@
 "use client";
 
-import { enable2Fa, getQrCode } from "@/app/nerasol/actions/auth";
+import { enable2Fa, getQrCode } from "@/app/merchant/actions/auth";
 import { useLogout } from "@/hooks/useLogout";
 import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";

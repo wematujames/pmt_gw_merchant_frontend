@@ -1,6 +1,6 @@
 "use client";
 
-import { loadUser, updateUserMobile } from "@/app/nerasol/actions/auth";
+import { loadUser, updateUserMobile } from "@/app/merchant/actions/auth";
 import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";

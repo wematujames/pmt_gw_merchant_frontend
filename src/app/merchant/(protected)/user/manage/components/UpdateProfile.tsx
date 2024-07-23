@@ -1,6 +1,6 @@
 "use client";
 
-import { loadUser, updateUser } from "@/app/nerasol/actions/auth";
+import { loadUser, updateUser } from "@/app/merchant/actions/auth";
 import { useMessage } from "@/hooks/useMessage";
 import { removeUndefinedValues } from "@/utils/common";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -45,8 +45,7 @@ function UpdateProfile() {
         form={form}
         requiredMark
         initialValues={{
-          fName: userQuery.data?.person?.fName,
-          lName: userQuery.data?.person?.lName,
+          name: userQuery.data?.name,
           password: "",
         }}
         layout="vertical"
@@ -56,20 +55,10 @@ function UpdateProfile() {
           <Col span={24}>
             <Form.Item
               rules={[{ required: true, message: "First name is required" }]}
-              name="fName"
-              label="First Name"
+              name="name"
+              label="Merchant Name"
             >
               <Input placeholder="Wematu" />
-            </Form.Item>
-          </Col>
-
-          <Col span={24}>
-            <Form.Item
-              rules={[{ required: true, message: "Last name is required" }]}
-              name="lName"
-              label="Last Name"
-            >
-              <Input placeholder="James" />
             </Form.Item>
           </Col>
 
