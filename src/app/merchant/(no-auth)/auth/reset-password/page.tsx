@@ -7,7 +7,7 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import { useMutation } from "@tanstack/react-query";
 import { ResetPasswordData } from "@/types/types";
-import { resetPassword } from "@/app/nerasol/actions/auth";
+import { resetPassword } from "@/app/merchant/actions/auth";
 import { AxiosError } from "axios";
 import { Form, Input, Button, Flex, Divider, Card, Typography } from "antd";
 import { useMessage } from "@/hooks/useMessage";
