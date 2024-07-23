@@ -55,11 +55,7 @@ export default function FilterTransaction({
 
   return (
     <>
-      <Button
-        type="primary"
-        onClick={showDrawer}
-        icon={<FiFilter />}
-      >
+      <Button type="primary" onClick={showDrawer} icon={<FiFilter />}>
         Filter
       </Button>
       <Drawer
@@ -115,7 +111,7 @@ export default function FilterTransaction({
             <Col span={12}>
               <Form.Item
                 name="dateTime"
-                label="DateTime"
+                label="Created Between"
                 rules={[{ required: true, message: "Select date range" }]}
               >
                 <DatePicker.RangePicker
