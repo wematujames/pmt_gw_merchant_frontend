@@ -134,10 +134,10 @@ export default function FilterTransaction({
                   }
                   options={[
                     { label: "All", value: "" },
-                    ...merchantIds.data?.map((merc: any) => ({
+                    ...(merchantIds.data?.map((merc: any) => ({
                       label: merc.name,
                       value: merc._id,
-                    })),
+                    })) || []),
                   ]}
                   defaultActiveFirstOption
                   defaultValue=""
