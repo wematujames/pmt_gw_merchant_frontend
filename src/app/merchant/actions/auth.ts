@@ -2,8 +2,7 @@
 
 import axios from "axios";
 import setAuthTokenHeader from "./utils/setAuthToken";
-// ads21a00082y@ait.edu.gh
-// zx+u%@{H]A-7.#1#m;b.
+
 export const login = async (email: string, pwd: string) =>  {
     const res = await axios.post(
       "/merchants/auth/login",

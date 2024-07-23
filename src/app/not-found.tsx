@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Result } from "antd";
-import styles from "./not-found.module.css";
+import styles from "./utility.module.css";
 
 const NotFound: React.FC = () => (
   <Result
-    className={styles.container}
+    className={styles.fscontainer}
     status="404"
     title="404"
     subTitle="Sorry, the page you are looking for does not exist."

@@ -19,17 +19,19 @@ const UserAvatar = () => {
     {
       key: "1",
       icon: <CgProfile />,
-      label: <Link href="/user/manage?tab=profile">View Profile</Link>,
+      label: <Link href="/merchant/user/manage?tab=profile">View Profile</Link>,
     },
     {
       key: "2",
       icon: <LockOutlined />,
-      label: <Link href="/user/manage?tab=password">Update Password</Link>,
+      label: (
+        <Link href="/merchant/user/manage?tab=password">Update Password</Link>
+      ),
     },
     {
       key: "3",
       icon: <LockOutlined />,
-      label: <Link href="/user/manage?tab=2fa">2 FA</Link>,
+      label: <Link href="/merchant/user/manage?tab=2fa">2 FA</Link>,
     },
     {
       key: "4",
