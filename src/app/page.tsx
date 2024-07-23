@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 export default function Home() {
   const router = useRouter();
 
-  router.push("/auth/login");
+  router.push("/nerasol/auth/login");
 
   return <main className={styles.main}></main>;
 }

@@ -7,7 +7,7 @@ import { Typography } from "antd";
 import styles from "./styles.module.css";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
-import { forgotPassword } from "@/app/nerasol/actions/auth";
+import { forgotPassword } from "@/app/merchant/actions/auth";
 import { ForgotPasswordData } from "@/types/types";
 import { useMessage } from "@/hooks/useMessage";
 
