@@ -15,6 +15,7 @@ export function useAuth(loginUrl: string ) {
                 setAuthenticated(true);
             }
         }, 3000)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [router]);
 
     return authenticated;
