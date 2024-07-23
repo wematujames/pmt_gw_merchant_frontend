@@ -1,12 +1,12 @@
 "use client";
 import StatisticsCards from "./components/Statistics";
 import Jumbotron from "./components/Jumbotron";
-import { useAuth } from "../../../../hooks/useAuth";
+import { useAuth } from "../../../../../hooks/useAuth";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import PageLoader from "../../PageLoader";
 import { useQuery } from "@tanstack/react-query";
-import { getTransactionsOverall } from "@/app/nerasol/actions/summary";
+import { getTransactionsOverall } from "@/app/merchant/actions/summary";
 
 const CollectionsGrapgh = dynamic(
   () => import("./components/CollectionsGrapgh"),
@@ -44,7 +44,7 @@ function Dashboard() {
 }
 
 export default function DashboardSuspended() {
-  const authenticated = useAuth();
+  const authenticated = useAuth("/merchant/auth/login");
 
   if (!authenticated) return <PageLoader />;
 

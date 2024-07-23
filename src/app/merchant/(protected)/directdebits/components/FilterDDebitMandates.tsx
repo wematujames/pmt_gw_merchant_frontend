@@ -55,11 +55,7 @@ export default function FilterTransaction({
 
   return (
     <>
-      <Button
-        type="primary"
-        onClick={showDrawer}
-        icon={<FiFilter />}
-      >
+      <Button type="primary" onClick={showDrawer} icon={<FiFilter />}>
         Filter
       </Button>
       <Drawer
@@ -94,34 +90,12 @@ export default function FilterTransaction({
 
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="merchant" label="Merchant">
-                <Select defaultActiveFirstOption defaultValue="">
-                  <Option value="">All</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
               <Form.Item name="active" label="Status">
                 <Select defaultActiveFirstOption defaultValue="">
                   <Option value="">All</Option>
                   <Option value="true">Active</Option>
                   <Option value="false">Inactive</Option>
                 </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="dateTime"
-                label="DateTime"
-                rules={[{ required: true, message: "Select date range" }]}
-              >
-                <DatePicker.RangePicker
-                  style={{ width: "100%" }}
-                  getPopupContainer={(trigger) => trigger.parentElement!}
-                />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -131,6 +105,21 @@ export default function FilterTransaction({
                   <Option value="MTN">MTN</Option>
                   <Option value="Telecel">Telecel</Option>
                 </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
+                name="dateTime"
+                label="DateTime"
+                rules={[{ required: true, message: "Select date range" }]}
+              >
+                <DatePicker.RangePicker
+                  style={{ width: "100%" }}
+                  getPopupContainer={(trigger) => trigger.parentElement!}
+                />
               </Form.Item>
             </Col>
           </Row>

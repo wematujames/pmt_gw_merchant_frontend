@@ -1,8 +1,8 @@
 import { LockOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Avatar, Card, Divider, Dropdown, Space, Spin, theme } from "antd";
-import { useLogout } from "../../../../hooks/useLogout";
+import { useLogout } from "../../../../../hooks/useLogout";
 import { useQuery } from "@tanstack/react-query";
-import { loadUser } from "@/app/nerasol/actions/auth";
+import { loadUser } from "@/app/merchant/actions/auth";
 import Meta from "antd/es/card/Meta";
 import React from "react";
 import { CgProfile } from "react-icons/cg";
@@ -12,7 +12,7 @@ import { useMessage } from "@/hooks/useMessage";
 const { useToken } = theme;
 const UserAvatar = () => {
   const { token } = useToken();
-  const logout = useLogout();
+  const logout = useLogout("/merchant/auth/login");
   const { openMessage } = useMessage();
 
   const items = [
@@ -68,11 +68,10 @@ const UserAvatar = () => {
           <Meta
             avatar={
               <Avatar shape="square" size={50}>
-                {userQuery.data?.person?.lName.slice(0, 1)}
-                {userQuery.data?.person?.fName.slice(0, 1)}
+                {userQuery.data?.name?.slice(0, 2)}
               </Avatar>
             }
-            title={`${userQuery.data?.person?.fName} ${userQuery.data?.person?.lName}`}
+            title={userQuery.data?.name}
             description={userQuery.data?.email}
           />
           <Divider style={{ margin: 5, borderColor: "#f0f0f0" }}>
@@ -84,8 +83,7 @@ const UserAvatar = () => {
     >
       <Space>
         <Avatar shape="square" size={{ lg: 45, xl: 50 }}>
-          {userQuery.data?.person?.lName.slice(0, 1)}
-          {userQuery.data?.person?.fName.slice(0, 1)}
+          {userQuery.data?.name?.slice(0, 2)?.toUpperCase()}
         </Avatar>
       </Space>
     </Dropdown>

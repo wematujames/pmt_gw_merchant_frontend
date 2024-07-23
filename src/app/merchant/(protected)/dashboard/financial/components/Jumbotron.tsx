@@ -1,5 +1,5 @@
 "use client";
-import { loadUser } from "@/app/nerasol/actions/auth";
+import { loadUser } from "@/app/merchant/actions/auth";
 import { useQuery } from "@tanstack/react-query";
 import { Card, theme, Typography } from "antd";
 
@@ -26,7 +26,7 @@ const Jumbotron = () => {
       style={{ marginTop: token.marginXXS, marginBottom: token.marginSM }}
     >
       <Typography.Title style={{ fontSize: token.fontSizeHeading2 }}>
-        {getGreeting()} {userQuery.data?.person?.fName}
+        {getGreeting()} {userQuery.data?.name}
       </Typography.Title>
       <p style={{ fontSize: token.fontSize, color: token.colorBgMask }}>
         {"Here's"} your financial overview

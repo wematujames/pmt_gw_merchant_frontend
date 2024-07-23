@@ -2,23 +2,24 @@
 
 import axios from "axios";
 import setAuthTokenHeader from "./utils/setAuthToken";
-
+// ads21a00082y@ait.edu.gh
+// zx+u%@{H]A-7.#1#m;b.
 export const login = async (email: string, pwd: string) =>  {
     const res = await axios.post(
-      "/platform/auth/login",
+      "/merchants/auth/login",
        { email, password: pwd }, 
     );
 
     if (res.data.data.token){
       localStorage.setItem("token", res.data.data.token);
     }
-
+    
     return res.data.data;
 };
 
 export const login2fa = async (vCode: string, tkn: string) =>  {
     const res = await axios.post(
-      "/platform/auth/login2fa",
+      "/merchants/auth/login2fa",
       {  verificationCode: vCode, loginToken: tkn }
     );
 
@@ -30,18 +31,18 @@ export const login2fa = async (vCode: string, tkn: string) =>  {
 export const loadUser = async () =>  {
     setAuthTokenHeader()
 
-    const res = await axios.get( "/platform/auth/user");
+    const res = await axios.get( "/merchants/auth/user");
 
     return res.data.data;
 };
 
 export const forgotPassword = async (email: string,) =>  {
-   return axios.post( "/platform/auth/forgotpassword",  { email });
+   return axios.post( "/merchants/auth/forgotpassword",  { email });
 };
 
 export const resetPassword = async (tkn: string, pwd: string) =>  {
    return axios.post(
-    "/platform/auth/resetpassword", 
+    "/merchants/auth/resetpassword", 
     { resetToken: tkn, newPassword: pwd }
    );
 };
@@ -50,31 +51,31 @@ export const updateUser = async ( updates: Object) =>  {
 
   setAuthTokenHeader()
 
-  return axios.put( "/platform/auth/user/updatedetails", updates );
+  return axios.put( "/merchants/auth/user/updatedetails", updates );
 };
 
 export const updateUserEmail = async ( updates: Object) =>  {
   setAuthTokenHeader()
 
-  return axios.put("/platform/auth/user/updateemail", updates );
+  return axios.put("/merchants/auth/user/updateemail", updates );
 };
 
 export const verifyUserEmail = async ( token: string) =>  {
   setAuthTokenHeader()
 
-  return axios.put("/platform/auth/user/verifyemail", { token });
+  return axios.put("/merchants/auth/user/verifyemail", { token });
 };
 
 export const resendEmailVeriLink = async ( token: string) =>  {
   setAuthTokenHeader()
 
-  return axios.put( "/platform/auth/user/updateemail",{ token } );
+  return axios.put( "/merchants/auth/user/updateemail",{ token } );
 };
 
 export const updateUserMobile = async ( updates: Object) =>  {
   setAuthTokenHeader()
 
-  return axios.put("/platform/auth/user/updatemobile",  updates );
+  return axios.put("/merchants/auth/user/updatemobile",  updates );
 };
 
 export const updatePassword = async ( 
@@ -84,7 +85,7 @@ export const updatePassword = async (
   setAuthTokenHeader();
 
   return axios.put(
-    "/platform/auth/user/updatepassword",
+    "/merchants/auth/user/updatepassword",
     { currentPassword, newPassword, confirmNewPassword }
   );
 };
@@ -92,7 +93,7 @@ export const updatePassword = async (
 export const getQrCode = async () =>  {
   setAuthTokenHeader();
 
-  const qrCode = await axios.get("/platform/auth/genqrcode");
+  const qrCode = await axios.get("/merchants/auth/genqrcode");
 
   return qrCode.data.data?.qrImage;
 };
@@ -100,12 +101,12 @@ export const getQrCode = async () =>  {
 export const enable2Fa = async ( verficationCode: string) =>  {
   setAuthTokenHeader();
 
-  return axios.post( "/platform/auth/enablemultifa", { verficationCode });
+  return axios.post( "/merchants/auth/enablemultifa", { verficationCode });
 };
 
 export const logoutUser = async () =>  {
   setAuthTokenHeader();
 
-  return axios.get("/platform/auth/logout");
+  return axios.get("/merchants/auth/logout");
 };
 

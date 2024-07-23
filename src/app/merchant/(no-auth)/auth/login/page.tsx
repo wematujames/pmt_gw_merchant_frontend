@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Typography } from "antd";
 import styles from "./styles.module.css";
 import { useMutation } from "@tanstack/react-query";
-import { login } from "@/app/nerasol/actions/auth";
+import { login } from "@/app/merchant/actions/auth";
 import { LoginCredentials } from "@/types/types";
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
@@ -35,7 +35,7 @@ export default function LoginPage() {
       }
 
       openMessage("success", "Logged in");
-      router.push("/dashboard/financial");
+      router.push("/merchant/dashboard/financial");
     },
     onError: (err: AxiosError<{ message: string }>) => {
       openMessage("error", err.response?.data.message || err.message);
@@ -44,7 +44,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      router.push("/dashboard/financial");
+      router.push("/merchant/dashboard/financial");
     }
   });
 
@@ -126,7 +126,10 @@ export default function LoginPage() {
                   <Checkbox>Remember me</Checkbox>
                 </Form.Item>
 
-                <a href="/auth/forgot-password" style={{ float: "right" }}>
+                <a
+                  href="/merchant/auth/forgot-password"
+                  style={{ float: "right" }}
+                >
                   Forgot password
                 </a>
               </Form.Item>

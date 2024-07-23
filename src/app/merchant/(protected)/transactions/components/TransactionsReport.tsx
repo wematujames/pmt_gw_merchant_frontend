@@ -13,7 +13,7 @@ import TransactionDetail from "./TransactionDetails";
 import FilterTransaction from "./FilterTransactions";
 import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
-import { getTransactions } from "@/app/nerasol/actions/transactions";
+import { getTransactions } from "@/app/merchant/actions/transactions";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import moment from "moment";
 import exportData from "@/utils/exportData";

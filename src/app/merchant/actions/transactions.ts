@@ -11,7 +11,7 @@ export const getTransactions = async (_filter: any = {}) =>  {
   });
 
   const res = await axios(
-    "/platform/transactions",
+    "/merchants/transactions",
     {
       method: "GET",
       headers: {
@@ -29,7 +29,7 @@ export const getTransaction = async (txnId: string) =>  {
   setAuthTokenHeader()
   
   const res = await axios(
-    `/platform/transactions/${txnId}`,
+    `/merchants/transactions/${txnId}`,
     {
       method: "GET",
       headers: {

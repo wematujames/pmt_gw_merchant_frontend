@@ -6,8 +6,6 @@ import { ImMeter } from "react-icons/im";
 
 import type { MenuProps } from "antd";
 import { GrTransaction } from "react-icons/gr";
-import { BsShop } from "react-icons/bs";
-import { HiUserGroup } from "react-icons/hi";
 import { TbTransactionBitcoin } from "react-icons/tb";
 
 const { SubMenu } = Menu;
@@ -17,15 +15,25 @@ const items = [
     key: "dashboard",
     label: "Dashboard",
     icon: <ImMeter />,
-    items: [{ key: "2", label: "Financial", link: "/dashboard/financial" }],
+    items: [
+      { key: "2", label: "Financial", link: "/merchant/dashboard/financial" },
+    ],
   },
   {
     key: "transactions",
     label: "Transactions",
     icon: <GrTransaction />,
     items: [
-      { key: "6", label: `Overview`, link: "/transactions/view?tab=overview" },
-      { key: "5", label: `Report`, link: "/transactions/view?tab=report" },
+      {
+        key: "6",
+        label: `Overview`,
+        link: "/merchant/transactions/view?tab=overview",
+      },
+      {
+        key: "5",
+        label: `Report`,
+        link: "/merchant/transactions/view?tab=report",
+      },
     ],
   },
   {
@@ -33,27 +41,16 @@ const items = [
     label: "Direct Debits",
     icon: <TbTransactionBitcoin />,
     items: [
-      { key: "7", label: `Overview`, link: "/directdebits/view?tab=overview" },
-      { key: "8", label: `Report`, link: "/directdebits/view?tab=report" },
-    ],
-  },
-  {
-    key: "merchants",
-    label: "Merchants",
-    icon: <BsShop />,
-    items: [
-      { key: "9", label: `Overview`, link: "/merchants/view?tab=overview" },
-      { key: "10", label: `Report`, link: "/merchants/view?tab=report" },
-    ],
-  },
-  {
-    key: "users",
-    label: "Platform Users",
-    icon: <HiUserGroup />,
-    items: [
-      { key: "11", label: `Manage Users`, link: "/users/view" },
-      // { key: "14", label: `USSD API Docs`, link: "/docs/sms/v1" },
-      // { key: "15", label: `OTP API Docs`, link: "/docs/otp/v1" },
+      {
+        key: "7",
+        label: `Overview`,
+        link: "/merchant/directdebits/view?tab=overview",
+      },
+      {
+        key: "8",
+        label: `Report`,
+        link: "/merchant/directdebits/view?tab=report",
+      },
     ],
   },
 ];

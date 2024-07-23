@@ -7,13 +7,13 @@ import { GrOverview } from "react-icons/gr";
 import OverView from "../components/OverView";
 import TransactionReport from "../components/DDebitMandatesReport";
 import { TbReport } from "react-icons/tb";
-import { useAuth } from "../../../../hooks/useAuth";
+import { useAuth } from "../../../../../hooks/useAuth";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import PageLoader from "../../PageLoader";
 import SectionHeader from "../../components/SectionHeader";
 
 const DirectDebitMandates: React.FC = () => {
-  const authenticated = useAuth();
+  const authenticated = useAuth("merchant/auth/login");
 
   const { token } = theme.useToken();
   const searchParams = useSearchParams();

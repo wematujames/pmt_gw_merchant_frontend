@@ -13,8 +13,6 @@ import {
   Typography,
 } from "antd";
 import { FiFilter } from "react-icons/fi";
-import { useQuery } from "@tanstack/react-query";
-import { getPlatformMerchants } from "@/app/nerasol/actions/merchants";
 
 const { Option } = Select;
 
@@ -32,14 +30,6 @@ export default function FilterTransaction({
 
   const showDrawer = () => setOpen(true);
   const onClose = () => setOpen(false);
-
-  const merchantIds = useQuery({
-    queryKey: ["merchants-ids"],
-    queryFn: () =>
-      getPlatformMerchants({
-        _select: "merchantId name",
-      }),
-  });
 
   const onFinish = (formVals: any) => {
     onClose();
@@ -122,26 +112,7 @@ export default function FilterTransaction({
           </Row>
 
           <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="merchant" label="Merchant">
-                <Select
-                  listHeight={250}
-                  showSearch
-                  defaultActiveFirstOption
-                  defaultValue=""
-                >
-                  <Option value="" key={""}>
-                    All
-                  </Option>
-                  {merchantIds.data?.map((i: any) => (
-                    <Option key={i._id} value={i._id}>
-                      {i.name}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
+            <Col span={24}>
               <Form.Item name="processorTerminalRef" label="External Txn ID">
                 <Input placeholder="40733500385" />
               </Form.Item>

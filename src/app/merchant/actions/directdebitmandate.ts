@@ -1,7 +1,5 @@
 import axios from "axios";
 import setAuthTokenHeader from "./utils/setAuthToken";
-
-
 export const getDirectDebitMandates = async (_filter: any = {}) =>  {
   setAuthTokenHeader()
 
@@ -12,7 +10,7 @@ export const getDirectDebitMandates = async (_filter: any = {}) =>  {
   });
 
   const res = await axios(
-    "/platform/directdebit/mandates",
+    "/merchants/directdebit/mandates",
     {
       method: "GET",
       headers: {

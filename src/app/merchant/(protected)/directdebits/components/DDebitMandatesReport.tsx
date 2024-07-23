@@ -14,7 +14,7 @@ import FilterTransaction from "./FilterDDebitMandates";
 import { useState } from "react";
 import { MdNumbers } from "react-icons/md";
 import { QueryClient, useQuery } from "@tanstack/react-query";
-import { getDirectDebitMandates } from "@/app/nerasol/actions/directdebitmandate";
+import { getDirectDebitMandates } from "@/app/merchant/actions/directdebitmandate";
 import moment from "moment";
 import { FiRefreshCw } from "react-icons/fi";
 import { getRecColor } from "@/utils/common";

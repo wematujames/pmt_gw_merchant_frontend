@@ -133,6 +133,11 @@ export default function LoginPage() {
                   Forgot password
                 </a>
               </Form.Item>
+              <Form.Item>
+                <a href="/merchant/auth/login" style={{ float: "right" }}>
+                  Merchant Sign In
+                </a>
+              </Form.Item>
 
               <Form.Item>
                 <Button
