@@ -13,7 +13,7 @@ import PageLoader from "../../PageLoader";
 import SectionHeader from "../../components/SectionHeader";
 
 const DirectDebitMandates: React.FC = () => {
-  const authenticated = useAuth();
+  const authenticated = useAuth("/nerasol/auth/login");
 
   const { token } = theme.useToken();
   const searchParams = useSearchParams();

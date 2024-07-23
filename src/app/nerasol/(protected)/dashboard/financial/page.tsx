@@ -44,7 +44,7 @@ function Dashboard() {
 }
 
 export default function DashboardSuspended() {
-  const authenticated = useAuth();
+  const authenticated = useAuth("/nerasol/auth/login");
 
   if (!authenticated) return <PageLoader />;
 

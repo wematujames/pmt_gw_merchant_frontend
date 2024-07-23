@@ -1,10 +1,8 @@
 import React from "react";
 import { Button, Result } from "antd";
-import styles from "../../../../utility.module.css";
 
 const EmailVerificationSuccess: React.FC = () => (
   <Result
-    className={styles.fscontainer}
     status="success"
     title="Email verification successful"
     subTitle=""

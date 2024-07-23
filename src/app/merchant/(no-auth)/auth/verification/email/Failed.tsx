@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Result } from "antd";
-import styles from "../../../../utility.module.css";
+import styles from "../../../../../utility.module.css";
 import { useMutation } from "@tanstack/react-query";
 import { resendEmailVeriLink } from "@/app/nerasol/actions/auth";
 import { AxiosError } from "axios";
@@ -19,7 +19,7 @@ const VerifyEmailFailed: React.FC = () => {
 
   return (
     <Result
-      className={styles.fscontainer}
+
       status="error"
       title="Verification Failed"
       subTitle={
