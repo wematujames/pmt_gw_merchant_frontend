@@ -7,8 +7,6 @@ import {
   Modal,
   Popconfirm,
   Row,
-  Space,
-  Tag,
   theme,
   Typography,
 } from "antd";
@@ -80,9 +78,11 @@ export default function ReverseTransaction({ txn }: { txn: any }) {
               title="Reverse this transaction ? "
               icon={<InfoCircleOutlined style={{ color: "yellow7" }} />}
               onConfirm={form.submit}
+              okText="Yes"
+              cancelText="No"
             >
               <Button htmlType="submit" type="primary">
-                Submit
+                Reverse
               </Button>
             </Popconfirm>
           </>
@@ -100,17 +100,7 @@ export default function ReverseTransaction({ txn }: { txn: any }) {
         >
           <Row gutter={16}>
             <Col span={24}>
-              <Form.Item
-                name="transactionId"
-                label={
-                  <Space>
-                    <Typography.Text>Transaction ID </Typography.Text>
-                    <Tag color={getRecColor(txn.status, token)}>
-                      {txn.status}
-                    </Tag>
-                  </Space>
-                }
-              >
+              <Form.Item name="transactionId" label="Transaction ID">
                 <Input readOnly placeholder="6648574ee18c5235e783f834" />
               </Form.Item>
             </Col>

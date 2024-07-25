@@ -73,12 +73,14 @@ export default function CreateTransaction() {
           <>
             <Button onClick={() => setOpen(false)}>Cancel</Button>
             <Popconfirm
-              title="Initiate Transaction ?"
+              title="Initiate transaction ?"
               icon={<InfoCircleOutlined style={{ color: "yellow7" }} />}
               onConfirm={form.submit}
+              okText="Yes"
+              cancelText="No"
             >
               <Button htmlType="submit" type="primary">
-                Submit
+                Create
               </Button>
             </Popconfirm>
           </>
@@ -103,13 +105,13 @@ export default function CreateTransaction() {
                 rules={[
                   {
                     required: true,
-                    message: "Mobile account number is required",
+                    message: "Mobile is required",
                   },
                 ]}
                 name="phone"
                 label="Account"
               >
-                <Input placeholder="233554268378" />
+                <Input type="number" min={0} placeholder="233554268378" />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -118,13 +120,13 @@ export default function CreateTransaction() {
                 rules={[
                   {
                     required: true,
-                    message: "Transaction amount is required",
+                    message: "Txn amount is required",
                   },
                 ]}
                 name="amount"
                 label="Amount"
               >
-                <Input placeholder="233554268378" />
+                <Input type="number" placeholder="1.00" />
               </Form.Item>
             </Col>
           </Row>
@@ -135,7 +137,7 @@ export default function CreateTransaction() {
                 rules={[
                   {
                     required: true,
-                    message: "Transaction description is required",
+                    message: "Txn description is required",
                   },
                 ]}
                 name="desc"

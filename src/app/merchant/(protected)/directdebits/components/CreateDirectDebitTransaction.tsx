@@ -88,6 +88,8 @@ export default function CreateDirectDebitTransaction({
               title="Debit account with mandate ?"
               icon={<InfoCircleOutlined style={{ color: "yellow7" }} />}
               onConfirm={form.submit}
+              okText="Yes"
+              cancelText="No"
             >
               <Button htmlType="submit" type="primary">
                 Debit
@@ -135,7 +137,7 @@ export default function CreateDirectDebitTransaction({
                 name="amount"
                 label="Amount"
               >
-                <Input placeholder="233554268378" />
+                <Input type="number" min={0} placeholder="233554268378" />
               </Form.Item>
             </Col>
           </Row>

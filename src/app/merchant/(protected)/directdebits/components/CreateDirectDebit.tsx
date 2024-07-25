@@ -78,6 +78,8 @@ export default function CreateDirectDebit() {
                 form.setFieldValue("agreeTnC", true);
                 form.submit;
               }}
+              okText="Yes"
+              cancelText="No"
             >
               <Button htmlType="submit" type="primary">
                 Create Mandate
@@ -111,7 +113,7 @@ export default function CreateDirectDebit() {
                 name="phone"
                 label="Account"
               >
-                <Input placeholder="233554268378" />
+                <Input type="number" min={0} placeholder="233554268378" />
               </Form.Item>
             </Col>
 
@@ -121,7 +123,7 @@ export default function CreateDirectDebit() {
                 name="amount"
                 label="Amount"
               >
-                <Input placeholder="1.00" />
+                <Input type="number" min={0} placeholder="1.00" />
               </Form.Item>
             </Col>
           </Row>
