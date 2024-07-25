@@ -44,34 +44,52 @@ export const getTransaction = async (txnId: string) =>  {
 
 export const reverseTransaction = async (txnId: string, reversalAmount: string) =>  {
   setAuthTokenHeader()
-  return console.log("txn reversal", txnId, reversalAmount)
   
   const res = await axios(
-    `/merchants/transactions/${txnId}`,
+    `/transactions/web/payments/reverse`,
     {
-      method: "GET",
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+      data: { transactionId: txnId, reversalAmount }
+    }
+  );
+
+  return res.data.data;
+};
+
+export const createCollectionTxn = async (data: any) =>  {
+  setAuthTokenHeader()
+  
+  const res = await axios(
+    `/transactions/web/payments/collection`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      data,
     }
   );
 
   return res.data.data ;
 };
 
-export const createTransaction = async (txnId: string, reversalAmount: string) =>  {
+export const createDisbursementTxn = async (data: any) =>  {
   setAuthTokenHeader()
-  return console.log("txn create", txnId, reversalAmount)
   
   const res = await axios(
-    `/merchants/transactions/${txnId}`,
+    `/transactions/web/payments/b2cdisbursement`,
     {
-      method: "GET",
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+      data
     }
   );
 

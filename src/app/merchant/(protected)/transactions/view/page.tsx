@@ -12,6 +12,7 @@ import { useAuth } from "../../../../../hooks/useAuth";
 import PageLoader from "../../PageLoader";
 import SectionHeader from "../../components/SectionHeader";
 import CreateTransaction from "../components/CreateTransaction";
+import NewTxnDropDown from "../components/NewTxnDropDown";
 
 const Transactions: React.FC = () => {
   const authenticated = useAuth("merchant");
@@ -51,7 +52,7 @@ const Transactions: React.FC = () => {
         leadText="Transactions"
         subText="View all transaction and extract reports"
         icon={<AiOutlineTransaction />}
-        extra={<CreateTransaction />}
+        extra={<NewTxnDropDown />}
       />
       <Tabs
         size="large"

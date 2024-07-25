@@ -28,10 +28,10 @@ export default function ReverseTransaction({ txn }: { txn: any }) {
   const [form] = useForm();
 
   const handleSubit = (vals: FormData) => {
-    console.log("form vals", vals);
+    reverseTxnMutation.mutate();
   };
 
-  const updateUserPermissionsMutation = useMutation({
+  const reverseTxnMutation = useMutation({
     mutationKey: ["upate-user-permissions"],
     mutationFn: () =>
       reverseTransaction(
@@ -39,7 +39,7 @@ export default function ReverseTransaction({ txn }: { txn: any }) {
         form.getFieldValue("reversalAmount")
       ),
     onSuccess: () => {
-      openMessage("success", "User permissions updated");
+      openMessage("info", "Reversal processing");
       queryClient.invalidateQueries({ queryKey: ["platform-users"] });
     },
     onError: (err: AxiosError<{ message: string }>) => {
