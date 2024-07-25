@@ -117,12 +117,7 @@ export default function CreateTransaction() {
             <Col span={12}>
               <Form.Item
                 required
-                rules={[
-                  {
-                    required: true,
-                    message: "Txn amount is required",
-                  },
-                ]}
+                rules={[{ required: true, message: "Txn amount is required" }]}
                 name="amount"
                 label="Amount"
               >
@@ -135,10 +130,7 @@ export default function CreateTransaction() {
             <Col span={24}>
               <Form.Item
                 rules={[
-                  {
-                    required: true,
-                    message: "Txn description is required",
-                  },
+                  { required: true, message: "Txn description is required" },
                 ]}
                 name="desc"
                 label="Description"
