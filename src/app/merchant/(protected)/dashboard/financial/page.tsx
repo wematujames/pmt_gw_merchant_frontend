@@ -44,7 +44,7 @@ function Dashboard() {
 }
 
 export default function DashboardSuspended() {
-  const authenticated = useAuth("/merchant/auth/login");
+  const authenticated = useAuth("merchant");
 
   if (!authenticated) return <PageLoader />;
 

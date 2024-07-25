@@ -11,9 +11,10 @@ import { useAuth } from "../../../../../hooks/useAuth";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import PageLoader from "../../PageLoader";
 import SectionHeader from "../../components/SectionHeader";
+import CreateDirectDebit from "../components/CreateDirectDebit";
 
 const DirectDebitMandates: React.FC = () => {
-  const authenticated = useAuth("merchant/auth/login");
+  const authenticated = useAuth("merchant");
 
   const { token } = theme.useToken();
   const searchParams = useSearchParams();
@@ -50,6 +51,7 @@ const DirectDebitMandates: React.FC = () => {
         leadText="Direct Debit Mandates"
         subText="View and manage direct debit mandates"
         icon={<CiMoneyCheck1 />}
+        extra={<CreateDirectDebit />}
       />
       <Tabs
         size="large"

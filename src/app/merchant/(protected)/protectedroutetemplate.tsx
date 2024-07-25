@@ -3,7 +3,7 @@
 import { useAuth } from "../../../hooks/useAuth";
 
 export default function DashboardPage() {
-  const authenticated = useAuth("/merchant/auth/login");
+  const authenticated = useAuth("merchant");
 
   if (!authenticated) {
     return <div>Loading...</div>;

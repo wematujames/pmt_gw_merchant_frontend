@@ -13,7 +13,7 @@ import PageLoader from "../../PageLoader";
 import SectionHeader from "../../components/SectionHeader";
 
 const Transactions: React.FC = () => {
-  const authenticated = useAuth("/nerasol/auth/login");
+  const authenticated = useAuth("nerasol");
 
   const { token } = theme.useToken();
   const searchParams = useSearchParams();

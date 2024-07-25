@@ -19,7 +19,7 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }>) {
   const { token } = theme.useToken();
-  const logout = useLogout();
+  const logout = useLogout("nerasol");
   const { openMessage } = useMessage();
   const { openNotification } = useNotification();
 

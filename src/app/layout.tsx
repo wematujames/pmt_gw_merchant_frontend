@@ -5,8 +5,6 @@ import "./globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import NotificationProvider from "@/context/NotificationContext";
 import MessageProvider from "@/context/MessageContext";
-import { useEffect } from "react";
-import setAuthTokenHeader from "@/app/nerasol/actions/utils/setAuthToken";
 import { ConfigProvider } from "antd";
 import theme from "@/themes/default";
 
@@ -20,10 +18,6 @@ export default function RootLayout({
       queries: { refetchOnWindowFocus: false },
     },
   });
-
-  useEffect(() => {
-    setAuthTokenHeader();
-  }, []);
 
   return (
     <html lang="en" content="noindex, nofollow">

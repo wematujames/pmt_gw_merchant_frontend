@@ -7,7 +7,7 @@ const EmailVerificationSuccess: React.FC = () => (
     title="Email verification successful"
     subTitle=""
     extra={
-      <Button type="primary" key="console" href="/nerasol/auth/login">
+      <Button type="primary" key="console" href="/auth/login">
         Go To Home
       </Button>
     }

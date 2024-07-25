@@ -8,7 +8,7 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-function TwoFAModal({
+function AdminTwoFAModal({
   loginToken,
   open = false,
   setOpen,
@@ -77,4 +77,4 @@ function TwoFAModal({
   );
 }
 
-export default TwoFAModal;
+export default AdminTwoFAModal;

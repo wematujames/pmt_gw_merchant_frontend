@@ -12,7 +12,7 @@ import { useMessage } from "@/hooks/useMessage";
 const { useToken } = theme;
 const UserAvatar = () => {
   const { token } = useToken();
-  const logout = useLogout("/merchant/auth/login");
+  const logout = useLogout("merchant");
   const { openMessage } = useMessage();
 
   const items = [

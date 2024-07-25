@@ -5,10 +5,10 @@ const setAuthTokenHeader = () => {
 	axios.defaults.headers.common["Content-Type"] = "application/json";
 	axios.defaults.headers.common.Accept = "application/json";
 
-	if (localStorage.getItem("token")) {
+	if (localStorage.getItem("merchant-token")) {
 		axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
-			"token"
+			"merchant-token"
 		)}`;	
-	} else localStorage.removeItem("token");
+	} else localStorage.removeItem("merchant-token");
 };
 export default setAuthTokenHeader;

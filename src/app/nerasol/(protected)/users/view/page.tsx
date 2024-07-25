@@ -12,7 +12,7 @@ import SectionHeader from "../../components/SectionHeader";
 import { FaUserGroup } from "react-icons/fa6";
 
 const App: React.FC = () => {
-  const authenticated = useAuth("/nerasol/auth/login");
+  const authenticated = useAuth("nerasol");
   const { token } = theme.useToken();
   const [activeTabKey, setActiveTabKey] = useState<string>("report");
 

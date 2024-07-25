@@ -5,8 +5,7 @@ import Link from "next/link";
 import { ImMeter } from "react-icons/im";
 
 import type { MenuProps } from "antd";
-import { GrTransaction } from "react-icons/gr";
-import { TbTransactionBitcoin } from "react-icons/tb";
+import { TbTransactionBitcoin, TbTransactionDollar } from "react-icons/tb";
 
 const { SubMenu } = Menu;
 
@@ -20,9 +19,9 @@ const items = [
     ],
   },
   {
-    key: "transactions",
+    key: "transaction_report",
     label: "Transactions",
-    icon: <GrTransaction />,
+    icon: <TbTransactionDollar />,
     items: [
       {
         key: "6",

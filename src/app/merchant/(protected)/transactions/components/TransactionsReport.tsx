@@ -20,7 +20,8 @@ import exportData from "@/utils/exportData";
 import { BiExport } from "react-icons/bi";
 import { getRecColor } from "@/utils/common";
 import { FiRefreshCw } from "react-icons/fi";
-
+import ReverseTransaction from "./ReverseTransaction";
+import CreateTransaction from "./CreateTransaction";
 function TransactionReport() {
   const { token } = theme.useToken();
 
@@ -32,6 +33,7 @@ function TransactionReport() {
       render: (_: any, record: any) => (
         <Space>
           <TransactionDetail txn={record} />
+          <ReverseTransaction txn={record} />
         </Space>
       ),
     },
@@ -138,7 +140,7 @@ function TransactionReport() {
   ];
 
   const [filter, setFilter] = useState({
-    startDate: moment().startOf("day").toISOString(),
+    startDate: "2024-05-28 11:35:59" || moment().startOf("day").toISOString(),
     endDate: moment().endOf("day").toISOString(),
   });
 
@@ -162,6 +164,7 @@ function TransactionReport() {
             Count: {transactions.length}
           </Space>
           <Space>
+            
             <FilterTransaction
               filter={filter}
               setFilter={setFilter}

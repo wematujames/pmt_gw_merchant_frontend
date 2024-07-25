@@ -29,7 +29,7 @@ function ResetPasswordPage() {
     },
     onSuccess: (res) => {
       openMessage("success", res.data.message);
-      router.push("/merchant/auth/login");
+      router.push("/auth/login");
     },
     onError: (err: AxiosError<Error>) => {
       openMessage("error", err.response?.data.message || err.message);

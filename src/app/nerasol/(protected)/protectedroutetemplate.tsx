@@ -3,7 +3,7 @@
 import { useAuth } from "../../../hooks/useAuth";
 
 export default function DashboardPage() {
-  const authenticated = useAuth("/nerasol/auth/login");
+  const authenticated = useAuth("nerasol");
 
   if (!authenticated) {
     return <div>Loading...</div>;

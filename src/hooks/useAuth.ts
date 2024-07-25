@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-export function useAuth(loginUrl: string ) {
+export function useAuth(type: string ) {
     const [authenticated, setAuthenticated] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
         setTimeout(() => {
-            const token = localStorage.getItem("token");
+            const token = localStorage.getItem(`${type}-token`);
             
             if (!token) {
-                router.push(loginUrl || "/admin/auth/login");
+                router.push(`/auth/login?tab=${type}`);
             } else {
                 setAuthenticated(true);
             }

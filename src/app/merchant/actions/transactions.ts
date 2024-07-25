@@ -41,3 +41,39 @@ export const getTransaction = async (txnId: string) =>  {
 
   return res.data.data ;
 };
+
+export const reverseTransaction = async (txnId: string, reversalAmount: string) =>  {
+  setAuthTokenHeader()
+  return console.log("txn reversal", txnId, reversalAmount)
+  
+  const res = await axios(
+    `/merchants/transactions/${txnId}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  return res.data.data ;
+};
+
+export const createTransaction = async (txnId: string, reversalAmount: string) =>  {
+  setAuthTokenHeader()
+  return console.log("txn create", txnId, reversalAmount)
+  
+  const res = await axios(
+    `/merchants/transactions/${txnId}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  return res.data.data ;
+};

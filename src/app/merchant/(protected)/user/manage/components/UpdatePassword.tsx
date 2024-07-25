@@ -10,7 +10,7 @@ import { useForm } from "antd/es/form/Form";
 import { AxiosError } from "axios";
 
 function UpdatePassword() {
-  const logout = useLogout("/merchant/auth/login");
+  const logout = useLogout("merchant");
   const { openMessage } = useMessage();
   const [form] = useForm();
 

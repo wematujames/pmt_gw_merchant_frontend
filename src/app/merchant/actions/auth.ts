@@ -10,7 +10,7 @@ export const login = async (email: string, pwd: string) =>  {
     );
 
     if (res.data.data.token){
-      localStorage.setItem("token", res.data.data.token);
+      localStorage.setItem("merchant-token", res.data.data.token);
     }
     
     return res.data.data;
@@ -22,7 +22,7 @@ export const login2fa = async (vCode: string, tkn: string) =>  {
       {  verificationCode: vCode, loginToken: tkn }
     );
 
-    localStorage && localStorage.setItem("token", res.data.data.token);
+    localStorage && localStorage.setItem("merchant-token", res.data.data.token);
     
     return res.data.data;
 };
@@ -106,6 +106,10 @@ export const enable2Fa = async ( verficationCode: string) =>  {
 export const logoutUser = async () =>  {
   setAuthTokenHeader();
 
-  return axios.get("/merchants/auth/logout");
+  const res = await axios.get("/merchants/auth/logout");
+
+  localStorage.removeItem(`merchant-token`);
+  
+  return res.data;
 };
 

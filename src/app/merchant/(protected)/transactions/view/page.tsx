@@ -11,9 +11,10 @@ import { TbReport } from "react-icons/tb";
 import { useAuth } from "../../../../../hooks/useAuth";
 import PageLoader from "../../PageLoader";
 import SectionHeader from "../../components/SectionHeader";
+import CreateTransaction from "../components/CreateTransaction";
 
 const Transactions: React.FC = () => {
-  const authenticated = useAuth("merchant/auth/login");
+  const authenticated = useAuth("merchant");
 
   const { token } = theme.useToken();
   const searchParams = useSearchParams();
@@ -50,6 +51,7 @@ const Transactions: React.FC = () => {
         leadText="Transactions"
         subText="View all transaction and extract reports"
         icon={<AiOutlineTransaction />}
+        extra={<CreateTransaction />}
       />
       <Tabs
         size="large"
