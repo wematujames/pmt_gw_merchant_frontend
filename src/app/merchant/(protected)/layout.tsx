@@ -10,6 +10,7 @@ import { useLogout } from "@/hooks/useLogout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useMessage } from "@/hooks/useMessage";
 import { useNotification } from "@/hooks/useNotification";
+import WebTransactions from "./components/WebTransactions";
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function ProtectedLayout({
@@ -66,6 +67,7 @@ export default function ProtectedLayout({
               textAlign: "right",
             }}
           >
+            <WebTransactions />
             <UserAvatar />
           </Header>
           <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
