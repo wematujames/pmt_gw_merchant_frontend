@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Button,
-  Checkbox,
   Col,
   DatePicker,
   Form,
@@ -28,10 +27,8 @@ export default function CreateDirectDebit() {
   const queryClient = new QueryClient();
   const [form] = useForm();
 
-  const handleSubbit = async () => {
-    const errors = await form.validateFields();
-    console.log("error", errors);
-    // console.log("formvals", vals);
+  const handleSubmit = (vals: FormData) => {
+    console.log("form vals", vals);
   };
 
   const updateUserPermissionsMutation = useMutation({
@@ -58,30 +55,32 @@ export default function CreateDirectDebit() {
         size="middle"
         onClick={() => setOpen(true)}
       >
-        Create Mandate
+        Create New Mandate
       </Button>
 
       <Modal
         open={open}
-        width={1000}
+        width={500}
         onCancel={() => setOpen(false)}
         title={
           <Typography.Title level={5}>
             <MoneyCollectTwoTone />
-            {""} Create Direct Debit Mandate
+            {""} CREATE DIRECT DEBIT MANDATE
           </Typography.Title>
         }
         footer={
           <>
             <Button onClick={() => setOpen(false)}>Cancel</Button>
             <Popconfirm
-              title="Create Mandate"
-              description="Create direct debit mandate ?"
+              title="Create Mandate ?"
               icon={<InfoCircleOutlined style={{ color: "yellow7" }} />}
-              onConfirm={handleSubbit}
+              onConfirm={() => {
+                form.setFieldValue("agreeTnC", true);
+                form.submit;
+              }}
             >
               <Button htmlType="submit" type="primary">
-                Create
+                Create Mandate
               </Button>
             </Popconfirm>
           </>
@@ -90,8 +89,18 @@ export default function CreateDirectDebit() {
         <Form
           form={form}
           layout="vertical"
-          onFinish={handleSubbit}
+          onFinish={handleSubmit}
           requiredMark
+          initialValues={{
+            phone: "",
+            amount: "",
+            desc: "",
+            network: "MTN",
+            frequency: "03",
+            firstPaymentDate: null,
+            expiryDate: null,
+            agreeTnC: false,
+          }}
         >
           <Row gutter={16}>
             <Col span={12}>
@@ -166,34 +175,6 @@ export default function CreateDirectDebit() {
                   style={{ width: "100%" }}
                   getPopupContainer={(trigger) => trigger.parentElement!}
                 />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={24}>
-              {/* <Form.Item
-                name="agreeTnC"
-                valuePropName="A"
-                required
-                rules={[{ required: true, message: "Must agree to T n Cs" }]}
-              >
-                <Checkbox
-                  onChange={(e) => console.log(e.target.value)}
-                  name="agreeTnC"
-                  style={{ width: "100%" }}
-                >
-                  Agree to terms and conditins
-                </Checkbox>
-              </Form.Item> */}
-
-              <Form.Item
-                // required
-                rules={[{ required: true, message: "Must agree to T n Cs" }]}
-                name="agreeTnC"
-                valuePropName="agreeTnC"
-              >
-                <Checkbox>Agree to terms and conditins</Checkbox>
               </Form.Item>
             </Col>
           </Row>

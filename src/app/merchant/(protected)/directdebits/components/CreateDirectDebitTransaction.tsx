@@ -7,7 +7,6 @@ import {
   Modal,
   Popconfirm,
   Row,
-  Select,
   theme,
   Typography,
 } from "antd";
@@ -17,9 +16,14 @@ import { AxiosError } from "axios";
 import { createTransaction } from "@/app/merchant/actions/transactions";
 import { useForm } from "antd/es/form/Form";
 import { InfoCircleOutlined, TransactionOutlined } from "@ant-design/icons";
-import { FaMoneyBillTransfer } from "react-icons/fa6";
+import { BsBackspaceReverse } from "react-icons/bs";
+import { getRecColor } from "@/utils/common";
 
-export default function CreateTransaction() {
+export default function CreateDirectDebitTransaction({
+  mandate,
+}: {
+  mandate: any;
+}) {
   const [open, setOpen] = React.useState<boolean>(false);
   const { token } = theme.useToken();
   const [txn, setTxnType] = useState("collection");
@@ -49,14 +53,24 @@ export default function CreateTransaction() {
 
   return (
     <>
-      <Button
-        type="primary"
-        icon={<FaMoneyBillTransfer />}
-        size="middle"
-        onClick={() => setOpen(true)}
-      >
-        New Transaction
-      </Button>
+      {mandate.active && (
+        <Button
+          type="default"
+          icon={<BsBackspaceReverse />}
+          size="middle"
+          style={{
+            color: getRecColor(
+              mandate.statusReason === "pending" ? "pending" : mandate.active,
+              token
+            ),
+            borderColor: getRecColor(
+              mandate.statusReason === "pending" ? "pending" : mandate.active,
+              token
+            ),
+          }}
+          onClick={() => setOpen(true)}
+        />
+      )}
 
       <Modal
         open={open}
@@ -64,21 +78,19 @@ export default function CreateTransaction() {
         onCancel={() => setOpen(false)}
         title={
           <Typography.Title level={5}>
-            <TransactionOutlined />
-            {""} NEW {form.getFieldValue("type")?.toUpperCase() || "COLLECTION"}{" "}
-            TRANSACTION
+            <TransactionOutlined /> NEW DIRECT DEBIT TRANSACTION
           </Typography.Title>
         }
         footer={
           <>
             <Button onClick={() => setOpen(false)}>Cancel</Button>
             <Popconfirm
-              title="Initiate Transaction ?"
+              title="Debit account with mandate ?"
               icon={<InfoCircleOutlined style={{ color: "yellow7" }} />}
               onConfirm={form.submit}
             >
               <Button htmlType="submit" type="primary">
-                Submit
+                Debit
               </Button>
             </Popconfirm>
           </>
@@ -86,11 +98,8 @@ export default function CreateTransaction() {
       >
         <Form
           initialValues={{
-            phone: "",
-            amount: "",
-            desc: "",
-            network: "MTN",
-            type: "collection",
+            mandateId: mandate._id,
+            amount: mandate.amount,
           }}
           form={form}
           layout="vertical"
@@ -98,7 +107,7 @@ export default function CreateTransaction() {
           onFinish={handleSubmit}
         >
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={24}>
               <Form.Item
                 rules={[
                   {
@@ -106,13 +115,15 @@ export default function CreateTransaction() {
                     message: "Mobile account number is required",
                   },
                 ]}
-                name="phone"
-                label="Account"
+                name="mandateId"
+                label="MandateId"
               >
-                <Input placeholder="233554268378" />
+                <Input readOnly placeholder="233554268378" />
               </Form.Item>
             </Col>
-            <Col span={12}>
+          </Row>
+          <Row gutter={16}>
+            <Col span={24}>
               <Form.Item
                 required
                 rules={[
@@ -125,49 +136,6 @@ export default function CreateTransaction() {
                 label="Amount"
               >
                 <Input placeholder="233554268378" />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                rules={[
-                  {
-                    required: true,
-                    message: "Transaction description is required",
-                  },
-                ]}
-                name="desc"
-                label="Description"
-              >
-                <Input placeholder="Payment for some shoes" />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item name="network" label="Network">
-                <Select defaultActiveFirstOption defaultValue="">
-                  <Select.Option value="AirtelTigo">AirtelTigo</Select.Option>
-                  <Select.Option value="MTN">MTN</Select.Option>
-                  <Select.Option value="Telecel">Telecel</Select.Option>
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item name="type" label="Type">
-                <Select
-                  onChange={setTxnType}
-                  defaultActiveFirstOption
-                  defaultValue="collection"
-                >
-                  <Select.Option value="collection">Collection</Select.Option>
-                  <Select.Option value="disbursement">
-                    Disbursement
-                  </Select.Option>
-                </Select>
               </Form.Item>
             </Col>
           </Row>

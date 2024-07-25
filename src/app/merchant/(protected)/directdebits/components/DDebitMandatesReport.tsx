@@ -18,6 +18,7 @@ import { getDirectDebitMandates } from "@/app/merchant/actions/directdebitmandat
 import moment from "moment";
 import { FiRefreshCw } from "react-icons/fi";
 import { getRecColor } from "@/utils/common";
+import CreateDirectDebitTransaction from "./CreateDirectDebitTransaction";
 
 function TransactionReport() {
   const { token } = theme.useToken();
@@ -38,6 +39,7 @@ function TransactionReport() {
       render: (_: any, record: any) => (
         <Space size={0}>
           <TransactionDetail mandate={record} />
+          <CreateDirectDebitTransaction mandate={record} />
         </Space>
       ),
     },
