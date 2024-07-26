@@ -31,7 +31,6 @@ export default function CreateDirectDebitTransaction({
   const [form] = useForm();
 
   const handleSubmit = (vals: any) => {
-    console.log("form vals", vals);
     createDDebitTxnMutation.mutate(vals);
   };
 
@@ -39,9 +38,9 @@ export default function CreateDirectDebitTransaction({
     mutationKey: ["direct-debit-mandate-txn"],
     mutationFn: (data) => createDDebitTxn(data),
     onSuccess: () => {
-      openMessage("success", "Transaction Processing");
+      openMessage("success", "Processing");
       form.resetFields();
-      queryClient.invalidateQueries({ queryKey: ["platform-users"] });
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
     },
     onError: (err: AxiosError<{ message: string }>) => {
       openMessage("error", err.response?.data.message || err.message);

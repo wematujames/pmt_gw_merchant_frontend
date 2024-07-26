@@ -46,7 +46,7 @@ export const createDDebitTxn = async (data: any) =>  {
   setAuthTokenHeader()
 
   const res = await axios(
-    "/transactions/web/directdebit/mandates",
+    "/transactions/web/directdebit/payment",
     {
       method: "POST",
       headers: {

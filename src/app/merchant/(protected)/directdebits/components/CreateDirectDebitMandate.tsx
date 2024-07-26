@@ -28,17 +28,23 @@ export default function CreateDirectDebit() {
   const [form] = useForm();
 
   const handleSubmit = (vals: any) => {
-    console.log("form vals", vals);
-    createDDebitMandateMutation.mutate(vals);
+    const data = { ...vals };
+
+    data.firstPaymentDate = vals.dateTime[0].$d;
+    data.expiryDate = vals.dateTime[1].$d;
+    data.agreeTnC = "1";
+    delete data["dateTime"];
+
+    createDDebitMandateMutation.mutate(data);
   };
 
   const createDDebitMandateMutation = useMutation({
     mutationKey: ["create-direct-debit-mandate"],
     mutationFn: (data) => createDDebitMandate(data),
     onSuccess: () => {
-      openMessage("success", "User permissions updated");
+      openMessage("info", "Processing");
       form.resetFields();
-      queryClient.invalidateQueries({ queryKey: ["platform-users"] });
+      queryClient.invalidateQueries({ queryKey: ["ddebit-mandates-report"] });
     },
     onError: (err: AxiosError<{ message: string }>) => {
       openMessage("error", err.response?.data.message || err.message);
@@ -72,10 +78,7 @@ export default function CreateDirectDebit() {
             <Popconfirm
               title="Create Mandate ?"
               icon={<InfoCircleOutlined style={{ color: "yellow7" }} />}
-              onConfirm={() => {
-                form.setFieldValue("agreeTnC", true);
-                form.submit;
-              }}
+              onConfirm={form.submit}
               okText="Yes"
               cancelText="No"
             >
@@ -99,7 +102,6 @@ export default function CreateDirectDebit() {
             frequency: "03",
             firstPaymentDate: null,
             expiryDate: null,
-            agreeTnC: false,
           }}
         >
           <Row gutter={16}>
