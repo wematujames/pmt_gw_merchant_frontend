@@ -41,7 +41,6 @@ export default function DisbursementTransaction() {
       queryClient.invalidateQueries({ queryKey: ["Transaction processing"] });
     },
     onError: (err: AxiosError<{ message: string }>) => {
-      console.log(err.response);
       openMessage("error", err.response?.data.message || err.message);
     },
   });

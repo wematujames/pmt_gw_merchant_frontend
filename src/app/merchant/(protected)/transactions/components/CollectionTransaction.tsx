@@ -44,7 +44,6 @@ export default function CollectionTransaction() {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
     },
     onError: (err: AxiosError<{ message: string }>) => {
-      console.log(err.response);
       openMessage("error", err.response?.data.message || err.message);
     },
   });
