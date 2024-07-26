@@ -60,8 +60,7 @@ export default function DisbursementTransaction() {
         onCancel={() => setOpen(false)}
         title={
           <Typography.Title level={5}>
-            <TransactionOutlined />
-            MOMO DISBURSEMENT
+            <TransactionOutlined /> MOMO DISBURSEMENT
           </Typography.Title>
         }
         footer={

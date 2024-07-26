@@ -15,8 +15,11 @@ import { QueryClient, useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { createDDebitTxn } from "@/app/merchant/actions/directdebitmandate";
 import { useForm } from "antd/es/form/Form";
-import { InfoCircleOutlined, TransactionOutlined } from "@ant-design/icons";
-import { BsBackspaceReverse } from "react-icons/bs";
+import {
+  InfoCircleOutlined,
+  MoneyCollectOutlined,
+  TransactionOutlined,
+} from "@ant-design/icons";
 import { getRecColor } from "@/utils/common";
 
 export default function CreateDirectDebitTransaction({
@@ -52,7 +55,7 @@ export default function CreateDirectDebitTransaction({
       {mandate.active && (
         <Button
           type="default"
-          icon={<BsBackspaceReverse />}
+          icon={<MoneyCollectOutlined />}
           size="middle"
           style={{
             color: getRecColor(

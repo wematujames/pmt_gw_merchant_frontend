@@ -63,8 +63,7 @@ export default function CollectionTransaction() {
         onCancel={() => setOpen(false)}
         title={
           <Typography.Title level={5}>
-            <TransactionOutlined />
-            MOMO COLLECTION
+            <TransactionOutlined /> MOMO COLLECTION
           </Typography.Title>
         }
         footer={
