@@ -11,7 +11,6 @@ import {
   Typography,
 } from "antd";
 import { getRecColor } from "@/utils/common";
-import { transformTxn } from "./utils";
 import { useMessage } from "@/hooks/useMessage";
 import { QueryClient, useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -27,27 +26,23 @@ export default function ReverseTransaction({ txn }: { txn: any }) {
   const queryClient = new QueryClient();
   const [form] = useForm();
 
-  const handleSubit = (vals: FormData) => {
-    reverseTxnMutation.mutate();
+  const handleSubit = (vals: any) => {
+    reverseTxnMutation.mutate(vals);
   };
 
   const reverseTxnMutation = useMutation({
     mutationKey: ["upate-user-permissions"],
-    mutationFn: () =>
-      reverseTransaction(
-        form.getFieldValue("transactionId"),
-        form.getFieldValue("reversalAmount")
-      ),
+    mutationFn: (data: any) =>
+      reverseTransaction(data.transactionId, data.reversalAmount),
     onSuccess: () => {
       openMessage("info", "Reversal processing");
+      form.resetFields();
       queryClient.invalidateQueries({ queryKey: ["platform-users"] });
     },
     onError: (err: AxiosError<{ message: string }>) => {
       openMessage("error", err.response?.data.message || err.message);
     },
   });
-
-  const txnTransformed = transformTxn(txn || {});
 
   return (
     <>

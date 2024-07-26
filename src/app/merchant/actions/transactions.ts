@@ -44,7 +44,7 @@ export const getTransaction = async (txnId: string) =>  {
 
 export const reverseTransaction = async (txnId: string, reversalAmount: string) =>  {
   setAuthTokenHeader()
-  
+
   const res = await axios(
     `/transactions/web/payments/reverse`,
     {

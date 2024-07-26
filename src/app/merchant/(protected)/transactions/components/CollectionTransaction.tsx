@@ -33,7 +33,6 @@ export default function CollectionTransaction() {
 
   const handleSubmit = (vals: any) => {
     createColTxnMutation.mutate(vals);
-    form.resetFields();
   };
 
   const createColTxnMutation = useMutation({
@@ -41,9 +40,11 @@ export default function CollectionTransaction() {
     mutationFn: (data) => createCollectionTxn(data),
     onSuccess: () => {
       openMessage("info", "Transaction processing");
+      form.resetFields();
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
     },
     onError: (err: AxiosError<{ message: string }>) => {
+      console.log(err.response);
       openMessage("error", err.response?.data.message || err.message);
     },
   });

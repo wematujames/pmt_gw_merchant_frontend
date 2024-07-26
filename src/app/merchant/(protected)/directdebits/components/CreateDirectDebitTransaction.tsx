@@ -13,7 +13,7 @@ import {
 import { useMessage } from "@/hooks/useMessage";
 import { QueryClient, useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { createTransaction } from "@/app/merchant/actions/transactions";
+import { createDDebitTxn } from "@/app/merchant/actions/directdebitmandate";
 import { useForm } from "antd/es/form/Form";
 import { InfoCircleOutlined, TransactionOutlined } from "@ant-design/icons";
 import { BsBackspaceReverse } from "react-icons/bs";
@@ -31,17 +31,14 @@ export default function CreateDirectDebitTransaction({
   const queryClient = new QueryClient();
   const [form] = useForm();
 
-  const handleSubmit = (vals: FormData) => {
+  const handleSubmit = (vals: any) => {
     console.log("form vals", vals);
+    createDDebitTxnMutation.mutate(vals);
   };
 
-  const createTransactionMutation = useMutation({
+  const createDDebitTxnMutation = useMutation({
     mutationKey: ["upate-user-permissions"],
-    mutationFn: () =>
-      createTransaction(
-        form.getFieldValue("transactionId"),
-        form.getFieldValue("reversalAmount")
-      ),
+    mutationFn: (data) => createDDebitTxn(data),
     onSuccess: () => {
       openMessage("success", "User permissions updated");
       queryClient.invalidateQueries({ queryKey: ["platform-users"] });

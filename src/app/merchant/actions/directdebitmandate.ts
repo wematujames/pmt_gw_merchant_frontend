@@ -23,3 +23,21 @@ export const getDirectDebitMandates = async (_filter: any = {}) =>  {
 
   return res.data.data;
 };
+
+export const createDDebitTxn = async (data: any) =>  {
+  setAuthTokenHeader()
+
+  const res = await axios(
+    "/transactions/web/directdebit/mandates",
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      data
+    }
+  );
+
+  return res.data.data;
+};

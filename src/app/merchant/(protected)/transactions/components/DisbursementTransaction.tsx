@@ -30,7 +30,6 @@ export default function DisbursementTransaction() {
 
   const handleSubmit = (vals: any) => {
     createDisTxnMutation.mutate(vals);
-    form.resetFields();
   };
 
   const createDisTxnMutation = useMutation({
@@ -38,9 +37,11 @@ export default function DisbursementTransaction() {
     mutationFn: (data) => createDisbursementTxn(data),
     onSuccess: () => {
       openMessage("info", "Transaction processing");
+      form.resetFields();
       queryClient.invalidateQueries({ queryKey: ["Transaction processing"] });
     },
     onError: (err: AxiosError<{ message: string }>) => {
+      console.log(err.response);
       openMessage("error", err.response?.data.message || err.message);
     },
   });
