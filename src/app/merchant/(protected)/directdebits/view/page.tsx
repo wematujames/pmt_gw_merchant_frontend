@@ -11,7 +11,7 @@ import { useAuth } from "../../../../../hooks/useAuth";
 import { CiMoneyCheck1 } from "react-icons/ci";
 import PageLoader from "../../PageLoader";
 import SectionHeader from "../../components/SectionHeader";
-import CreateDirectDebit from "../components/CreateDirectDebit";
+import CreateDirectDebit from "../components/CreateDirectDebitMandate";
 
 const DirectDebitMandates: React.FC = () => {
   const authenticated = useAuth("merchant");

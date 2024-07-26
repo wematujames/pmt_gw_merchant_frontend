@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Col,
@@ -26,7 +26,6 @@ export default function CreateDirectDebitTransaction({
 }) {
   const [open, setOpen] = React.useState<boolean>(false);
   const { token } = theme.useToken();
-  const [txn, setTxnType] = useState("collection");
   const { openMessage } = useMessage();
   const queryClient = new QueryClient();
   const [form] = useForm();
@@ -37,10 +36,11 @@ export default function CreateDirectDebitTransaction({
   };
 
   const createDDebitTxnMutation = useMutation({
-    mutationKey: ["upate-user-permissions"],
+    mutationKey: ["direct-debit-mandate-txn"],
     mutationFn: (data) => createDDebitTxn(data),
     onSuccess: () => {
-      openMessage("success", "User permissions updated");
+      openMessage("success", "Transaction Processing");
+      form.resetFields();
       queryClient.invalidateQueries({ queryKey: ["platform-users"] });
     },
     onError: (err: AxiosError<{ message: string }>) => {
