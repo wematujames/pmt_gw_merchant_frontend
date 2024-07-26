@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useMessage } from "@/hooks/useMessage";
 import { useNotification } from "@/hooks/useNotification";
 import WebTransactions from "./components/WebTransactions";
+import useInactivityTimeout from "@/hooks/useInactivityTimeout";
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function ProtectedLayout({
@@ -33,7 +34,7 @@ export default function ProtectedLayout({
     },
   });
 
-  // useInactivityTimeout(logout);
+  useInactivityTimeout(logout);
 
   return (
     <QueryClientProvider client={queryClient}>
