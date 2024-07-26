@@ -174,6 +174,7 @@ export default function CreateDirectDebit() {
                 rules={[{ required: true, message: "Select mandate duration" }]}
               >
                 <DatePicker.RangePicker
+                  format={"YYYY/MM/DD"}
                   style={{ width: "100%" }}
                   getPopupContainer={(trigger) => trigger.parentElement!}
                 />

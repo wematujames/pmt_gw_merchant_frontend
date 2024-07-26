@@ -26,7 +26,7 @@ export const getDirectDebitMandates = async (_filter: any = {}) =>  {
 
 export const createDDebitMandate = async (data: any) =>  {
   setAuthTokenHeader()
-
+  
   const res = await axios(
     "/transactions/web/directdebit/mandates",
     {
