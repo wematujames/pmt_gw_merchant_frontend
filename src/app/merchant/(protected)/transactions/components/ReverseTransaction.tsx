@@ -31,13 +31,13 @@ export default function ReverseTransaction({ txn }: { txn: any }) {
   };
 
   const reverseTxnMutation = useMutation({
-    mutationKey: ["upate-user-permissions"],
+    mutationKey: ["reverse-transaction"],
     mutationFn: (data: any) =>
       reverseTransaction(data.transactionId, data.reversalAmount),
     onSuccess: () => {
       openMessage("info", "Reversal processing");
       form.resetFields();
-      queryClient.invalidateQueries({ queryKey: ["platform-users"] });
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
     },
     onError: (err: AxiosError<{ message: string }>) => {
       openMessage("error", err.response?.data.message || err.message);

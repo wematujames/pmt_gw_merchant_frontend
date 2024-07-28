@@ -38,7 +38,7 @@ export default function DisbursementTransaction() {
     onSuccess: () => {
       openMessage("info", "Transaction processing");
       form.resetFields();
-      queryClient.invalidateQueries({ queryKey: ["Transaction processing"] });
+      queryClient.invalidateQueries({ queryKey: ["transactions"] });
     },
     onError: (err: AxiosError<{ message: string }>) => {
       openMessage("error", err.response?.data.message || err.message);
