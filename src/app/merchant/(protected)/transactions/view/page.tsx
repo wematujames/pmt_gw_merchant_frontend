@@ -11,7 +11,6 @@ import { TbReport } from "react-icons/tb";
 import { useAuth } from "../../../../../hooks/useAuth";
 import PageLoader from "../../PageLoader";
 import SectionHeader from "../../components/SectionHeader";
-import CreateTransaction from "../components/CreateTransaction";
 import NewTxnDropDown from "../components/NewTxnDropDown";
 
 const Transactions: React.FC = () => {

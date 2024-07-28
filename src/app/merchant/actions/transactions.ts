@@ -95,3 +95,54 @@ export const createDisbursementTxn = async (data: any) =>  {
 
   return res.data.data ;
 };
+export const isWebTxnsEnabled = async () =>  {
+  setAuthTokenHeader()
+  
+  const res = await axios(
+    `/transactions/auth/web/token`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  return res.data.data;
+};
+export const enableWebTxns = async (merchantId:string , merchantSecret: string) =>  {
+  setAuthTokenHeader()
+  
+  const res = await axios(
+    `/transactions/auth/web/token`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-Merchant-Secret": merchantSecret,
+      },
+      data: { merchantId }
+    }
+  );
+
+  return res.data.data;
+};
+
+export const disableWebTxns = async () =>  {
+  setAuthTokenHeader()
+  
+  const res = await axios(
+    `/transactions/auth/web/token/disable`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  return res.data.data;
+};

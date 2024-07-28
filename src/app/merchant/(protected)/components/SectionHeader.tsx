@@ -11,7 +11,7 @@ function SectionHeader({
   leadText: string;
   subText: string;
   icon: JSX.Element;
-  extra: any;
+  extra?: any;
 }) {
   const { token } = theme.useToken();
 

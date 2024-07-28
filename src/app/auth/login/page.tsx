@@ -10,16 +10,17 @@ import { useEffect } from "react";
 import MerchantLogin from "../../merchant/(no-auth)/auth/login/MerchantLogin";
 import NerasolLogin from "../../nerasol/(no-auth)/auth/login/AdminLogin";
 import MerchantSetAuthTokenHeader from "@/app/merchant/actions/utils/setAuthToken";
-// import NerasolSetAuthTokenHeader from "@/app/nerasol/actions/utils/setAuthToken";
+import NerasolSetAuthTokenHeader from "@/app/nerasol/actions/utils/setAuthToken";
 
 export default function LoginPage() {
   const router = useRouter();
 
   useEffect(() => {
-    // if (localStorage.getItem("admin-token")) {
-    //   router.push("/nerasol/dashboard/financial");
-    //   NerasolSetAuthTokenHeader();
-    // }
+    if (localStorage.getItem("admin-token")) {
+      router.push("/nerasol/dashboard/financial");
+      NerasolSetAuthTokenHeader();
+    }
+
     if (localStorage.getItem("merchant-token")) {
       MerchantSetAuthTokenHeader();
       router.push("/merchant/dashboard/financial");

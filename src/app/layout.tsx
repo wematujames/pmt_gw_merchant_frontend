@@ -7,6 +7,7 @@ import NotificationProvider from "@/context/NotificationContext";
 import MessageProvider from "@/context/MessageContext";
 import { ConfigProvider } from "antd";
 import theme from "@/themes/default";
+import axios from "axios";
 
 export default function RootLayout({
   children,
@@ -18,6 +19,9 @@ export default function RootLayout({
       queries: { refetchOnWindowFocus: false },
     },
   });
+
+  // configure base url
+  axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   return (
     <html lang="en" content="noindex, nofollow">
