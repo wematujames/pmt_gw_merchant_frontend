@@ -1,29 +1,22 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Flex, Divider, Card, Tabs } from "antd";
+import { Flex, Divider, Card } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { Typography } from "antd";
 import styles from "./styles.module.css";
 import { useEffect } from "react";
-import MerchantLogin from "../../merchant/(no-auth)/auth/login/MerchantLogin";
-import NerasolLogin from "../../nerasol/(no-auth)/auth/login/AdminLogin";
-import MerchantSetAuthTokenHeader from "@/app/merchant/actions/utils/setAuthToken";
-import NerasolSetAuthTokenHeader from "@/app/nerasol/actions/utils/setAuthToken";
+import MerchantLogin from "./MerchantLogin";
+import MerchantSetAuthTokenHeader from "@/actions/utils/setAuthToken";
 
 export default function LoginPage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (localStorage.getItem("admin-token")) {
-      router.push("/nerasol/dashboard/financial");
-      NerasolSetAuthTokenHeader();
-    }
-
-    if (localStorage.getItem("merchant-token")) {
+    if (localStorage.getItem("token")) {
       MerchantSetAuthTokenHeader();
-      router.push("/merchant/dashboard/financial");
+      router.push("/dashboard/financial");
     }
   });
 
@@ -55,24 +48,9 @@ export default function LoginPage() {
             <Typography.Title level={4}>
               Sign In To Your Account
             </Typography.Title>
-            <Divider style={{ margin: 0 }} />
+            <Divider style={{ marginTop: 5, marginBottom: 30 }} />
           </Flex>
-          <Tabs
-            defaultActiveKey="merchant"
-            centered
-            items={[
-              {
-                label: `Merchant`,
-                key: "merchant",
-                children: <MerchantLogin />,
-              },
-              {
-                label: `Nerasol`,
-                key: "nerasol",
-                children: <NerasolLogin />,
-              },
-            ]}
-          />
+          <MerchantLogin />
         </Card>
       </Flex>
     </Flex>
